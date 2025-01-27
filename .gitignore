@@ -1,3 +1,4 @@
+.env.local
 _build
 _opam
 
