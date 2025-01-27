@@ -2,6 +2,7 @@
 
 import GameBoardCss from "./GameBoard.css";
 import * as Caml_option from "melange.js/caml_option.js";
+import * as Components__BarChart from "../../components/BarChart/BarChart.js";
 import * as Components__BoardCard from "../../components/BoardCard/BoardCard.js";
 import * as Components__Button from "../../components/Button/Button.js";
 import * as Components__HandCard from "../../components/HandCard/HandCard.js";
@@ -22,6 +23,9 @@ function GameBoard(Props) {
   let gameId = Props.gameId;
   let game = Props.game;
   let me = Props.me;
+  const gameDeck = React.useMemo((function () {
+          return Stdlib__Array.of_list(game.game_deck);
+        }), [game.game_deck]);
   const func = Curry._3(Hooks__Hooks_Confirm.useConfirm(undefined), "Not everyone voted", "There are some players that did not pick a card yet. Do you really want to reveal all cards?", "Warning");
   const arg = [
     "Keep hidden",
@@ -135,8 +139,29 @@ function GameBoard(Props) {
   const match$5 = me.who_am_i_typ;
   return JsxRuntime.jsxs("section", {
               children: [
-                JsxRuntime.jsx("div", {
-                      children: tmp,
+                JsxRuntime.jsxs("div", {
+                      children: [
+                        gameState.is_revealed ? JsxRuntime.jsx(Components__BarChart.make, {
+                                title: "Results",
+                                entries: Array.from(Stdlib__List.fold_left((function (acc, key) {
+                                            const value = acc.get(key);
+                                            if (value !== undefined) {
+                                              return acc.set(key, value + 1 | 0);
+                                            } else {
+                                              return acc.set(key, 1);
+                                            }
+                                          }), new Map(), Stdlib__List.sort((function (a, b) {
+                                                return gameDeck.indexOf(a, undefined) - gameDeck.indexOf(b, undefined) | 0;
+                                              }), Stdlib__List.filter_map((function (player) {
+                                                    const match = player.played_card;
+                                                    if (match !== undefined && match) {
+                                                      return match._0;
+                                                    }
+                                                    
+                                                  }), gameState.players))))
+                              }) : null,
+                        tmp
+                      ],
                       className: "GameBoard-result"
                     }),
                 JsxRuntime.jsxs("div", {

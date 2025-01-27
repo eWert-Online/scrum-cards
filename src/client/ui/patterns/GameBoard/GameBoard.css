@@ -7,6 +7,8 @@
   .GameBoard-result {
     display: flex;
     flex: 1 1 0;
+    flex-direction: column;
+    gap: 64px;
     align-content: center;
     align-items: center;
     justify-content: center;

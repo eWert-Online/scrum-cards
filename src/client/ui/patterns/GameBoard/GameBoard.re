@@ -9,6 +9,8 @@ let make =
       ~game: Api.load_game_response,
       ~me: Api.who_am_i_response,
     ) => {
+  let gameDeck =
+    React.useMemo1(() => Array.of_list(game.game_deck), [|game.game_deck|]);
   let confirm =
     Hooks.Confirm.useConfirm(
       ~variant=`Warning,
@@ -106,6 +108,38 @@ let make =
 
   <section className="GameBoard">
     <div className="GameBoard-result">
+      {if (gameState.is_revealed) {
+         <Components.BarChart
+           title="Results"
+           entries={
+             gameState.players
+             |> List.filter_map(player => {
+                  switch (player.Api.played_card) {
+                  | None
+                  | Some(Hidden) => None
+                  | Some(Revealed(key)) => Some(key)
+                  }
+                })
+             |> List.sort((a, b) => {
+                  Js.Array.indexOf(gameDeck, ~value=a)
+                  - Js.Array.indexOf(gameDeck, ~value=b)
+                })
+             |> List.fold_left(
+                  (acc, key) => {
+                    switch (Js.Map.get(acc, ~key)) {
+                    | None => Js.Map.set(acc, ~key, ~value=1)
+                    | Some(value) =>
+                      Js.Map.set(acc, ~key, ~value=succ(value))
+                    }
+                  },
+                  Js.Map.make(),
+                )
+             |> Js.Map.toArray
+           }
+         />;
+       } else {
+         React.null;
+       }}
       {switch (
          game.game_reveal,
          me.who_am_i_typ,
