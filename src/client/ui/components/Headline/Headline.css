@@ -1,0 +1,35 @@
+.Headline :is(h1, h2, h3, h4, h5, h6) {
+  margin-block: 0;
+  margin-inline: 0;
+}
+
+/* ################ PRIMARY HEADLINE ################ */
+
+.Headline--primary :is(h1, h2, h3, h4, h5, h6) {
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--color-text);
+}
+
+.Headline--primary + .Headline--subheadline {
+  margin-block-start: 5px;
+}
+
+/* ################ SECONDARY HEADLINE ################ */
+
+.Headline--secondary :is(h1, h2, h3, h4, h5, h6) {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.Headline--secondary + .Headline--subheadline {
+  margin-block-start: 5px;
+}
+
+/* ################ SUBHEADLINE ################ */
+
+.Headline--subheadline :is(h1, h2, h3, h4, h5, h6) {
+  font-size: 20px;
+  font-weight: 300;
+}

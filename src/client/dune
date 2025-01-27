@@ -1,0 +1,10 @@
+(library
+ (name client)
+ (modes melange)
+ (libraries context ui melange-fetch reason-react melange-webapi)
+ (melange.runtime_deps
+  (glob_files_rec *.css)
+  (glob_files_rec fonts/*)
+  (glob_files_rec public/*))
+ (preprocess
+  (pps melange.ppx reason-react-ppx)))

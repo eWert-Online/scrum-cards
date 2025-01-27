@@ -1,0 +1,52 @@
+.GameBoard {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  block-size: 100%;
+
+  .GameBoard-result {
+    display: flex;
+    flex: 1 1 0;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    margin-block: 0;
+    margin-inline: 0;
+
+    list-style-type: none;
+  }
+
+  .GameBoard-players {
+    display: flex;
+    flex: 1 0 0;
+    flex-wrap: wrap;
+    gap: 48px;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    margin-block: 0;
+    margin-inline: 0;
+    padding-inline: 10vw;
+
+    list-style-type: none;
+  }
+
+  .GameBoard-hand {
+    display: flex;
+    flex: 0 1 auto;
+    gap: 12px;
+    align-items: flex-end;
+    justify-content: center;
+    justify-self: flex-end;
+    margin-block: 0;
+    margin-inline: 0;
+    padding-inline: 128px;
+
+    list-style-type: none;
+
+    > li {
+      flex: 0 0 64px;
+      block-size: min-content;
+    }
+  }
+}

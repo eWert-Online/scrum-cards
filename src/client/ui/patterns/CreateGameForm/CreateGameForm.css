@@ -1,0 +1,17 @@
+.CreateGameForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-block: 0;
+  margin-inline: 0;
+  padding-block: 24px;
+  padding-inline: 24px;
+
+  .CreateGameForm-title {
+    margin-block-end: 8px;
+  }
+
+  .CreateGameForm-button {
+    align-self: flex-end;
+  }
+}

@@ -1,0 +1,8 @@
+(include_subdirs qualified)
+
+(library
+ (name css)
+ (modes melange)
+ (libraries)
+ (preprocess
+  (pps melange.ppx)))

@@ -1,0 +1,96 @@
+/* ================== SWITCH ================== */
+
+:root {
+  --Switch-color-label: var(--color-text);
+  --Switch-color-descripton: var(--color-grey-65);
+  --Switch-color-handle: var(--color-white);
+  --Switch-color-background: var(--color-grey-70);
+  --Switch-color-background--active: var(--color-main);
+}
+
+.Switch {
+  z-index: 1;
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  cursor: pointer;
+  user-select: none;
+}
+
+.Switch--described {
+  align-items: flex-start;
+}
+
+.Switch-info {
+  margin-inline-start: 12px;
+}
+
+.Switch-title {
+  display: block;
+  font-weight: 600;
+  color: var(--Switch-color-label);
+}
+
+.Switch-description {
+  display: block;
+  margin-block-start: 2px;
+
+  font-size: 12px;
+  font-weight: 400;
+  font-style: italic;
+
+  color: var(--Switch-color-descripton);
+}
+
+.Switch-input {
+  position: absolute;
+
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+
+  opacity: 0;
+}
+
+.Switch-switch {
+  z-index: -1;
+  position: relative;
+
+  display: block;
+  inline-size: 32px;
+  min-inline-size: 32px;
+  block-size: 16px;
+  margin-block-start: 2px;
+  border-radius: 50px;
+
+  background-color: var(--Switch-color-background);
+
+  transition: all 200ms ease;
+}
+
+.Switch-switch::after {
+  content: "";
+
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 0;
+
+  inline-size: 12px;
+  block-size: 12px;
+  border-radius: 50%;
+
+  transform: translate(2px, -50%);
+  background-color: var(--Switch-color-handle);
+
+  transition: transform 200ms cubic-bezier(0.65, 0.38, 0.29, 1.19);
+}
+
+.Switch-input:checked ~ .Switch-switch {
+  background-color: var(--Switch-color-background--active);
+}
+
+.Switch-input:checked ~ .Switch-switch::after {
+  transform: translate(18px, -50%);
+}

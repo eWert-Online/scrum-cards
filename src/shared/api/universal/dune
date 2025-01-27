@@ -1,0 +1,8 @@
+(include_subdirs qualified)
+
+(library
+ (name shared_api_universal)
+ (modes native melange)
+ (libraries)
+ (flags
+  (:standard -w -108)))

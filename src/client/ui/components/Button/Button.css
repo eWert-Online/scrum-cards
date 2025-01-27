@@ -1,0 +1,112 @@
+.Button {
+  position: relative;
+
+  box-sizing: border-box;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  margin-block: 0;
+  margin-inline: 0;
+  padding-block: 8px;
+  padding-inline: 12px;
+  border: none;
+  border-radius: 6px;
+
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+
+  background: none;
+
+  &:focus {
+    outline: none;
+  }
+
+  & .Button-icon {
+    inline-size: 18px;
+    block-size: 18px;
+
+    & .Button-icon--left {
+      margin-inline-start: -2px;
+    }
+
+    & .Button-icon--right {
+      margin-inline-start: -2px;
+    }
+  }
+}
+
+.Button--primary {
+  --Button-color-main: var(--color-main);
+  --Button-color-text: var(--color-white);
+  --Button-color-main--hover: var(--color-main);
+
+  border: 1px solid var(--Button-color-main);
+
+  color: var(--Button-color-text);
+  background: var(--Button-color-main);
+  box-shadow: oklch(0 0 0 / 0.05) 0 1px 2px 0;
+
+  &:is(:hover, :focus) {
+    background: var(--Button-color-main--hover);
+  }
+}
+
+.Button--secondary {
+  --Button-color-main: var(--color-main);
+  --Button-color-text: var(--color-main);
+  --Button-color-main--hover: var(--color-main);
+
+  border: 1px solid var(--Button-color-main);
+  color: var(--Button-color-text);
+  box-shadow: oklch(0 0 0 / 0.05) 0 1px 2px 0;
+
+  &:is(:hover, :focus) {
+    border-block-color: var(--Button-color-main--hover);
+    border-inline-color: var(--Button-color-main--hover);
+  }
+}
+
+.Button--cta {
+  --Button-color-main: var(--color-main);
+  --Button-color-text: var(--color-white);
+  --Button-color-main--hover: var(--color-main);
+
+  padding-block: 16px;
+  padding-inline: 24px;
+  border: 1px solid var(--Button-color-main);
+
+  font-size: 22px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+
+  transform: scale(1);
+  color: var(--Button-color-text);
+  background: var(--Button-color-main);
+  box-shadow: 0 15px 40px color(from var(--Button-color-main) srgb r g b / 0.5);
+
+  transition: transform 100ms linear;
+
+  &:is(:hover, :focus-visible) {
+    transform: scale(1.03);
+  }
+
+  &:is(:active) {
+    transform: scale(0.95);
+  }
+}
+
+.Button--danger {
+  --Button-color-main: var(--color-danger);
+  --Button-color-main--hover: var(--color-danger--hover);
+
+  &.Button--primary {
+    --Button-color-text: var(--color-white);
+  }
+
+  &.Button--secondary {
+    --Button-color-text: var(--color-danger);
+  }
+}

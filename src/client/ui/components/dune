@@ -1,0 +1,8 @@
+(include_subdirs qualified)
+
+(library
+ (name components)
+ (modes melange)
+ (libraries css images bindings hooks melange.belt melange-webapi reason-react)
+ (preprocess
+  (pps melange.ppx reason-react-ppx)))

@@ -1,0 +1,59 @@
+.Spectator {
+  position: relative;
+
+  .Spectator-card {
+    position: relative;
+
+    aspect-ratio: 1 / 1.5;
+    inline-size: 72px;
+    margin-inline: auto;
+
+    &::before {
+      content: "";
+
+      position: absolute;
+      inset-block: 0;
+      inset-inline: 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      aspect-ratio: inherit;
+      inline-size: 56px;
+      margin-block: auto;
+      margin-inline: auto;
+      border-radius: 8px;
+
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: 2px;
+
+      background-color: var(--color-grey-90);
+    }
+  }
+
+  .Spectator-icon {
+    z-index: 1;
+    position: absolute;
+    inset-block: 0;
+    inset-inline: 0;
+
+    inline-size: 36px;
+    block-size: 36px;
+    margin-block: auto;
+    margin-inline: auto;
+
+    color: var(--color-grey-55);
+  }
+
+  .Spectator-label {
+    display: block;
+    inline-size: min-content;
+    margin-block: 24px 0;
+    margin-inline: auto;
+
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+  }
+}

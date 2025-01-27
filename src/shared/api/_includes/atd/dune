@@ -1,0 +1,18 @@
+(rule
+ (alias atd)
+ (targets
+  api_bs.ml
+  api_bs.mli
+  api_v.ml
+  api_v.mli
+  api_t.ml
+  api_t.mli
+  api_j.ml
+  api_j.mli)
+ (deps api.atd)
+ (action
+  (concurrent
+   (run atdgen -v %{deps})
+   (run atdgen -bs %{deps})
+   (run atdgen -t %{deps})
+   (run atdgen -j -j-std %{deps}))))

@@ -1,0 +1,28 @@
+/* ================== HEADER ================== */
+
+:root {
+  --Header-color-background: var(--color-white);
+
+  [data-theme="dark"] & {
+    /* TODO: Add dark mode theme */
+  }
+}
+
+.Header {
+  display: flex;
+  align-items: center;
+  padding-block: 12px;
+  padding-inline: 12px;
+  border-radius: 8px;
+
+  background: var(--Header-color-background);
+  box-shadow: var(--shadow-large);
+
+  & .Header-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 28px;
+    block-size: 28px;
+  }
+}

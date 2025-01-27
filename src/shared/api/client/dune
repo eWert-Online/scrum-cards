@@ -1,0 +1,9 @@
+(copy_files#
+ (files "../_includes/atd/*_{bs,t}.{ml,mli}"))
+
+(library
+ (name shared_api_client)
+ (modes melange)
+ (libraries shared_api_universal melange-atdgen-codec-runtime)
+ (flags
+  (:standard -w -39-30-101)))

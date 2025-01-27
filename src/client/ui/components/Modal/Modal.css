@@ -1,0 +1,85 @@
+.Modal-wrapper {
+  z-index: -1;
+  position: fixed;
+  inset-block: 0;
+  inset-inline: 0;
+
+  block-size: 100vh;
+
+  opacity: 0;
+  background: oklch(0 0 0 / 0.5);
+  backdrop-filter: blur(3px);
+
+  transition: opacity 300ms ease;
+
+  will-change: opacity;
+}
+
+.Modal-wrapper.is-active {
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 300ms ease;
+}
+
+.Modal {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+
+  display: flex;
+  inline-size: 600px;
+  max-block-size: calc(100vh - 50px);
+  margin-block: auto;
+  margin-inline: auto;
+  padding-block: 0;
+  padding-inline: 0;
+  border-radius: 6px;
+  overflow: hidden;
+
+  transform: translate(-50%, -50%);
+  background: var(--color-white);
+  box-shadow: var(--shadow-large);
+}
+
+.Modal-content {
+  flex: 1;
+  overflow: auto;
+}
+
+.Modal-close {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+
+  inline-size: 24px;
+  block-size: 24px;
+  padding-block: 0;
+  padding-inline: 0;
+  border: none;
+
+  font-size: 0;
+
+  transform: translate(100%, -100%);
+  background: none;
+
+  &::before,
+  &::after {
+    content: "";
+
+    position: absolute;
+    inset-inline-start: 50%;
+
+    inline-size: 2px;
+    block-size: 100%;
+
+    background-color: var(--color-main);
+  }
+
+  &::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  &::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+}

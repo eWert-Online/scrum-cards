@@ -1,0 +1,78 @@
+@import "./fonts.css";
+@import "./colors.css";
+@import "./definitions.css";
+@import "./utilities.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  min-inline-size: 1024px;
+  min-block-size: 100%;
+}
+
+body {
+  position: relative;
+
+  margin-block: 0;
+  margin-inline: 0;
+  padding-block: 0;
+  padding-inline: 0;
+
+  font-family: "Inter", system-ui;
+  font-size: 14px;
+  font-weight: 500;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+
+  color: var(--color-text);
+  background: var(--color-grey-98);
+
+  &::before {
+    content: "";
+
+    z-index: -1;
+    position: absolute;
+    inset-block: 0;
+    inset-inline: 0;
+
+    opacity: 0.5;
+    background-image: radial-gradient(
+      var(--color-grey-10) 0.65px,
+      var(--color-grey-98) 0.65px
+    );
+    background-size: 13px 13px;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-clickable);
+}
+
+p {
+  margin-block: 15px;
+  margin-inline: 0;
+}
+
+img {
+  max-inline-size: 100%;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+
+  cursor: pointer;
+}
+
+svg {
+  pointer-events: none;
+}

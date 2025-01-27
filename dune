@@ -1,0 +1,18 @@
+(dirs :standard \ output)
+
+(melange.emit
+ (promote (until-clean))
+ (target output)
+ (libraries client)
+ (module_systems es6))
+
+(rule
+ (alias client)
+ (targets
+  (dir public))
+ (deps
+  (file esbuild.config.mjs)
+  (alias_rec melange))
+ (action
+  (concurrent
+   (run node esbuild.config.mjs %{env:BUILD_MODE=dev}))))

@@ -1,0 +1,12 @@
+(library
+ (name hooks)
+ (modes melange)
+ (libraries
+  context_types
+  bindings
+  router
+  reason-react
+  melange
+  melange-webapi)
+ (preprocess
+  (pps melange.ppx reason-react-ppx)))

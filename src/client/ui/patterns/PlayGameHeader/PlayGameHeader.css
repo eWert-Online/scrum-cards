@@ -1,0 +1,15 @@
+.PlayGameHeader {
+  display: flex;
+  gap: 16px;
+  inline-size: 100%;
+
+  .PlayGameHeader-logo {
+    block-size: 32px;
+  }
+
+  .PlayGameHeader-actions {
+    display: flex;
+    gap: 16px;
+    margin-inline-start: auto;
+  }
+}

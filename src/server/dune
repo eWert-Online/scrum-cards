@@ -1,0 +1,22 @@
+(library
+ (name server)
+ (libraries
+  shared_api_server
+  core
+  dream
+  irmin
+  irmin.unix
+  irmin-fs
+  irmin-fs.unix
+  randomconv)
+ (preprocess
+  (pps ppx_jane ppx_irmin)))
+
+(rule
+ (target assets.ml)
+ (deps
+  (source_tree %{project_root}/public)
+  (alias_rec %{project_root}/client))
+ (action
+  (progn
+   (run %{bin:ocaml-crunch} --mode=plain %{project_root}/public -o %{target}))))

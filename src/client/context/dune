@@ -1,0 +1,6 @@
+(library
+ (name context)
+ (modes melange)
+ (libraries context_types ui)
+ (preprocess
+  (pps melange.ppx reason-react-ppx)))

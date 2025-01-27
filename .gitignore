@@ -1,0 +1,25 @@
+_build
+_opam
+
+.depend
+.merlin
+.*.swp
+*.install
+*.byte
+*.orig
+*.native
+
+node_modules
+/public
+/output/.output.mobjs
+/output/**/*.*
+!/output/**/*.js
+/db
+!/src/db
+
+.DS_Store
+
+# Melange Specifics
+.bsb.lock
+dune.mel
+.melange.eobjs

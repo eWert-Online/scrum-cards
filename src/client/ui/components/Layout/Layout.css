@@ -1,0 +1,30 @@
+.Layout {
+  display: grid;
+  grid-template-areas:
+    "header  header  header"
+    "content content content";
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 48px 1fr;
+  gap: 12px;
+  min-block-size: 100vh;
+  padding-block: 12px;
+  padding-inline: 12px;
+}
+
+.Layout-header {
+  grid-area: header;
+
+  & > * {
+    min-block-size: 100%;
+  }
+}
+
+.Layout-content {
+  display: grid;
+  grid-area: content;
+  grid-template-columns: 100%;
+
+  & > * {
+    min-block-size: 100%;
+  }
+}

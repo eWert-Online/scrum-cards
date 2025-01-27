@@ -1,0 +1,87 @@
+/* ================== INPUTS ================== */
+
+:root {
+  --Input-color-descripton: var(--color-grey-65);
+  --Input-color-border: var(--color-grey-70);
+  --Input-color-background: var(--color-white);
+  --Input-color-text: var(--color-text);
+
+  [data-theme="dark"] & {
+    /* TODO: Add dark mode theme */
+  }
+}
+
+.Input {
+  position: relative;
+  display: block;
+  inline-size: 100%;
+}
+
+.Input-field {
+  display: block;
+  inline-size: 100%;
+  padding-block: 6px;
+  padding-inline: 12px;
+  border: none;
+  border-radius: 6px;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+
+  color: var(--color-text);
+  background-color: var(--Input-color-background);
+  box-shadow: inset 0 0 0 1px var(--color-grey-85),
+    0 1px 2px 0 oklch(0 0 0 / 0.05);
+}
+
+textarea.Input-field {
+  min-block-size: 51px; /* 2 rows */
+  resize: vertical;
+}
+
+.Input--small .Input-field {
+  padding-block: 12px;
+  padding-inline: 12px;
+}
+
+.Input-description {
+  display: block;
+  margin-block-start: 2px;
+
+  font-size: 12px;
+  font-weight: 400;
+  font-style: italic;
+
+  color: var(--Input-color-descripton);
+}
+
+/* .Input-error {
+  display: block;
+  margin-top: 4px;
+
+  color: var(--color-attention);
+} */
+
+.Input-fieldWrapper {
+  position: relative;
+}
+
+/* .Input-fieldError {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 20px;
+  height: 20px;
+
+  margin: auto;
+
+  color: var(--color_attention);
+} */
+
+/* .Input-fieldError + .Input-field {
+  padding-right: 40px;
+
+  border-color: var(--color_attention);
+} */

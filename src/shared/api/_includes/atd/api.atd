@@ -1,0 +1,78 @@
+type deck = [
+  | Fibonacci
+  | Tshirt
+  | FiveFingers
+]
+
+type reveal = [
+  | Everyone
+  | SpectatorsOnly
+]
+
+type typ = [
+  | Player
+  | Spectator
+]
+
+type player_id = string
+type card_value = string
+type card = [
+  | Hidden
+  | Revealed of card_value
+] <ocaml repr="classic">
+
+
+type create_game_request =
+  { name : string
+  ; deck : deck
+  ; reveal : reveal
+  } <ocaml field_prefix="create_game_">
+
+type create_game_response =
+  { id : string
+  } <ocaml field_prefix="created_game_">
+
+type load_game_response =
+  { id : string
+  ; name : string
+  ; deck : string list
+  ; reveal : reveal
+  } <ocaml field_prefix="game_">
+
+type join_game_request =
+  { typ : typ
+  ; name : string
+  } <ocaml field_prefix="join_game_">
+
+type who_am_i_response =
+  { id : string
+  ; typ : typ
+  ; name : string
+  } <ocaml field_prefix="who_am_i_">
+
+
+type player = {
+  id: player_id;
+  typ: typ;
+  name: string;
+  played_card: card option;
+}
+
+type game_state = {
+  is_revealed: bool;
+  players: player list;
+}
+
+type ws_request = [
+  | PlayCard of card_value
+  | RevokeCard
+  | RevealCards
+  | InitReset
+  | ResetMe
+] <ocaml repr="classic">
+
+type ws_response = [
+  | YourCard of card_value option
+  | UpdateGameState of game_state
+  | Reset
+] <ocaml repr="classic">

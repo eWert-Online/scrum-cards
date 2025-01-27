@@ -1,0 +1,8 @@
+(include_subdirs qualified)
+
+(library
+ (name screens)
+ (modes melange)
+ (libraries shared_api_client hooks components patterns reason-react)
+ (preprocess
+  (pps melange.ppx reason-react-ppx)))

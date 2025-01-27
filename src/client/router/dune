@@ -1,0 +1,6 @@
+(library
+ (name router)
+ (modes melange)
+ (libraries bindings reason-react)
+ (preprocess
+  (pps melange.ppx reason-react-ppx)))

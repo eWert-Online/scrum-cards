@@ -1,0 +1,39 @@
+:root {
+  --InputLabel-color-text: var(--color-text);
+
+  [data-theme="dark"] & {
+    /* TODO: Add dark mode theme */
+  }
+}
+
+.InputLabel {
+  & .InputLabel-text {
+    display: block;
+    font-size: 13px;
+    color: var(--InputLabel-color-text);
+  }
+}
+
+.InputLabel--top {
+  & .InputLabel-text {
+    margin-block-end: 4px;
+  }
+}
+
+.InputLabel--right {
+  & .InputLabel-text {
+    margin-inline-start: 4px;
+  }
+}
+
+.InputLabel--left {
+  & .InputLabel-text {
+    margin-inline-end: 4px;
+  }
+}
+
+.InputLabel--bottom {
+  & .InputLabel-text {
+    margin-block-start: 4px;
+  }
+}

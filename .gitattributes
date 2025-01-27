@@ -1,0 +1,16 @@
+*.re   text eol=lf
+*.rei  text eol=lf
+*.ml   text eol=lf
+*.mli  text eol=lf
+
+# Recognize all .re, .rei files as Reason
+*.re  linguist-language=Reason
+*.rei linguist-language=Reason
+
+# Recognize all .ml, .mli files as Reason
+*.ml  linguist-language=OCaml
+*.mli linguist-language=OCaml
+
+# Mark all .mel.js files as generated
+/output/**/* linguist-generated=true
+/output/**/* -merge

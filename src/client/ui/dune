@@ -1,0 +1,6 @@
+(include_subdirs qualified)
+
+(library
+ (name ui)
+ (modes melange)
+ (libraries shared_api_client context_types components patterns screens))

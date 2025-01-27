@@ -1,0 +1,34 @@
+:root {
+  --color-white: oklch(100% 0 0);
+  --color-black: oklch(0% 0 0);
+
+  --color-grey-98: oklch(97.82% 0.003 247.86);
+  --color-grey-95: oklch(94.72% 0.007 247.9);
+  --color-grey-90: oklch(90.72% 0.009 247.94);
+  --color-grey-85: oklch(87.58% 0.012 247.97);
+  --color-grey-70: oklch(77.83% 0.016 248.04);
+  --color-grey-65: oklch(66.58% 0.018 250.92);
+  --color-grey-55: oklch(56.51% 0.019 250.97);
+  --color-grey-50: oklch(48.49% 0.02 251.02);
+  --color-grey-40: oklch(40.53% 0.018 251.38);
+  --color-grey-35: oklch(33.78% 0.015 252.3);
+  --color-grey-25: oklch(27.85% 0.013 253.04);
+  --color-grey-10: oklch(18.98% 0.009 255.63);
+
+  --color-main: oklch(32.84% 0.0998 252.57);
+
+  --color-text: oklch(21.01% 0.032 264.66);
+  --color-clickable: var(--color-main);
+
+  --color-info: oklch(64.12% 0.192 257.04);
+
+  --color-warning: oklch(85.75% 0.175 88.49);
+
+  --color-danger: oklch(62.68% 0.236 20.26);
+  --color-danger--hover: oklch(64.37% 0.24 20.18);
+  --color-danger--active: oklch(57.49% 0.216 20.13);
+
+  &[data-theme="dark"] {
+    /* TODO: Add dark mode theme */
+  }
+}

@@ -1,0 +1,116 @@
+.BoardCard {
+  position: relative;
+
+  .BoardCard-cardWrapper {
+    position: relative;
+
+    aspect-ratio: 1 / 1.5;
+    inline-size: 72px;
+    margin-inline: auto;
+
+    &::before {
+      content: "";
+
+      position: absolute;
+      inset-block: 0;
+      inset-inline: 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      aspect-ratio: inherit;
+      inline-size: 56px;
+      margin-block: auto;
+      margin-inline: auto;
+      border-radius: 8px;
+
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: 2px;
+
+      background-color: var(--color-grey-90);
+    }
+
+    &:has(.BoardCard-card)::before {
+      display: none;
+    }
+  }
+
+  .BoardCard-card {
+    aspect-ratio: inherit;
+    border-radius: 8px;
+
+    transform-style: preserve-3d;
+    rotate: y 0deg;
+
+    transition: rotate 500ms ease-in-out;
+    transition-delay: var(--BoardCard-inline-transitionDelay, 0);
+
+    .is-flipped & {
+      rotate: y 180deg;
+    }
+  }
+
+  .BoardCard-face {
+    position: absolute;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 100%;
+    block-size: 100%;
+    border-radius: inherit;
+
+    transform: translateY(var(--BoardCard-inline-translateY, 0))
+      rotate(var(--BoardCard-inline-rotate, 0));
+    backface-visibility: hidden;
+    background-color: var(--color-white);
+    box-shadow: var(--shadow-small);
+  }
+
+  .BoardCard-cardBack {
+    background-image: linear-gradient(
+        135deg,
+        color(from var(--color-main) srgb r g b / 0.85) 25%,
+        transparent 25%
+      ),
+      linear-gradient(
+        225deg,
+        color(from var(--color-main) srgb r g b / 0.85) 25%,
+        transparent 25%
+      ),
+      linear-gradient(
+        45deg,
+        color(from var(--color-main) srgb r g b / 0.85) 25%,
+        transparent 25%
+      ),
+      linear-gradient(
+        315deg,
+        color(from var(--color-main) srgb r g b / 0.85) 25%,
+        var(--color-white) 25%
+      );
+    background-repeat: repeat;
+    background-position: 12px 0, 12px 0, 0 0, 0 0;
+    background-size: 12px 12px;
+  }
+
+  .BoardCard-cardFront {
+    font-size: 32px;
+    font-weight: 500;
+    text-align: center;
+
+    rotate: y 180deg;
+    color: var(--color-text);
+  }
+
+  .BoardCard-label {
+    display: block;
+    inline-size: min-content;
+    margin-block: 24px 0;
+    margin-inline: auto;
+
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+  }
+}
