@@ -1,5 +1,5 @@
 (copy_files#
- (files "../_includes/atd/*_{bs,t}.{ml,mli}"))
+ (files "../_includes/atd/*_{mel,t}.{ml,mli}"))
 
 (library
  (name shared_api_client)

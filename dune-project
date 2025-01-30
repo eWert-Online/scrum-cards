@@ -23,8 +23,7 @@
  (name scrum-cards)
  (synopsis "A scrum estimation poker application")
  (depends
-  (ocaml
-   (= 5.1))
+  ocaml
   core
   core_unix
   atdgen
@@ -37,7 +36,8 @@
   irmin-fs
   ppx_irmin
   lwt
-  melange
+  (melange
+   (= 4.0.0-51))
   melange-atdgen-codec-runtime
   melange-fetch
   melange-json

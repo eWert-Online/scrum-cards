@@ -7,7 +7,7 @@ license: "MIT"
 homepage: "https://github.com/ewert-online/scrum-cards"
 bug-reports: "https://github.com/ewert-online/scrum-cards/issues"
 depends: [
-  "ocaml" {= "5.1"}
+  "ocaml"
   "core"
   "core_unix"
   "atdgen"
@@ -16,8 +16,11 @@ depends: [
   "crunch"
   "dream"
   "dune" {>= "3.15"}
+  "irmin"
+  "irmin-fs"
+  "ppx_irmin"
   "lwt"
-  "melange"
+  "melange" {= "4.0.0-51"}
   "melange-atdgen-codec-runtime"
   "melange-fetch"
   "melange-json"
@@ -26,6 +29,7 @@ depends: [
   "reason"
   "reason-react"
   "reason-react-ppx"
+  "randomconv"
   "ocamlformat" {with-dev-setup}
   "ocaml-lsp-server" {with-dev-setup}
   "odoc" {with-doc}

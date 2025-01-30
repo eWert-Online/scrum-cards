@@ -6,4 +6,4 @@
  (modes native)
  (flags
   (:standard -w -39-30))
- (libraries shared_api_universal atdgen yojson))
+ (libraries shared_api_universal atdgen-runtime yojson))
