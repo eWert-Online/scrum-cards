@@ -1,7 +1,18 @@
 (executable
+ (enabled_if
+  (<> %{profile} release))
+ (name main)
+ (public_name main)
+ (modes native)
+ (libraries lwt cmdliner server))
+
+(executable
+ (enabled_if
+  (= %{profile} release))
  (name main)
  (public_name main)
  (modes native)
  (ocamlopt_flags :standard -O3)
- (flags :standard -open Core)
- (libraries lwt cmdliner server core))
+ (flags
+  (:standard -ccopt -static))
+ (libraries lwt cmdliner server))
