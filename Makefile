@@ -10,7 +10,7 @@ dev:
 	SESSION_SECRET="dev" opam exec -- dune exec -w -- main serve --port 4444
 
 build:
-	opam exec -- dune build @all --release
+	opam exec -- dune build @all --profile=static --release
 	cp -f ./_build/default/src/bin/main.exe ./scrum-cards
 
 install:

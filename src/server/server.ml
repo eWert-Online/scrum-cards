@@ -43,9 +43,7 @@ let routes =
 let start ?(port = 80) () =
   let secret = Sys.getenv_exn "SESSION_SECRET" in
 
-  Dream.run ~port
-  @@ Dream.livereload
-  @@ Dream.logger
+  Dream.run ~interface:"0.0.0.0" ~port
   @@ Dream.set_secret secret
   @@ Dream.cookie_sessions
   @@ Dream.router routes

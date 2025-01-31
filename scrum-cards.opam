@@ -9,7 +9,6 @@ bug-reports: "https://github.com/ewert-online/scrum-cards/issues"
 depends: [
   "ocaml"
   "core"
-  "core_unix"
   "atdgen"
   "cmdliner"
   "conf-openssl"

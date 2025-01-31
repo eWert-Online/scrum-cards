@@ -25,7 +25,6 @@
  (depends
   ocaml
   core
-  core_unix
   atdgen
   cmdliner
   conf-openssl

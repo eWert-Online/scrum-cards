@@ -1,0 +1,13 @@
+.merlin
+_build
+_opam
+*.byte
+*.native
+*.install
+.DS_Store
+.github
+.vscode
+node_modules
+deploy
+db
+output
