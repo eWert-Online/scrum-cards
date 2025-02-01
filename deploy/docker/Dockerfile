@@ -1,4 +1,4 @@
-FROM ocaml/opam:alpine-ocaml-5.1-flambda AS build
+FROM ocaml/opam:alpine-ocaml-4.14-flambda AS build
 
 WORKDIR /usr/app
 
@@ -10,10 +10,13 @@ ADD --chown=opam scrum-cards.opam package.json package-lock.json ./
 RUN npm install
 RUN opam install . --yes --deps-only && eval $(opam env)
 ADD --chown=opam . .
-RUN make build
+RUN make release
 
 FROM alpine:latest
+
 WORKDIR /usr/app
+
 COPY --chmod=755 --from=build /usr/app/scrum-cards .
+
 EXPOSE 80
 CMD ["/usr/app/scrum-cards", "serve", "--port=80"]

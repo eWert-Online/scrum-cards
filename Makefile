@@ -1,5 +1,5 @@
-.PHONY: all build install update fmt clean clear
-.SILENT: all build install update fmt clean clear
+.PHONY: all build release install update fmt clean clear
+.SILENT: all build release install update fmt clean clear
 
 all: build
 
@@ -10,6 +10,9 @@ dev:
 	SESSION_SECRET="dev" opam exec -- dune exec -w -- main serve --port 4444
 
 build:
+	opam exec -- dune build @all
+
+release:
 	opam exec -- dune build @all --release
 	cp -f ./_build/default/src/bin/main.exe ./scrum-cards
 

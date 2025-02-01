@@ -23,7 +23,7 @@ function CreateGame(Props) {
               create_game_deck: create_game_deck,
               create_game_reveal: create_game_reveal
             }));
-    fetch(Shared_api_universal__Routes__Routes_Builder.sprintf(Shared_api_universal__Routes.create_game(undefined)), Fetch.RequestInit.make(/* Post */2, undefined, Caml_option.some(data), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)(undefined)).then(function (prim) {
+    fetch(Shared_api_universal__Routes__Routes_Builder.sprintf(Shared_api_universal__Routes.create_game(undefined)), Curry._2(Fetch.RequestInit.make(/* Post */2, undefined, Caml_option.some(data), undefined, undefined, undefined)(undefined, undefined, undefined, undefined, undefined), undefined, undefined)).then(function (prim) {
               return prim.json();
             }).then(function (data) {
             return Promise.resolve(Curry._1(Shared_api_client.Api.read_create_game_response, data));

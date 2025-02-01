@@ -51,9 +51,9 @@ module Single = {
         ~disabled=false,
         ~label=?,
         ~name,
-        ~options: array(SelectOption.t('a)),
-        ~value: option('a),
-        ~onChange: 'a => unit,
+        ~options,
+        ~value,
+        ~onChange,
       ) => {
     open Bindings;
 
@@ -381,11 +381,11 @@ module Multi = {
         ~disabled=false,
         ~label=?,
         ~name,
-        ~options: array(SelectOption.t('a)),
+        ~options,
         ~minItems=?,
         ~maxItems=?,
-        ~value: array('a),
-        ~onChange: array('a) => unit,
+        ~value,
+        ~onChange,
         ~selectedText=_ => "selected item(s)",
       ) => {
     open Bindings;

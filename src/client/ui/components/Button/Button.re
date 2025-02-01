@@ -9,7 +9,7 @@ let make =
       ~buttonRef=?,
       ~disabled=false,
       ~action,
-      ~icon: option(Images.Icons.iconProp)=?,
+      ~icon=?,
       ~iconPosition=`Left,
       ~children,
     ) => {

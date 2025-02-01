@@ -173,7 +173,7 @@ function union(t1, t2) {
           throw new Caml_js_exceptions.MelangeError("Assert_failure", {
                     MEL_EXN_ID: "Assert_failure",
                     _1: [
-                      "src/shared/api/universal/routes/Routes_Builder.ml",
+                      "Routes_Builder.ml",
                       90,
                       27
                     ]

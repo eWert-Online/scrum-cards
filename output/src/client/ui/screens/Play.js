@@ -21,7 +21,7 @@ function useGame(id) {
   const setState = match[1];
   React.useEffect((function () {
           const abortController = new AbortController();
-          fetch(Curry._1(Shared_api_universal__Routes__Routes_Builder.sprintf(Shared_api_universal__Routes.get_game(undefined)), id), Fetch.RequestInit.make(/* Get */0, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, Caml_option.some(abortController.signal))(undefined)).then(function (prim) {
+          fetch(Curry._1(Shared_api_universal__Routes__Routes_Builder.sprintf(Shared_api_universal__Routes.get_game(undefined)), id), Curry._2(Fetch.RequestInit.make(/* Get */0, undefined, undefined, undefined, undefined, undefined)(undefined, undefined, undefined, undefined, undefined), Caml_option.some(abortController.signal), undefined)).then(function (prim) {
                     return prim.json();
                   }).then(function (data) {
                   const game = Curry._1(Shared_api_client.Api.read_load_game_response, data);
@@ -56,7 +56,7 @@ function useMe(param) {
   const setState = match[1];
   React.useEffect((function () {
           const abortController = new AbortController();
-          fetch(Shared_api_universal__Routes__Routes_Builder.sprintf(Shared_api_universal__Routes.me(undefined)), Fetch.RequestInit.make(/* Get */0, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, Caml_option.some(abortController.signal))(undefined)).then(function (prim) {
+          fetch(Shared_api_universal__Routes__Routes_Builder.sprintf(Shared_api_universal__Routes.me(undefined)), Curry._2(Fetch.RequestInit.make(/* Get */0, undefined, undefined, undefined, undefined, undefined)(undefined, undefined, undefined, undefined, undefined), Caml_option.some(abortController.signal), undefined)).then(function (prim) {
                     return prim.json();
                   }).then(function (data) {
                   const me = Curry._1(Shared_api_client.Api.read_who_am_i_response, data);
