@@ -33,7 +33,7 @@ let api_routes =
 
 let routes =
   [ Dream.get "/public/**" @@ Dream.static ~loader ""
-  ; Dream.scope "/api" [ Dream.origin_referrer_check ] api_routes
+  ; Dream.scope "/api" [] api_routes
   ; Dream.get "/join-game/:id" @@ Routes.home
   ; Dream.get "/play/:id" @@ session_handler @@ Routes.home
   ; Dream.get "**" @@ Routes.home
@@ -44,6 +44,7 @@ let start ?(port = 80) () =
   let secret = Sys.getenv_exn "SESSION_SECRET" in
 
   Dream.run ~interface:"0.0.0.0" ~port
+  @@ Dream.logger
   @@ Dream.set_secret secret
   @@ Dream.cookie_sessions
   @@ Dream.router routes
