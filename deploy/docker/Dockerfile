@@ -15,5 +15,5 @@ RUN make build
 FROM alpine:latest
 WORKDIR /usr/app
 COPY --chmod=755 --from=build /usr/app/scrum-cards .
-EXPOSE 8080
-CMD ["/usr/app/scrum-cards", "serve", "--port=8080"]
+EXPOSE 80
+CMD ["/usr/app/scrum-cards", "serve", "--port=80"]
