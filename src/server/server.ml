@@ -46,6 +46,6 @@ let start ?(port = 80) () =
   Dream.run ~interface:"0.0.0.0" ~port
   @@ Dream.logger
   @@ Dream.set_secret secret
-  @@ Dream.cookie_sessions
+  @@ Dream.memory_sessions
   @@ Dream.router routes
 ;;
