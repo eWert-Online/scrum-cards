@@ -1,10 +1,12 @@
 .BoardCard {
+  --BoardCard-local-aspectRatio: 1 / 1.5;
+
   position: relative;
 
   .BoardCard-cardWrapper {
     position: relative;
 
-    aspect-ratio: 1 / 1.5;
+    aspect-ratio: var(--BoardCard-local-aspectRatio);
     inline-size: 72px;
     margin-inline: auto;
 
@@ -18,7 +20,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      aspect-ratio: inherit;
+      aspect-ratio: var(--BoardCard-local-aspectRatio);
       inline-size: 56px;
       margin-block: auto;
       margin-inline: auto;
@@ -37,7 +39,7 @@
   }
 
   .BoardCard-card {
-    aspect-ratio: inherit;
+    aspect-ratio: var(--BoardCard-local-aspectRatio);
     border-radius: 8px;
 
     transform-style: preserve-3d;
