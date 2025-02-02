@@ -79,7 +79,7 @@ jobs:
           host: ${{ vars.DEPLOY_HOST }}
           username: ${{ vars.DEPLOY_USERNAME }}
           key: ${{ secrets.DEPLOY_KEY }}
-          source: "./deploy/docker-compose.yml,./deploy/.env"
+          source: "deploy/docker-compose.yml,deploy/.env"
           target: ${{ vars.DEPLOY_HOST_PATH }}
           strip_components: 1
 
