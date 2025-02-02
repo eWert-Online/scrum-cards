@@ -1,8 +1,6 @@
 open Core
 
 module RandomId = struct
-  let () = Mirage_crypto_rng_unix.initialize (module Mirage_crypto_rng.Fortuna)
-
   let make ~len () =
     let string n = Mirage_crypto_rng.generate n in
     let seq gen = Seq.unfold (fun () -> Some (gen (), ())) () in
