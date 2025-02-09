@@ -27,9 +27,10 @@
   core
   atdgen
   cmdliner
-  conf-openssl
   crunch
-  dream
+  cohttp-lwt-unix
+  session-cohttp-lwt
+  websocket-lwt-unix
   dune
   irmin
   irmin-fs
@@ -41,7 +42,6 @@
   melange-fetch
   melange-json
   melange-webapi
-  ppx_fields_conv
   reason
   reason-react
   reason-react-ppx

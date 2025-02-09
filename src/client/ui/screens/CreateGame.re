@@ -28,7 +28,7 @@ let make = () => {
       };
 
     Fetch.fetchWithInit(
-      ApiRoutes.(Builder.sprintf(create_game())),
+      ApiRoutes.(Builder.sprintf(Api.create_game())),
       Fetch.RequestInit.make(
         ~method_=Post,
         ~body=Fetch.BodyInit.make(data),

@@ -17,7 +17,9 @@ let make = (~game: Shared_api_client.Api.load_game_response) => {
         variant=`Primary
         action={
                  `Href(
-                   ApiRoutes.(Builder.sprintf(leave_game(), game.game_id)),
+                   ApiRoutes.(
+                     Builder.sprintf(Api.leave_game(), game.game_id)
+                   ),
                  )
                }>
         "Leave Game"

@@ -13,7 +13,7 @@ let make = (~gameId) => {
       };
 
     Fetch.fetchWithInit(
-      ApiRoutes.(Builder.sprintf(join_game(), gameId)),
+      ApiRoutes.(Builder.sprintf(Api.join_game(), gameId)),
       Fetch.RequestInit.make(
         ~credentials=SameOrigin,
         ~method_=Post,

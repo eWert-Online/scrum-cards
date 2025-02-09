@@ -81,7 +81,7 @@ let make =
   React.useEffect3(
     () => {
       let wsConnection =
-        ApiRoutes.(Builder.sprintf(websocket(), gameId))
+        ApiRoutes.(Builder.sprintf(Api.websocket(), gameId))
         |> Bindings.Websocket.make;
       ws.current = Some(wsConnection);
 

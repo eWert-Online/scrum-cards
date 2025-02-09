@@ -9,7 +9,7 @@ let useGame = id => {
       let abortController = Bindings.AbortController.make();
 
       Fetch.fetchWithInit(
-        ApiRoutes.(Builder.sprintf(get_game(), id)),
+        ApiRoutes.(Builder.sprintf(Api.get_game(), id)),
         Fetch.RequestInit.make(
           ~method_=Get,
           ~signal={
@@ -44,7 +44,7 @@ let useMe = () => {
       let abortController = Bindings.AbortController.make();
 
       Fetch.fetchWithInit(
-        ApiRoutes.(Builder.sprintf(me())),
+        ApiRoutes.(Builder.sprintf(Api.me())),
         Fetch.RequestInit.make(
           ~method_=Get,
           ~signal={
@@ -91,7 +91,9 @@ let make = (~gameId) => {
       )
     />
   | (_, `Data(None)) =>
-    <Router.Redirect route={Router.Route.JoinGame(gameId)} />
+    let route = ApiRoutes.(Builder.sprintf(join_game(), gameId));
+    Webapi.Dom.(Location.replace(route, location));
+    React.null;
   | (`Data(Some(game)), `Data(Some(me))) =>
     <Components.Layout>
       <Components.Layout.Header>

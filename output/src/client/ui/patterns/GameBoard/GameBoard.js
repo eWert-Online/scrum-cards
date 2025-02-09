@@ -56,7 +56,7 @@ function GameBoard(Props) {
     Caml_option.valFromOption(conn).send(data);
   };
   React.useEffect((function () {
-          const wsConnection = new WebSocket(Curry._1(Shared_api_universal__Routes__Routes_Builder.sprintf(Shared_api_universal__Routes.websocket(undefined)), gameId));
+          const wsConnection = new WebSocket(Curry._1(Shared_api_universal__Routes__Routes_Builder.sprintf(Shared_api_universal__Routes.Api.websocket(undefined)), gameId));
           ws.current = Caml_option.some(wsConnection);
           wsConnection.addEventListener("message", (function (param) {
                   const s = Curry._1(Shared_api_client.Api.read_ws_response, JSON.parse(param.data));

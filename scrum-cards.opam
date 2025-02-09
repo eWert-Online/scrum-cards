@@ -11,9 +11,10 @@ depends: [
   "core"
   "atdgen"
   "cmdliner"
-  "conf-openssl"
   "crunch"
-  "dream"
+  "cohttp-lwt-unix"
+  "session-cohttp-lwt"
+  "websocket-lwt-unix"
   "dune" {>= "3.15"}
   "irmin"
   "irmin-fs"
@@ -24,7 +25,6 @@ depends: [
   "melange-fetch"
   "melange-json"
   "melange-webapi"
-  "ppx_fields_conv"
   "reason"
   "reason-react"
   "reason-react-ppx"
@@ -48,3 +48,6 @@ build: [
   ]
 ]
 dev-repo: "git+https://github.com/ewert-online/scrum-cards.git"
+pin-depends: [
+  [ "session.dev" "git+https://github.com/talex5/ocaml-session#update-mirage-crypto"]
+]

@@ -3,7 +3,13 @@
  (libraries
   shared_api_server
   core
-  dream
+  mirage-crypto-rng.unix
+  cohttp
+  cohttp-lwt-unix
+  websocket
+  websocket-lwt-unix
+  websocket-lwt-unix.cohttp
+  session-cohttp-lwt
   irmin
   irmin.unix
   irmin-fs
@@ -20,3 +26,19 @@
  (action
   (progn
    (run %{bin:ocaml-crunch} --mode=plain %{project_root}/public -o %{target}))))
+
+(rule
+ (alias atd)
+ (targets
+  session_t.ml
+  session_t.mli
+  session_b.ml
+  session_b.mli
+  session_v.ml
+  session_v.mli)
+ (deps session.atd)
+ (action
+  (concurrent
+   (run atdgen -t %{deps})
+   (run atdgen -b %{deps})
+   (run atdgen -v %{deps}))))

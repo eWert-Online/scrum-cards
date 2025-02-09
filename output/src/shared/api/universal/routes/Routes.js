@@ -2,6 +2,14 @@
 
 import * as Shared_api_universal__Routes__Routes_Builder from "./Routes_Builder.js";
 
+function join_game(param) {
+  return Shared_api_universal__Routes__Routes_Builder.$slash$question((function (param) {
+                return Shared_api_universal__Routes__Routes_Builder.$slash((function (param) {
+                              return Shared_api_universal__Routes__Routes_Builder.s("join-game", param);
+                            }), Shared_api_universal__Routes__Routes_Builder.str, param);
+              }), Shared_api_universal__Routes__Routes_Builder.nil);
+}
+
 function create_game(param) {
   return Shared_api_universal__Routes__Routes_Builder.$slash$question((function (param) {
                 return Shared_api_universal__Routes__Routes_Builder.$slash((function (param) {
@@ -32,7 +40,7 @@ function get_game(param) {
               }), Shared_api_universal__Routes__Routes_Builder.nil);
 }
 
-function join_game(param) {
+function join_game$1(param) {
   return Shared_api_universal__Routes__Routes_Builder.$slash$question((function (param) {
                 return Shared_api_universal__Routes__Routes_Builder.$slash((function (param) {
                               return Shared_api_universal__Routes__Routes_Builder.$slash((function (param) {
@@ -90,12 +98,17 @@ function websocket(param) {
               }), Shared_api_universal__Routes__Routes_Builder.nil);
 }
 
+const Api = {
+  create_game: create_game,
+  get_game: get_game,
+  join_game: join_game$1,
+  leave_game: leave_game,
+  me: me,
+  websocket: websocket
+};
+
 export {
-  create_game ,
-  get_game ,
   join_game ,
-  leave_game ,
-  me ,
-  websocket ,
+  Api ,
 }
 /* Shared_api_universal__Routes__Routes_Builder Not a pure module */

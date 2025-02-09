@@ -72,7 +72,7 @@ esbuild
       ".png": "file",
       ".jpg": "file",
       ".gif": "file",
-      ".svg": "dataurl",
+      ".svg": "file",
       ".ttf": "file",
       ".otf": "file",
       ".eot": "file",

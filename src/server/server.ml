@@ -1,51 +1,31 @@
-open Core
+let handler _socket request body =
+  let open Shared_api_server.Routes.Builder in
+  let target = Cohttp.Request.resource request in
 
-let session_handler next_handler request =
-  let id = Dream.param request "id" in
-
-  let name = Dream.session_field request "name" in
-  let spectator = Dream.session_field request "spectator" in
-
-  match name, spectator with
-  | Some _, Some _ ->
-    let%bind.Lwt response = next_handler request in
-    Lwt.return response
-  | _ ->
-    let%bind.Lwt () = Dream.invalidate_session request in
-    Dream.redirect ~status:`See_Other request (Printf.sprintf "/join-game/%s" id)
-;;
-
-let loader _root path _request =
-  match Assets.read path with
-  | None -> Dream.empty `Not_Found
-  | Some asset -> Dream.respond asset
-;;
-
-let api_routes =
-  [ Dream.post "/game/create" @@ Routes.create_game
-  ; Dream.get "/game/get/:id" @@ Routes.get_game
-  ; Dream.post "/game/join/:id" @@ Routes.join_game
-  ; Dream.get "/game/leave/:id" @@ Routes.leave_game
-  ; Dream.get "/who-am-i" @@ Routes.who_am_i
-  ; Dream.get "/game/websocket/:id" @@ session_handler @@ Websocket.route
-  ]
-;;
-
-let routes =
-  [ Dream.get "/public/**" @@ Dream.static ~loader ""
-  ; Dream.scope "/api" [] api_routes
-  ; Dream.get "/join-game/:id" @@ Routes.home
-  ; Dream.get "/play/:id" @@ session_handler @@ Routes.home
-  ; Dream.get "**" @@ Routes.home
-  ]
+  match
+    match'
+      ~target
+      (one_of
+         [ (s "public" /? wildcard) @--> Routes.static
+         ; Shared_api_server.Routes.join_game () @--> Routes.join_game
+         ; Shared_api_server.Routes.Api.create_game () @--> Routes.Api.create_game body
+         ; Shared_api_server.Routes.Api.get_game () @--> Routes.Api.get_game
+         ; Shared_api_server.Routes.Api.join_game () @--> Routes.Api.join_game body
+         ; Shared_api_server.Routes.Api.leave_game () @--> Routes.Api.leave_game
+         ; Shared_api_server.Routes.Api.me () @--> Routes.Api.who_am_i
+         ; Shared_api_server.Routes.Api.websocket () @--> Websocket_handler.route
+         ])
+  with
+  | NoMatch -> Routes.home request
+  | FullMatch r -> r request
+  | MatchWithTrailingSlash r -> r request
 ;;
 
 let start ?(port = 80) () =
-  let secret = Sys.getenv_exn "SESSION_SECRET" in
-
-  Dream.run ~interface:"0.0.0.0" ~port
-  @@ Dream.logger
-  @@ Dream.set_secret secret
-  @@ Dream.memory_sessions
-  @@ Dream.router routes
+  print_newline ();
+  Logs.info (fun m -> m "Starting server on port %i" port);
+  let () = Mirage_crypto_rng_unix.use_default () in
+  Lwt_main.run
+    (Cohttp_lwt_unix.Server.make_response_action ~callback:handler ()
+     |> Cohttp_lwt_unix.Server.create ~mode:(`TCP (`Port port)))
 ;;

@@ -1,0 +1,5 @@
+type payload = {
+  spectator: bool;
+  name: string;
+  ?played_card: string option;
+}

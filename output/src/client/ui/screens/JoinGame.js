@@ -19,7 +19,7 @@ function JoinGame(Props) {
               join_game_typ: typ,
               join_game_name: name
             }));
-    fetch(Curry._1(Shared_api_universal__Routes__Routes_Builder.sprintf(Shared_api_universal__Routes.join_game(undefined)), gameId), Curry._2(Fetch.RequestInit.make(/* Post */2, undefined, Caml_option.some(data), undefined, undefined, undefined)(/* SameOrigin */1, undefined, undefined, undefined, undefined), undefined, undefined)).then(function (param) {
+    fetch(Curry._1(Shared_api_universal__Routes__Routes_Builder.sprintf(Shared_api_universal__Routes.Api.join_game(undefined)), gameId), Curry._2(Fetch.RequestInit.make(/* Post */2, undefined, Caml_option.some(data), undefined, undefined, undefined)(/* SameOrigin */1, undefined, undefined, undefined, undefined), undefined, undefined)).then(function (param) {
           return Promise.resolve(Router.push({
                           TAG: /* Play */1,
                           _0: gameId

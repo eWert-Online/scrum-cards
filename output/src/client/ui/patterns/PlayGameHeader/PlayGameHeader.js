@@ -31,7 +31,7 @@ function PlayGameHeader(Props) {
                             danger: true,
                             action: {
                               NAME: "Href",
-                              VAL: Curry._1(Shared_api_universal__Routes__Routes_Builder.sprintf(Shared_api_universal__Routes.leave_game(undefined)), game.game_id)
+                              VAL: Curry._1(Shared_api_universal__Routes__Routes_Builder.sprintf(Shared_api_universal__Routes.Api.leave_game(undefined)), game.game_id)
                             },
                             children: "Leave Game"
                           }),
