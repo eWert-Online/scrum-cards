@@ -4,10 +4,10 @@
 all: build
 
 run:
-	SESSION_SECRET="dev" opam exec -- dune exec -- main serve --port 4444
+	opam exec -- dune exec -- main serve --port 4444
 
 dev:
-	SESSION_SECRET="dev" opam exec -- dune exec -w -- main serve --port 4444
+	opam exec -- dune exec -w -- main serve --port 4444
 
 build:
 	opam exec -- dune build @all
