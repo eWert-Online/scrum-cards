@@ -26,7 +26,12 @@ module Game = struct
   let add_player game_id player =
     Hashtbl.change storage game_id ~f:(function
       | None -> Some { is_revealed = false; players = [ player ] }
-      | Some game -> Some { game with players = player :: game.players })
+      | Some game ->
+        if List.exists game.players ~f:(fun { id; _ } -> String.equal id player.id)
+        then Some game
+        else (
+          let players = player :: game.players in
+          Some { game with players }))
   ;;
 
   let update_players game_id f =
