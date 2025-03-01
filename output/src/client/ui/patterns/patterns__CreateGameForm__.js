@@ -4,6 +4,6 @@
 const Patterns__CreateGameForm__ = {};
 
 export {
-  Patterns__CreateGameForm__ ,
+  Patterns__CreateGameForm__,
 }
 /* No side effect */

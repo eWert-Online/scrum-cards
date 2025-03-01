@@ -4,6 +4,6 @@
 const Shared_api_universal__Routes__ = {};
 
 export {
-  Shared_api_universal__Routes__ ,
+  Shared_api_universal__Routes__,
 }
 /* No side effect */

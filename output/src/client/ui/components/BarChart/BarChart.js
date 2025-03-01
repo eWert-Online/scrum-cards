@@ -14,49 +14,49 @@ function BarChart(Props) {
   let classNameOpt = Props.className;
   const className = classNameOpt !== undefined ? classNameOpt : "";
   return JsxRuntime.jsxs("div", {
-              children: [
-                JsxRuntime.jsx(Components__Headline.Secondary.make, {
-                      className: "BarChart-headline",
-                      children: title
-                    }),
-                JsxRuntime.jsx("ul", {
-                      children: entries.map(function (param) {
-                            const value = param[1];
-                            return JsxRuntime.jsxs("li", {
-                                        children: [
-                                          JsxRuntime.jsx("span", {
-                                                children: param[0],
-                                                className: "BarChart-entryLabel"
-                                              }),
-                                          JsxRuntime.jsx("span", {
-                                                children: value,
-                                                className: "BarChart-entryValue"
-                                              })
-                                        ],
-                                        className: "BarChart-entry",
-                                        style: Js__Js_dict.fromList({
-                                              hd: [
-                                                "--BarChart-inline-span",
-                                                String(value)
-                                              ],
-                                              tl: /* [] */0
-                                            })
-                                      });
-                          }),
-                      className: "BarChart-chart"
-                    })
+    children: [
+      JsxRuntime.jsx(Components__Headline.Secondary.make, {
+        className: "BarChart-headline",
+        children: title
+      }),
+      JsxRuntime.jsx("ul", {
+        children: entries.map(function (param) {
+          const value = param[1];
+          return JsxRuntime.jsxs("li", {
+            children: [
+              JsxRuntime.jsx("span", {
+                children: param[0],
+                className: "BarChart-entryLabel"
+              }),
+              JsxRuntime.jsx("span", {
+                children: value,
+                className: "BarChart-entryValue"
+              })
+            ],
+            className: "BarChart-entry",
+            style: Js__Js_dict.fromList({
+              hd: [
+                "--BarChart-inline-span",
+                String(value)
               ],
-              className: Css.merge([
-                    "BarChart",
-                    className
-                  ])
-            });
+              tl: /* [] */ 0
+            })
+          });
+        }),
+        className: "BarChart-chart"
+      })
+    ],
+    className: Css.merge([
+      "BarChart",
+      className
+    ])
+  });
 }
 
 const make = BarChart;
 
 export {
-  css ,
-  make ,
+  css,
+  make,
 }
 /* css Not a pure module */

@@ -4,6 +4,6 @@
 const Bindings__ = {};
 
 export {
-  Bindings__ ,
+  Bindings__,
 }
 /* No side effect */

@@ -10,9 +10,9 @@ const $$Window = {};
 const $$Element = {};
 
 export {
-  Progress ,
-  Input ,
-  $$Window ,
-  $$Element ,
+  Progress,
+  Input,
+  $$Window,
+  $$Element,
 }
 /* No side effect */

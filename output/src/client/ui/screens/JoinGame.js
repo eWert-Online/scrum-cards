@@ -16,32 +16,32 @@ function JoinGame(Props) {
   let gameId = Props.gameId;
   const joinGame = function (typ, name) {
     const data = JSON.stringify(Curry._1(Shared_api_client.Api.write_join_game_request, {
-              join_game_typ: typ,
-              join_game_name: name
-            }));
-    fetch(Curry._1(Shared_api_universal__Routes__Routes_Builder.sprintf(Shared_api_universal__Routes.Api.join_game(undefined)), gameId), Curry._2(Fetch.RequestInit.make(/* Post */2, undefined, Caml_option.some(data), undefined, undefined, undefined)(/* SameOrigin */1, undefined, undefined, undefined, undefined), undefined, undefined)).then(function (param) {
-          return Promise.resolve(Router.push({
-                          TAG: /* Play */1,
-                          _0: gameId
-                        }));
-        });
+      join_game_typ: typ,
+      join_game_name: name
+    }));
+    fetch(Curry._1(Shared_api_universal__Routes__Routes_Builder.sprintf(Shared_api_universal__Routes.Api.join_game(undefined)), gameId), Fetch.RequestInit.make(/* Post */ 2, undefined, Caml_option.some(data), undefined, undefined, undefined, /* SameOrigin */ 1, undefined, undefined, undefined, undefined, undefined)(undefined)).then(function (param) {
+      return Promise.resolve(Router.push({
+        TAG: /* Play */ 1,
+        _0: gameId
+      }));
+    });
   };
   return JsxRuntime.jsx(Components__Layout.make, {
-              children: JsxRuntime.jsx(Components__Layout.Content.make, {
-                    children: JsxRuntime.jsx(Components__Modal.make, {
-                          isOpen: true,
-                          onClose: undefined,
-                          children: JsxRuntime.jsx(Patterns__JoinGameForm.make, {
-                                onSubmit: joinGame
-                              })
-                        })
-                  })
-            });
+    children: JsxRuntime.jsx(Components__Layout.Content.make, {
+      children: JsxRuntime.jsx(Components__Modal.make, {
+        isOpen: true,
+        onClose: undefined,
+        children: JsxRuntime.jsx(Patterns__JoinGameForm.make, {
+          onSubmit: joinGame
+        })
+      })
+    })
+  });
 }
 
 const make = JoinGame;
 
 export {
-  make ,
+  make,
 }
 /* Components__Layout Not a pure module */

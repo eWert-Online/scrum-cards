@@ -31,60 +31,60 @@ function Input(Props) {
     
   };
   return JsxRuntime.jsx("div", {
-              children: JsxRuntime.jsxs(Components__InputLabel.make, {
-                    text: label,
-                    htmlFor: name,
-                    children: [
-                      description !== undefined ? JsxRuntime.jsx("aside", {
-                              children: description,
-                              className: "Input-description"
-                            }) : null,
-                      JsxRuntime.jsx("div", {
-                            children: typ === "Textarea" ? JsxRuntime.jsx("textarea", {
-                                    className: "Input-field",
-                                    id: name,
-                                    autoComplete: autoComplete,
-                                    placeholder: placeholder,
-                                    readOnly: onChange === undefined,
-                                    rows: rows,
-                                    value: value,
-                                    onChange: handleChange
-                                  }) : (
-                                typ === "Text" ? JsxRuntime.jsx("input", {
-                                        className: "Input-field",
-                                        id: name,
-                                        autoComplete: autoComplete,
-                                        placeholder: placeholder,
-                                        readOnly: onChange === undefined,
-                                        type: "text",
-                                        value: value,
-                                        onChange: handleChange
-                                      }) : JsxRuntime.jsx("input", {
-                                        className: "Input-field",
-                                        id: name,
-                                        autoComplete: autoComplete,
-                                        placeholder: placeholder,
-                                        readOnly: onChange === undefined,
-                                        type: "password",
-                                        value: value,
-                                        onChange: handleChange
-                                      })
-                              ),
-                            className: "Input-fieldWrapper"
-                          })
-                    ]
-                  }),
-              className: Css.merge([
-                    "Input",
-                    className
-                  ])
-            });
+    children: JsxRuntime.jsxs(Components__InputLabel.make, {
+      text: label,
+      htmlFor: name,
+      children: [
+        description !== undefined ? JsxRuntime.jsx("aside", {
+            children: description,
+            className: "Input-description"
+          }) : null,
+        JsxRuntime.jsx("div", {
+          children: typ === "Textarea" ? JsxRuntime.jsx("textarea", {
+              className: "Input-field",
+              id: name,
+              autoComplete: autoComplete,
+              placeholder: placeholder,
+              readOnly: onChange === undefined,
+              rows: rows,
+              value: value,
+              onChange: handleChange
+            }) : (
+              typ === "Text" ? JsxRuntime.jsx("input", {
+                  className: "Input-field",
+                  id: name,
+                  autoComplete: autoComplete,
+                  placeholder: placeholder,
+                  readOnly: onChange === undefined,
+                  type: "text",
+                  value: value,
+                  onChange: handleChange
+                }) : JsxRuntime.jsx("input", {
+                  className: "Input-field",
+                  id: name,
+                  autoComplete: autoComplete,
+                  placeholder: placeholder,
+                  readOnly: onChange === undefined,
+                  type: "password",
+                  value: value,
+                  onChange: handleChange
+                })
+            ),
+          className: "Input-fieldWrapper"
+        })
+      ]
+    }),
+    className: Css.merge([
+      "Input",
+      className
+    ])
+  });
 }
 
 const make = Input;
 
 export {
-  css ,
-  make ,
+  css,
+  make,
 }
 /* css Not a pure module */

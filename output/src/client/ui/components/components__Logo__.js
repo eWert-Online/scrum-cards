@@ -4,6 +4,6 @@
 const Components__Logo__ = {};
 
 export {
-  Components__Logo__ ,
+  Components__Logo__,
 }
 /* No side effect */

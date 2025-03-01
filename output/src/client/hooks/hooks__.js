@@ -4,6 +4,6 @@
 const Hooks__ = {};
 
 export {
-  Hooks__ ,
+  Hooks__,
 }
 /* No side effect */

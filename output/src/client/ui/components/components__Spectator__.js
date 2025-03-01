@@ -4,6 +4,6 @@
 const Components__Spectator__ = {};
 
 export {
-  Components__Spectator__ ,
+  Components__Spectator__,
 }
 /* No side effect */

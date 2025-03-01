@@ -18,58 +18,58 @@ function Modal(Props) {
   const className = classNameOpt !== undefined ? classNameOpt : "";
   const modalRef = React.useRef(null);
   Hooks__Hooks_ClickAway.useClickAway({
-        hd: modalRef,
-        tl: /* [] */0
-      }, (function (param) {
-          if (onClose !== undefined) {
-            return Curry._1(onClose, undefined);
-          }
-          
-        }));
+    hd: modalRef,
+    tl: /* [] */ 0
+  }, (function (param) {
+    if (onClose !== undefined) {
+      return Curry._1(onClose, undefined);
+    }
+    
+  }));
   const portal = React.useMemo((function () {
-          return document.createElement("div");
-        }), []);
+    return document.createElement("div");
+  }), []);
   React.useEffect((function () {
-          if (!isOpen) {
-            return ;
-          }
-          const body = document.body;
-          body.appendChild(portal);
-          return (function (param) {
-                    body.removeChild(portal);
-                  });
-        }), [
-        isOpen,
-        portal
-      ]);
+    if (!isOpen) {
+      return;
+    }
+    const body = document.body;
+    body.appendChild(portal);
+    return (function (param) {
+      body.removeChild(portal);
+    });
+  }), [
+    isOpen,
+    portal
+  ]);
   if (isOpen) {
     return ReactDom.createPortal(JsxRuntime.jsx("div", {
-                    children: JsxRuntime.jsxs("div", {
-                          ref: modalRef,
-                          children: [
-                            onClose !== undefined ? JsxRuntime.jsx("button", {
-                                    children: "close window",
-                                    className: "Modal-close",
-                                    type: "button",
-                                    onClick: (function (param) {
-                                        Curry._1(onClose, undefined);
-                                      })
-                                  }) : null,
-                            JsxRuntime.jsx("div", {
-                                  children: children,
-                                  className: Css.merge_list({
-                                        hd: "Modal-content",
-                                        tl: {
-                                          hd: className,
-                                          tl: /* [] */0
-                                        }
-                                      })
-                                })
-                          ],
-                          className: "Modal"
-                        }),
-                    className: "Modal-wrapper is-active"
-                  }), portal);
+      children: JsxRuntime.jsxs("div", {
+        ref: modalRef,
+        children: [
+          onClose !== undefined ? JsxRuntime.jsx("button", {
+              children: "close window",
+              className: "Modal-close",
+              type: "button",
+              onClick: (function (param) {
+                Curry._1(onClose, undefined);
+              })
+            }) : null,
+          JsxRuntime.jsx("div", {
+            children: children,
+            className: Css.merge_list({
+              hd: "Modal-content",
+              tl: {
+                hd: className,
+                tl: /* [] */ 0
+              }
+            })
+          })
+        ],
+        className: "Modal"
+      }),
+      className: "Modal-wrapper is-active"
+    }), portal);
   } else {
     return null;
   }
@@ -78,7 +78,7 @@ function Modal(Props) {
 const make = Modal;
 
 export {
-  css ,
-  make ,
+  css,
+  make,
 }
 /* css Not a pure module */

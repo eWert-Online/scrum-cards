@@ -16,7 +16,7 @@ function split_path(target) {
     switch (target) {
       case "" :
       case "/" :
-          return /* [] */0;
+        return /* [] */ 0;
       default:
         const xs = Stdlib__String.split_on_char(/* '/' */47, target);
         if (xs && xs.hd === "") {
@@ -31,7 +31,7 @@ function split_path(target) {
     if (i !== 0) {
       return split_target(Stdlib__String.sub(target, 0, i));
     } else {
-      return /* [] */0;
+      return /* [] */ 0;
     }
   } else {
     return split_target(target);
@@ -39,13 +39,13 @@ function split_path(target) {
 }
 
 const KeyMap = Stdlib__Map.Make({
-      compare: Stdlib__String.compare
-    });
+  compare: Stdlib__String.compare
+});
 
 const empty_children = KeyMap.empty;
 
 const empty = {
-  parsers: /* [] */0,
+  parsers: /* [] */ 0,
   children: empty_children,
   capture: undefined,
   wildcard: false
@@ -54,7 +54,7 @@ const empty = {
 function feed_params(t, params) {
   let _t = t;
   let _params = params;
-  while(true) {
+  while (true) {
     const params$1 = _params;
     const t$1 = _t;
     const rs = t$1.parsers;
@@ -63,7 +63,7 @@ function feed_params(t, params) {
       exit = 1;
     } else {
       if (!params$1) {
-        return /* [] */0;
+        return /* [] */ 0;
       }
       exit = 1;
     }
@@ -90,14 +90,14 @@ function feed_params(t, params) {
         if (m$p !== undefined) {
           _params = xs;
           _t = m$p;
-          continue ;
+          continue;
         }
         if (capture === undefined) {
-          return /* [] */0;
+          return /* [] */ 0;
         }
         _params = xs;
         _t = capture;
-        continue ;
+        continue;
       }
       
     }
@@ -109,50 +109,51 @@ function add(k, v, t) {
   const aux = function (k, t) {
     if (!k) {
       return {
-              parsers: {
-                hd: v,
-                tl: t.parsers
-              },
-              children: t.children,
-              capture: t.capture,
-              wildcard: t.wildcard
-            };
+        parsers: {
+          hd: v,
+          tl: t.parsers
+        },
+        children: t.children,
+        capture: t.capture,
+        wildcard: t.wildcard
+      };
     }
     const capture = t.capture;
     const children = t.children;
     const r = k.tl;
     const x = k.hd;
-    if (typeof x === "number") {
-      if (x) {
+    if (/* tag */ typeof x === "number" || typeof x === "string") {
+      if (x !== /* Capture */ 0) {
         return {
-                parsers: {
-                  hd: v,
-                  tl: t.parsers
-                },
-                children: t.children,
-                capture: t.capture,
-                wildcard: true
-              };
+          parsers: {
+            hd: v,
+            tl: t.parsers
+          },
+          children: t.children,
+          capture: t.capture,
+          wildcard: true
+        };
       }
       const t$p = capture !== undefined ? capture : empty;
       const t$p$p = aux(r, t$p);
       return {
-              parsers: t.parsers,
-              children: t.children,
-              capture: t$p$p,
-              wildcard: t.wildcard
-            };
+        parsers: t.parsers,
+        children: t.children,
+        capture: t$p$p,
+        wildcard: t.wildcard
+      };
+    } else {
+      const w = x._0;
+      const v$1 = Curry._2(KeyMap.find_opt, w, children);
+      const t$p$1 = v$1 !== undefined ? v$1 : empty;
+      const t$p$p$1 = aux(r, t$p$1);
+      return {
+        parsers: t.parsers,
+        children: Curry._3(KeyMap.add, w, t$p$p$1, children),
+        capture: t.capture,
+        wildcard: t.wildcard
+      };
     }
-    const w = x._0;
-    const v$1 = Curry._2(KeyMap.find_opt, w, children);
-    const t$p$1 = v$1 !== undefined ? v$1 : empty;
-    const t$p$p$1 = aux(r, t$p$1);
-    return {
-            parsers: t.parsers,
-            children: Curry._3(KeyMap.add, w, t$p$p$1, children),
-            capture: t.capture,
-            wildcard: t.wildcard
-          };
   };
   return aux(k, t);
 }
@@ -160,25 +161,25 @@ function add(k, v, t) {
 function union(t1, t2) {
   const parsers = Stdlib.$at(t1.parsers, t2.parsers);
   const children = Curry._3(KeyMap.merge, (function (param, l, r) {
-          if (l !== undefined) {
-            if (r !== undefined) {
-              return union(l, r);
-            } else {
-              return l;
-            }
-          }
-          if (r !== undefined) {
-            return r;
-          }
-          throw new Caml_js_exceptions.MelangeError("Assert_failure", {
-                    MEL_EXN_ID: "Assert_failure",
-                    _1: [
-                      "Routes_Builder.ml",
-                      90,
-                      27
-                    ]
-                  });
-        }), t1.children, t2.children);
+    if (l !== undefined) {
+      if (r !== undefined) {
+        return union(l, r);
+      } else {
+        return l;
+      }
+    }
+    if (r !== undefined) {
+      return r;
+    }
+    throw new Caml_js_exceptions.MelangeError("Assert_failure", {
+          MEL_EXN_ID: "Assert_failure",
+          _1: [
+            "src/shared/api/universal/routes/Routes_Builder.ml",
+            90,
+            27
+          ]
+        });
+  }), t1.children, t2.children);
   const match = t1.capture;
   const match$1 = t2.capture;
   const capture = match !== undefined ? (
@@ -194,150 +195,152 @@ function union(t1, t2) {
       match$3 ? Stdlib.failwith("Attemp to union wildcard and non-wildcard pattern") : false
     );
   return {
-          parsers: parsers,
-          children: children,
-          capture: capture,
-          wildcard: wildcard
-        };
+    parsers: parsers,
+    children: children,
+    capture: capture,
+    wildcard: wildcard
+  };
 }
 
 function of_parts(x) {
   return {
-          prefix: /* [] */0,
-          matched: split_path(x)
-        };
+    prefix: /* [] */ 0,
+    matched: split_path(x)
+  };
 }
 
 function wildcard_match(t) {
   return Stdlib__String.concat("/", {
-              hd: "",
-              tl: t.matched
-            });
+    hd: "",
+    tl: t.matched
+  });
 }
 
 function prefix(t) {
   return Stdlib__String.concat("/", {
-              hd: "",
-              tl: t.prefix
-            });
+    hd: "",
+    tl: t.prefix
+  });
 }
 
 function pattern(to_, from_, label, r) {
   return {
-          TAG: /* Conv */1,
-          _0: {
-            to_: to_,
-            from_: from_,
-            label: label
-          },
-          _1: r
-        };
+    TAG: /* Conv */ 1,
+    _0: {
+      to_: to_,
+      from_: from_,
+      label: label
+    },
+    _1: r
+  };
 }
 
 function custom(to_, from_, label, r) {
   return {
-          TAG: /* Conv */1,
-          _0: {
-            to_: to_,
-            from_: from_,
-            label: label
-          },
-          _1: r
-        };
+    TAG: /* Conv */ 1,
+    _0: {
+      to_: to_,
+      from_: from_,
+      label: label
+    },
+    _1: r
+  };
 }
 
 function $at$neg$neg$great(r, handler) {
-  return /* Route */{
-          _0: r,
-          _1: handler,
-          _2: (function (x) {
-              return x;
-            })
-        };
+  return {
+    TAG: /* Route */ 0,
+    _0: r,
+    _1: handler,
+    _2: (function (x) {
+      return x;
+    })
+  };
 }
 
 function route(r, handler) {
-  return /* Route */{
-          _0: r,
-          _1: handler,
-          _2: (function (x) {
-              return x;
-            })
-        };
+  return {
+    TAG: /* Route */ 0,
+    _0: r,
+    _1: handler,
+    _2: (function (x) {
+      return x;
+    })
+  };
 }
 
 function s(w, r) {
   return {
-          TAG: /* Match */0,
-          _0: w,
-          _1: r
-        };
+    TAG: /* Match */ 0,
+    _0: w,
+    _1: r
+  };
 }
 
 function $$int(r) {
   return {
-          TAG: /* Conv */1,
-          _0: {
-            to_: (function (prim) {
-                return String(prim);
-              }),
-            from_: Stdlib.int_of_string_opt,
-            label: ":int"
-          },
-          _1: r
-        };
+    TAG: /* Conv */ 1,
+    _0: {
+      to_: (function (prim) {
+        return String(prim);
+      }),
+      from_: Stdlib.int_of_string_opt,
+      label: ":int"
+    },
+    _1: r
+  };
 }
 
 function int64(r) {
   return {
-          TAG: /* Conv */1,
-          _0: {
-            to_: Stdlib__Int64.to_string,
-            from_: Stdlib__Int64.of_string_opt,
-            label: ":int64"
-          },
-          _1: r
-        };
+    TAG: /* Conv */ 1,
+    _0: {
+      to_: Stdlib__Int64.to_string,
+      from_: Stdlib__Int64.of_string_opt,
+      label: ":int64"
+    },
+    _1: r
+  };
 }
 
 function int32(r) {
   return {
-          TAG: /* Conv */1,
-          _0: {
-            to_: Stdlib__Int32.to_string,
-            from_: Stdlib__Int32.of_string_opt,
-            label: ":int32"
-          },
-          _1: r
-        };
+    TAG: /* Conv */ 1,
+    _0: {
+      to_: Stdlib__Int32.to_string,
+      from_: Stdlib__Int32.of_string_opt,
+      label: ":int32"
+    },
+    _1: r
+  };
 }
 
 function str(r) {
   return {
-          TAG: /* Conv */1,
-          _0: {
-            to_: (function (x) {
-                return x;
-              }),
-            from_: (function (x) {
-                return x;
-              }),
-            label: ":string"
-          },
-          _1: r
-        };
+    TAG: /* Conv */ 1,
+    _0: {
+      to_: (function (x) {
+        return x;
+      }),
+      from_: (function (x) {
+        return x;
+      }),
+      label: ":string"
+    },
+    _1: r
+  };
 }
 
 function bool(r) {
   return {
-          TAG: /* Conv */1,
-          _0: {
-            to_: Stdlib.string_of_bool,
-            from_: Stdlib.bool_of_string_opt,
-            label: ":bool"
-          },
-          _1: r
-        };
+    TAG: /* Conv */ 1,
+    _0: {
+      to_: Stdlib.string_of_bool,
+      from_: Stdlib.bool_of_string_opt,
+      label: ":bool"
+    },
+    _1: r
+  };
 }
 
 function $slash(m1, m2, r) {
@@ -349,75 +352,78 @@ function $slash$question(m1, m2) {
 }
 
 function route_pattern(param) {
-  if (typeof param === "number") {
-    if (param === /* End */0) {
-      return /* [] */0;
+  if (/* tag */ typeof param === "number" || typeof param === "string") {
+    if (param === /* End */ 0) {
+      return /* [] */ 0;
     } else {
       return {
-              hd: /* Wildcard */1,
-              tl: /* [] */0
-            };
+        hd: /* Wildcard */ 1,
+        tl: /* [] */ 0
+      };
     }
-  } else if (param.TAG === /* Match */0) {
+  } else if (param.TAG === /* Match */ 0) {
     return {
-            hd: /* Match */{
-              _0: param._0
-            },
-            tl: route_pattern(param._1)
-          };
+      hd: {
+        TAG: /* Match */ 0,
+        _0: param._0
+      },
+      tl: route_pattern(param._1)
+    };
   } else {
     return {
-            hd: /* Capture */0,
-            tl: route_pattern(param._1)
-          };
+      hd: /* Capture */ 0,
+      tl: route_pattern(param._1)
+    };
   }
 }
 
 function pp_path$p(path) {
   const aux = function (param) {
-    if (typeof param === "number") {
-      if (param === /* End */0) {
-        return /* [] */0;
+    if (/* tag */ typeof param === "number" || typeof param === "string") {
+      if (param === /* End */ 0) {
+        return /* [] */ 0;
       } else {
         return {
-                hd: ":wildcard",
-                tl: /* [] */0
-              };
+          hd: ":wildcard",
+          tl: /* [] */ 0
+        };
       }
-    } else if (param.TAG === /* Match */0) {
+    } else if (param.TAG === /* Match */ 0) {
       return {
-              hd: param._0,
-              tl: aux(param._1)
-            };
+        hd: param._0,
+        tl: aux(param._1)
+      };
     } else {
       return {
-              hd: param._0.label,
-              tl: aux(param._1)
-            };
+        hd: param._0.label,
+        tl: aux(param._1)
+      };
     }
   };
   return aux(path);
 }
 
 function pp_target(fmt, t) {
-  Curry._1(Stdlib__Format.fprintf(fmt)(/* Format */{
-            _0: {
-              TAG: /* String */2,
-              _0: /* No_padding */0,
-              _1: /* End_of_format */0
-            },
-            _1: "%s"
-          }), "/" + Stdlib__String.concat("/", pp_path$p(t)));
+  Curry._1(Stdlib__Format.fprintf(fmt)({
+    TAG: /* Format */ 0,
+    _0: {
+      TAG: /* String */ 2,
+      _0: /* No_padding */ 0,
+      _1: /* End_of_format */ 0
+    },
+    _1: "%s"
+  }), "/" + Stdlib__String.concat("/", pp_path$p(t)));
 }
 
 function string_of_path(t) {
-  return Curry._2(Stdlib__Format.asprintf(/* Format */{
-                  _0: {
-                    TAG: /* Alpha */15,
-                    _0: /* End_of_format */0
-                  },
-                  _1: "%a"
-                }), pp_target, t);
+  return Curry._2(Stdlib__Format.asprintf({
+    TAG: /* Format */ 0,
+    _0: {
+      TAG: /* Alpha */ 15,
+      _0: /* End_of_format */ 0
+    },
+    _1: "%a"
+  }), pp_target, t);
 }
 
 function pp_route(fmt, param) {
@@ -425,13 +431,14 @@ function pp_route(fmt, param) {
 }
 
 function string_of_route(r) {
-  return Curry._2(Stdlib__Format.asprintf(/* Format */{
-                  _0: {
-                    TAG: /* Alpha */15,
-                    _0: /* End_of_format */0
-                  },
-                  _1: "%a"
-                }), pp_route, r);
+  return Curry._2(Stdlib__Format.asprintf({
+    TAG: /* Format */ 0,
+    _0: {
+      TAG: /* Alpha */ 15,
+      _0: /* End_of_format */ 0
+    },
+    _1: "%a"
+  }), pp_route, r);
 }
 
 function ksprintf(k, t) {
@@ -439,44 +446,44 @@ function ksprintf(k, t) {
     return Curry._1(k, "/" + Stdlib__String.concat("/", x));
   };
   const aux = function (_k, _param) {
-    while(true) {
+    while (true) {
       const param = _param;
       const k = _k;
-      if (typeof param === "number") {
-        if (param === /* End */0) {
-          return Curry._1(k, /* [] */0);
+      if (/* tag */ typeof param === "number" || typeof param === "string") {
+        if (param === /* End */ 0) {
+          return Curry._1(k, /* [] */ 0);
         } else {
           return function (param) {
             return Curry._1(k, Stdlib__List.concat({
-                            hd: param.matched,
-                            tl: {
-                              hd: /* [] */0,
-                              tl: /* [] */0
-                            }
-                          }));
+              hd: param.matched,
+              tl: {
+                hd: /* [] */ 0,
+                tl: /* [] */ 0
+              }
+            }));
           };
         }
       }
-      if (param.TAG === /* Match */0) {
+      if (param.TAG === /* Match */ 0) {
         const w = param._0;
         _param = param._1;
         _k = (function (s) {
-            return Curry._1(k, {
-                        hd: w,
-                        tl: s
-                      });
+          return Curry._1(k, {
+            hd: w,
+            tl: s
           });
-        continue ;
+        });
+        continue;
       }
       const fmt = param._1;
       const to_ = param._0.to_;
       return function (x) {
         return aux((function (rest) {
-                      return Curry._1(k, {
-                                  hd: Curry._1(to_, x),
-                                  tl: rest
-                                });
-                    }), fmt);
+          return Curry._1(k, {
+            hd: Curry._1(to_, x),
+            tl: rest
+          });
+        }), fmt);
       };
     };
   };
@@ -485,54 +492,54 @@ function ksprintf(k, t) {
 
 function sprintf(t) {
   return ksprintf((function (x) {
-                return x;
-              }), t);
+    return x;
+  }), t);
 }
 
 function parse_route(path, handler, params) {
   let _t = path;
   let _f = handler;
-  let _seen = /* [] */0;
+  let _seen = /* [] */ 0;
   let _s = params;
-  while(true) {
+  while (true) {
     const s = _s;
     const seen = _seen;
     const f = _f;
     const t = _t;
-    if (typeof t === "number") {
-      if (t === /* End */0) {
+    if (/* tag */ typeof t === "number" || typeof t === "string") {
+      if (t === /* End */ 0) {
         if (s) {
           if (s.hd === "" && !s.tl) {
             return {
-                    TAG: /* MatchWithTrailingSlash */1,
-                    _0: f
-                  };
+              TAG: /* MatchWithTrailingSlash */ 1,
+              _0: f
+            };
           } else {
-            return /* NoMatch */0;
+            return /* NoMatch */ 0;
           }
         } else {
           return {
-                  TAG: /* FullMatch */0,
-                  _0: f
-                };
+            TAG: /* FullMatch */ 0,
+            _0: f
+          };
         }
       } else {
         return {
-                TAG: /* FullMatch */0,
-                _0: Curry._1(f, {
-                      prefix: Stdlib__List.rev(seen),
-                      matched: s
-                    })
-              };
+          TAG: /* FullMatch */ 0,
+          _0: Curry._1(f, {
+            prefix: Stdlib__List.rev(seen),
+            matched: s
+          })
+        };
       }
     }
-    if (t.TAG === /* Match */0) {
+    if (t.TAG === /* Match */ 0) {
       if (!s) {
-        return /* NoMatch */0;
+        return /* NoMatch */ 0;
       }
       const x$p = s.hd;
       if (t._0 !== x$p) {
-        return /* NoMatch */0;
+        return /* NoMatch */ 0;
       }
       _s = s.tl;
       _seen = {
@@ -540,15 +547,15 @@ function parse_route(path, handler, params) {
         tl: seen
       };
       _t = t._1;
-      continue ;
+      continue;
     }
     if (!s) {
-      return /* NoMatch */0;
+      return /* NoMatch */ 0;
     }
     const x = s.hd;
     const x$p$1 = Curry._1(t._0.from_, x);
     if (x$p$1 === undefined) {
-      return /* NoMatch */0;
+      return /* NoMatch */ 0;
     }
     _s = s.tl;
     _seen = {
@@ -557,16 +564,16 @@ function parse_route(path, handler, params) {
     };
     _f = Curry._1(f, Caml_option.valFromOption(x$p$1));
     _t = t._1;
-    continue ;
+    continue;
   };
 }
 
 function one_of(routes) {
   const routes$1 = Stdlib__List.rev(routes);
   return Stdlib__List.fold_left((function (routes, route) {
-                const patterns = route_pattern(route._0);
-                return add(patterns, route, routes);
-              }), empty, routes$1);
+    const patterns = route_pattern(route._0);
+    return add(patterns, route, routes);
+  }), empty, routes$1);
 }
 
 function add_route(route, routes) {
@@ -576,42 +583,43 @@ function add_route(route, routes) {
 
 function map(f, param) {
   const g = param._2;
-  return /* Route */{
-          _0: param._0,
-          _1: param._1,
-          _2: (function (x) {
-              return Curry._1(f, Curry._1(g, x));
-            })
-        };
+  return {
+    TAG: /* Route */ 0,
+    _0: param._0,
+    _1: param._1,
+    _2: (function (x) {
+      return Curry._1(f, Curry._1(g, x));
+    })
+  };
 }
 
 function match$p(router, target) {
   const target$1 = split_path(target);
   const routes = feed_params(router, target$1);
   let _param = routes;
-  while(true) {
+  while (true) {
     const param = _param;
     if (!param) {
-      return /* NoMatch */0;
+      return /* NoMatch */ 0;
     }
     const match = param.hd;
     const f = match._2;
     const r = parse_route(match._0, match._1, target$1);
-    if (typeof r !== "number") {
-      if (r.TAG === /* FullMatch */0) {
+    if (!/* tag */ (typeof r === "number" || typeof r === "string")) {
+      if (r.TAG === /* FullMatch */ 0) {
         return {
-                TAG: /* FullMatch */0,
-                _0: Curry._1(f, r._0)
-              };
+          TAG: /* FullMatch */ 0,
+          _0: Curry._1(f, r._0)
+        };
       } else {
         return {
-                TAG: /* MatchWithTrailingSlash */1,
-                _0: Curry._1(f, r._0)
-              };
+          TAG: /* MatchWithTrailingSlash */ 1,
+          _0: Curry._1(f, r._0)
+        };
       }
     }
     _param = param.tl;
-    continue ;
+    continue;
   };
 }
 
@@ -625,37 +633,37 @@ const Parts = {
   of_parts: of_parts
 };
 
-const wildcard = /* Wildcard */1;
+const wildcard = /* Wildcard */ 1;
 
-const nil = /* End */0;
+const nil = /* End */ 0;
 
 export {
-  Parts ,
-  $$int ,
-  int32 ,
-  int64 ,
-  str ,
-  bool ,
-  s ,
-  wildcard ,
-  nil ,
-  pattern ,
-  custom ,
-  $slash ,
-  $slash$tilde ,
-  $slash$question ,
-  $at$neg$neg$great ,
-  route ,
-  one_of ,
-  map ,
-  match$p ,
-  ksprintf ,
-  sprintf ,
-  pp_target ,
-  pp_route ,
-  string_of_path ,
-  string_of_route ,
-  add_route ,
-  union ,
+  Parts,
+  $$int,
+  int32,
+  int64,
+  str,
+  bool,
+  s,
+  wildcard,
+  nil,
+  pattern,
+  custom,
+  $slash,
+  $slash$tilde,
+  $slash$question,
+  $at$neg$neg$great,
+  route,
+  one_of,
+  map,
+  match$p,
+  ksprintf,
+  sprintf,
+  pp_target,
+  pp_route,
+  string_of_path,
+  string_of_route,
+  add_route,
+  union,
 }
 /* KeyMap Not a pure module */

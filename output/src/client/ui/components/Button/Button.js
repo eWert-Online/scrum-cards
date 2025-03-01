@@ -32,69 +32,69 @@ function Button(Props) {
   const icon$1 = function (className) {
     if (icon !== undefined) {
       return Curry._2(icon, Css.merge_list({
-                      hd: "Button-icon",
-                      tl: {
-                        hd: className,
-                        tl: /* [] */0
-                      }
-                    }), undefined);
+        hd: "Button-icon",
+        tl: {
+          hd: className,
+          tl: /* [] */ 0
+        }
+      }), undefined);
     } else {
       return null;
     }
   };
   const classes = Css.merge_list({
-        hd: "Button",
+    hd: "Button",
+    tl: {
+      hd: dangerClass,
+      tl: {
+        hd: variantClass,
         tl: {
-          hd: dangerClass,
-          tl: {
-            hd: variantClass,
-            tl: {
-              hd: className,
-              tl: /* [] */0
-            }
-          }
+          hd: className,
+          tl: /* [] */ 0
         }
-      });
+      }
+    }
+  });
   const contents = iconPosition === "Left" ? JsxRuntime.jsxs(JsxRuntime.Fragment, {
-          children: [
-            icon$1("Button-icon--left"),
-            JsxRuntime.jsx("span", {
-                  children: children,
-                  className: "Button-text"
-                })
-          ]
-        }) : JsxRuntime.jsxs(JsxRuntime.Fragment, {
-          children: [
-            JsxRuntime.jsx("span", {
-                  children: children,
-                  className: "Button-text"
-                }),
-            icon$1("Button-icon--right")
-          ]
-        });
+      children: [
+        icon$1("Button-icon--left"),
+        JsxRuntime.jsx("span", {
+          children: children,
+          className: "Button-text"
+        })
+      ]
+    }) : JsxRuntime.jsxs(JsxRuntime.Fragment, {
+      children: [
+        JsxRuntime.jsx("span", {
+          children: children,
+          className: "Button-text"
+        }),
+        icon$1("Button-icon--right")
+      ]
+    });
   if (action.NAME === "Href") {
     return JsxRuntime.jsx("a", {
-                ref: buttonRef !== undefined ? Caml_option.valFromOption(buttonRef) : fallbackRef,
-                children: contents,
-                className: classes,
-                disabled: disabled,
-                href: action.VAL
-              });
+      ref: buttonRef !== undefined ? Caml_option.valFromOption(buttonRef) : fallbackRef,
+      children: contents,
+      className: classes,
+      disabled: disabled,
+      href: action.VAL
+    });
   } else {
     return JsxRuntime.jsx("button", {
-                ref: buttonRef !== undefined ? Caml_option.valFromOption(buttonRef) : fallbackRef,
-                children: contents,
-                className: classes,
-                disabled: disabled,
-                onClick: action.VAL
-              });
+      ref: buttonRef !== undefined ? Caml_option.valFromOption(buttonRef) : fallbackRef,
+      children: contents,
+      className: classes,
+      disabled: disabled,
+      onClick: action.VAL
+    });
   }
 }
 
 const make = Button;
 
 export {
-  css ,
-  make ,
+  css,
+  make,
 }
 /* css Not a pure module */

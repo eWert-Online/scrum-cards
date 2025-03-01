@@ -4,6 +4,6 @@
 const Components__Layout__ = {};
 
 export {
-  Components__Layout__ ,
+  Components__Layout__,
 }
 /* No side effect */

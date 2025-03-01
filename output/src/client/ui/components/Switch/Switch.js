@@ -21,45 +21,45 @@ function Switch(Props) {
   };
   const has_description = description !== "";
   return JsxRuntime.jsxs("label", {
-              children: [
-                JsxRuntime.jsx("input", {
-                      className: "Switch-input",
-                      id: name,
-                      checked: checked,
-                      name: name,
-                      type: "checkbox",
-                      onChange: handleChange
-                    }),
-                JsxRuntime.jsx("span", {
-                      className: "Switch-switch"
-                    }),
-                JsxRuntime.jsxs("div", {
-                      children: [
-                        JsxRuntime.jsx("div", {
-                              children: label,
-                              className: "Switch-title"
-                            }),
-                        has_description ? JsxRuntime.jsx("aside", {
-                                children: description,
-                                className: "Switch-description"
-                              }) : null
-                      ],
-                      className: "Switch-info"
-                    })
-              ],
-              className: Css.merge([
-                    "Switch",
-                    has_description ? "Switch--described" : "",
-                    className
-                  ]),
-              htmlFor: name
-            });
+    children: [
+      JsxRuntime.jsx("input", {
+        className: "Switch-input",
+        id: name,
+        checked: checked,
+        name: name,
+        type: "checkbox",
+        onChange: handleChange
+      }),
+      JsxRuntime.jsx("span", {
+        className: "Switch-switch"
+      }),
+      JsxRuntime.jsxs("div", {
+        children: [
+          JsxRuntime.jsx("div", {
+            children: label,
+            className: "Switch-title"
+          }),
+          has_description ? JsxRuntime.jsx("aside", {
+              children: description,
+              className: "Switch-description"
+            }) : null
+        ],
+        className: "Switch-info"
+      })
+    ],
+    className: Css.merge([
+      "Switch",
+      has_description ? "Switch--described" : "",
+      className
+    ]),
+    htmlFor: name
+  });
 }
 
 const make = Switch;
 
 export {
-  css ,
-  make ,
+  css,
+  make,
 }
 /* css Not a pure module */

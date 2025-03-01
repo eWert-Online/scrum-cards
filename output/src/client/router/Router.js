@@ -7,70 +7,70 @@ import * as Stdlib__String from "melange/string.js";
 import * as React from "react";
 
 function encode(route) {
-  if (typeof route === "number") {
-    if (route === /* Home */0) {
+  if (/* tag */ typeof route === "number" || typeof route === "string") {
+    if (route === /* Home */ 0) {
       return {
-              hd: "",
-              tl: /* [] */0
-            };
+        hd: "",
+        tl: /* [] */ 0
+      };
     } else {
       return {
-              hd: "not-found",
-              tl: /* [] */0
-            };
+        hd: "not-found",
+        tl: /* [] */ 0
+      };
     }
-  } else if (route.TAG === /* JoinGame */0) {
+  } else if (route.TAG === /* JoinGame */ 0) {
     return {
-            hd: "join-game",
-            tl: {
-              hd: route._0,
-              tl: /* [] */0
-            }
-          };
+      hd: "join-game",
+      tl: {
+        hd: route._0,
+        tl: /* [] */ 0
+      }
+    };
   } else {
     return {
-            hd: "play",
-            tl: {
-              hd: route._0,
-              tl: /* [] */0
-            }
-          };
+      hd: "play",
+      tl: {
+        hd: route._0,
+        tl: /* [] */ 0
+      }
+    };
   }
 }
 
 function decode(path) {
   if (!path) {
-    return /* Home */0;
+    return /* Home */ 0;
   }
   switch (path.hd) {
     case "" :
-        if (path.tl) {
-          return /* NotFound */1;
-        } else {
-          return /* Home */0;
-        }
+      if (path.tl) {
+        return /* NotFound */ 1;
+      } else {
+        return /* Home */ 0;
+      }
     case "join-game" :
-        const match = path.tl;
-        if (match && !match.tl) {
-          return {
-                  TAG: /* JoinGame */0,
-                  _0: match.hd
-                };
-        } else {
-          return /* NotFound */1;
-        }
+      const match = path.tl;
+      if (match && !match.tl) {
+        return {
+          TAG: /* JoinGame */ 0,
+          _0: match.hd
+        };
+      } else {
+        return /* NotFound */ 1;
+      }
     case "play" :
-        const match$1 = path.tl;
-        if (match$1 && !match$1.tl) {
-          return {
-                  TAG: /* Play */1,
-                  _0: match$1.hd
-                };
-        } else {
-          return /* NotFound */1;
-        }
+      const match$1 = path.tl;
+      if (match$1 && !match$1.tl) {
+        return {
+          TAG: /* Play */ 1,
+          _0: match$1.hd
+        };
+      } else {
+        return /* NotFound */ 1;
+      }
     default:
-      return /* NotFound */1;
+      return /* NotFound */ 1;
   }
 }
 
@@ -83,8 +83,8 @@ function equal(a, b) {
 function toAbsoluteUri(t) {
   const baseUri = window.location.origin;
   const path = Stdlib__List.fold_left((function (path, segment) {
-          return path + ("/" + segment);
-        }), "", encode(t));
+    return path + ("/" + segment);
+  }), "", encode(t));
   return baseUri + path;
 }
 
@@ -97,8 +97,8 @@ const Route = {
 
 function decodePath(route) {
   return Stdlib__List.fold_left((function (path, segment) {
-                return path + ("/" + segment);
-              }), "", encode(route));
+    return path + ("/" + segment);
+  }), "", encode(route));
 }
 
 function push(route) {
@@ -117,11 +117,11 @@ function useUrl(param) {
   const url = ReasonReactRouter.useUrl(undefined, undefined);
   const path = url.path;
   return {
-          path: path,
-          hash: url.hash,
-          search: url.search,
-          route: decode(path)
-        };
+    path: path,
+    hash: url.hash,
+    search: url.search,
+    route: decode(path)
+  };
 }
 
 function search(param) {
@@ -133,7 +133,7 @@ function search(param) {
   switch (raw) {
     case "" :
     case "?" :
-        return "";
+      return "";
     default:
       return raw.slice(1, undefined);
   }
@@ -141,23 +141,23 @@ function search(param) {
 
 function getParam(key) {
   const param = Stdlib__List.find_opt((function (urlParam) {
-          const paramArray = Stdlib__String.split_on_char(/* '=' */61, urlParam);
-          if (!paramArray) {
-            return false;
-          }
-          const match = paramArray.tl;
-          if (match && !match.tl) {
-            return paramArray.hd === key;
-          } else {
-            return false;
-          }
-        }), Stdlib__String.split_on_char(/* '&' */38, search(undefined)));
+    const paramArray = Stdlib__String.split_on_char(/* '=' */61, urlParam);
+    if (!paramArray) {
+      return false;
+    }
+    const match = paramArray.tl;
+    if (match && !match.tl) {
+      return paramArray.hd === key;
+    } else {
+      return false;
+    }
+  }), Stdlib__String.split_on_char(/* '&' */38, search(undefined)));
   if (param === undefined) {
-    return ;
+    return;
   }
   const match = Stdlib__String.split_on_char(/* '=' */61, param);
   if (!match) {
-    return ;
+    return;
   }
   const match$1 = match.tl;
   if (match$1 && !match$1.tl) {
@@ -176,15 +176,15 @@ function Router$Redirect(Props) {
   let shouldReplaceOpt = Props.replace;
   const shouldReplace = shouldReplaceOpt !== undefined ? shouldReplaceOpt : false;
   React.useEffect((function () {
-          if (shouldReplace) {
-            replace(route);
-          } else {
-            push(route);
-          }
-        }), [
-        route,
-        shouldReplace
-      ]);
+    if (shouldReplace) {
+      replace(route);
+    } else {
+      push(route);
+    }
+  }), [
+    route,
+    shouldReplace
+  ]);
   return null;
 }
 
@@ -193,12 +193,12 @@ const Redirect = {
 };
 
 export {
-  Route ,
-  decodePath ,
-  push ,
-  replace ,
-  useUrl ,
-  QueryString ,
-  Redirect ,
+  Route,
+  decodePath,
+  push,
+  replace,
+  useUrl,
+  QueryString,
+  Redirect,
 }
 /* ReasonReactRouter Not a pure module */

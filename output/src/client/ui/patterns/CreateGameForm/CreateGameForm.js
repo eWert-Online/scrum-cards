@@ -18,17 +18,17 @@ const css = CreateGameFormCss;
 function CreateGameForm(Props) {
   let onSubmit = Props.onSubmit;
   const match = React.useState(function () {
-        return "";
-      });
+    return "";
+  });
   const name = match[0];
   const match$1 = React.useState(function () {
-        return "Fibonacci";
-      });
+    return "Fibonacci";
+  });
   const setDeck = match$1[1];
   const deck = match$1[0];
   const match$2 = React.useState(function () {
-        return true;
-      });
+    return true;
+  });
   const setCanEveryoneReveal = match$2[1];
   const canEveryoneReveal = match$2[0];
   const createGame = function (evt) {
@@ -36,105 +36,108 @@ function CreateGameForm(Props) {
     Curry._3(onSubmit, name, deck, canEveryoneReveal);
   };
   return JsxRuntime.jsxs("div", {
-              children: [
-                JsxRuntime.jsx(Components__Headline.Secondary.make, {
-                      className: "CreateGameForm-title",
-                      children: "Create a new Game"
-                    }),
-                JsxRuntime.jsx(Components__Input.make, {
-                      label: "Game name",
-                      name: "name",
-                      value: name,
-                      onChange: match[1]
-                    }),
-                JsxRuntime.jsx(Components__Select.Single.make, {
-                      label: "Card Deck",
-                      name: "deck",
-                      options: [
-                        Components__Select.SelectOption.make(false, "Fibonacci", Curry._1(Stdlib__Printf.sprintf(/* Format */{
-                                      _0: {
-                                        TAG: /* String_literal */11,
-                                        _0: "Fibonacci (",
-                                        _1: {
-                                          TAG: /* String */2,
-                                          _0: /* No_padding */0,
-                                          _1: {
-                                            TAG: /* Char_literal */12,
-                                            _0: /* ')' */41,
-                                            _1: /* End_of_format */0
-                                          }
-                                        }
-                                      },
-                                      _1: "Fibonacci (%s)"
-                                    }), Stdlib__String.concat(", ", Shared_api_universal__Game__Deck.make("Fibonacci"))), undefined),
-                        Components__Select.SelectOption.make(false, "Tshirt", Curry._1(Stdlib__Printf.sprintf(/* Format */{
-                                      _0: {
-                                        TAG: /* String_literal */11,
-                                        _0: "T-Shirt (",
-                                        _1: {
-                                          TAG: /* String */2,
-                                          _0: /* No_padding */0,
-                                          _1: {
-                                            TAG: /* Char_literal */12,
-                                            _0: /* ')' */41,
-                                            _1: /* End_of_format */0
-                                          }
-                                        }
-                                      },
-                                      _1: "T-Shirt (%s)"
-                                    }), Stdlib__String.concat(", ", Shared_api_universal__Game__Deck.make("Tshirt"))), undefined),
-                        Components__Select.SelectOption.make(false, "FiveFingers", Curry._1(Stdlib__Printf.sprintf(/* Format */{
-                                      _0: {
-                                        TAG: /* String_literal */11,
-                                        _0: "5-Fingers (",
-                                        _1: {
-                                          TAG: /* String */2,
-                                          _0: /* No_padding */0,
-                                          _1: {
-                                            TAG: /* Char_literal */12,
-                                            _0: /* ')' */41,
-                                            _1: /* End_of_format */0
-                                          }
-                                        }
-                                      },
-                                      _1: "5-Fingers (%s)"
-                                    }), Stdlib__String.concat(", ", Shared_api_universal__Game__Deck.make("FiveFingers"))), undefined)
-                      ],
-                      value: deck,
-                      onChange: (function (value) {
-                          Curry._1(setDeck, (function (param) {
-                                  return value;
-                                }));
-                        })
-                    }),
-                JsxRuntime.jsx(Components__Switch.make, {
-                      checked: !canEveryoneReveal,
-                      onChange: (function (value) {
-                          Curry._1(setCanEveryoneReveal, (function (param) {
-                                  return !value;
-                                }));
-                        }),
-                      description: "Only spectators will be allowed to flip cards and show results. This only applies, if at least one spectator is in the game.",
-                      label: "Only spectators can reveal cards",
-                      name: "reveal"
-                    }),
-                JsxRuntime.jsx(Components__Button.make, {
-                      className: "CreateGameForm-button",
-                      action: {
-                        NAME: "Fn",
-                        VAL: createGame
-                      },
-                      children: "Create new Game"
-                    })
-              ],
-              className: "CreateGameForm"
-            });
+    children: [
+      JsxRuntime.jsx(Components__Headline.Secondary.make, {
+        className: "CreateGameForm-title",
+        children: "Create a new Game"
+      }),
+      JsxRuntime.jsx(Components__Input.make, {
+        label: "Game name",
+        name: "name",
+        value: name,
+        onChange: match[1]
+      }),
+      JsxRuntime.jsx(Components__Select.Single.make, {
+        label: "Card Deck",
+        name: "deck",
+        options: [
+          Components__Select.SelectOption.make(false, "Fibonacci", Curry._1(Stdlib__Printf.sprintf({
+            TAG: /* Format */ 0,
+            _0: {
+              TAG: /* String_literal */ 11,
+              _0: "Fibonacci (",
+              _1: {
+                TAG: /* String */ 2,
+                _0: /* No_padding */ 0,
+                _1: {
+                  TAG: /* Char_literal */ 12,
+                  _0: /* ')' */41,
+                  _1: /* End_of_format */ 0
+                }
+              }
+            },
+            _1: "Fibonacci (%s)"
+          }), Stdlib__String.concat(", ", Shared_api_universal__Game__Deck.make("Fibonacci"))), undefined),
+          Components__Select.SelectOption.make(false, "Tshirt", Curry._1(Stdlib__Printf.sprintf({
+            TAG: /* Format */ 0,
+            _0: {
+              TAG: /* String_literal */ 11,
+              _0: "T-Shirt (",
+              _1: {
+                TAG: /* String */ 2,
+                _0: /* No_padding */ 0,
+                _1: {
+                  TAG: /* Char_literal */ 12,
+                  _0: /* ')' */41,
+                  _1: /* End_of_format */ 0
+                }
+              }
+            },
+            _1: "T-Shirt (%s)"
+          }), Stdlib__String.concat(", ", Shared_api_universal__Game__Deck.make("Tshirt"))), undefined),
+          Components__Select.SelectOption.make(false, "FiveFingers", Curry._1(Stdlib__Printf.sprintf({
+            TAG: /* Format */ 0,
+            _0: {
+              TAG: /* String_literal */ 11,
+              _0: "5-Fingers (",
+              _1: {
+                TAG: /* String */ 2,
+                _0: /* No_padding */ 0,
+                _1: {
+                  TAG: /* Char_literal */ 12,
+                  _0: /* ')' */41,
+                  _1: /* End_of_format */ 0
+                }
+              }
+            },
+            _1: "5-Fingers (%s)"
+          }), Stdlib__String.concat(", ", Shared_api_universal__Game__Deck.make("FiveFingers"))), undefined)
+        ],
+        value: deck,
+        onChange: (function (value) {
+          Curry._1(setDeck, (function (param) {
+            return value;
+          }));
+        })
+      }),
+      JsxRuntime.jsx(Components__Switch.make, {
+        checked: !canEveryoneReveal,
+        onChange: (function (value) {
+          Curry._1(setCanEveryoneReveal, (function (param) {
+            return !value;
+          }));
+        }),
+        description: "Only spectators will be allowed to flip cards and show results. This only applies, if at least one spectator is in the game.",
+        label: "Only spectators can reveal cards",
+        name: "reveal"
+      }),
+      JsxRuntime.jsx(Components__Button.make, {
+        className: "CreateGameForm-button",
+        action: {
+          NAME: "Fn",
+          VAL: createGame
+        },
+        children: "Create new Game"
+      })
+    ],
+    className: "CreateGameForm"
+  });
 }
 
 const make = CreateGameForm;
 
 export {
-  css ,
-  make ,
+  css,
+  make,
 }
 /* css Not a pure module */

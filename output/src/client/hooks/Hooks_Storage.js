@@ -4,50 +4,50 @@ import * as React from "react";
 
 function useSessionStorage(defaultValue, key) {
   const match = React.useState(function () {
-        const value = sessionStorage.getItem(key);
-        if (value !== null) {
-          return value;
-        } else {
-          return defaultValue;
-        }
-      });
+    const value = sessionStorage.getItem(key);
+    if (value !== null) {
+      return value;
+    } else {
+      return defaultValue;
+    }
+  });
   const value = match[0];
   React.useEffect((function () {
-          sessionStorage.setItem(key, value);
-        }), [
-        value,
-        key
-      ]);
+    sessionStorage.setItem(key, value);
+  }), [
+    value,
+    key
+  ]);
   return [
-          value,
-          match[1]
-        ];
+    value,
+    match[1]
+  ];
 }
 
 function useLocalStorage(defaultValue, key) {
   const match = React.useState(function () {
-        const value = localStorage.getItem(key);
-        if (value !== null) {
-          return value;
-        } else {
-          return defaultValue;
-        }
-      });
+    const value = localStorage.getItem(key);
+    if (value !== null) {
+      return value;
+    } else {
+      return defaultValue;
+    }
+  });
   const value = match[0];
   React.useEffect((function () {
-          localStorage.setItem(key, value);
-        }), [
-        value,
-        key
-      ]);
+    localStorage.setItem(key, value);
+  }), [
+    value,
+    key
+  ]);
   return [
-          value,
-          match[1]
-        ];
+    value,
+    match[1]
+  ];
 }
 
 export {
-  useSessionStorage ,
-  useLocalStorage ,
+  useSessionStorage,
+  useLocalStorage,
 }
 /* react Not a pure module */

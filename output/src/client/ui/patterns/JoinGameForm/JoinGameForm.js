@@ -14,13 +14,13 @@ const css = JoinGameFormCss;
 function JoinGameForm(Props) {
   let onSubmit = Props.onSubmit;
   const match = React.useState(function () {
-        return "Player";
-      });
+    return "Player";
+  });
   const setTyp = match[1];
   const typ = match[0];
   const match$1 = React.useState(function () {
-        return "";
-      });
+    return "";
+  });
   const setName = match$1[1];
   const name = match$1[0];
   const joinGame = function (evt) {
@@ -28,55 +28,55 @@ function JoinGameForm(Props) {
     Curry._2(onSubmit, typ, name);
   };
   return JsxRuntime.jsxs("div", {
-              children: [
-                JsxRuntime.jsx(Components__Headline.Secondary.make, {
-                      className: "JoinGameForm-title",
-                      children: "Join Game..."
-                    }),
-                JsxRuntime.jsx(Components__Input.make, {
-                      label: "Your Name",
-                      name: "name",
-                      value: name,
-                      onChange: (function (name) {
-                          Curry._1(setName, (function (param) {
-                                  return name;
-                                }));
-                        })
-                    }),
-                JsxRuntime.jsx(Components__Switch.make, {
-                      checked: typ === "Spectator",
-                      onChange: (function (param) {
-                          if (param) {
-                            return Curry._1(setTyp, (function (param) {
-                                          return "Spectator";
-                                        }));
-                          } else {
-                            return Curry._1(setTyp, (function (param) {
-                                          return "Player";
-                                        }));
-                          }
-                        }),
-                      description: "You will not be able to play cards.",
-                      label: "Join as Spectator",
-                      name: "spectator"
-                    }),
-                JsxRuntime.jsx(Components__Button.make, {
-                      className: "JoinGameForm-button",
-                      action: {
-                        NAME: "Fn",
-                        VAL: joinGame
-                      },
-                      children: "Join Game"
-                    })
-              ],
-              className: "JoinGameForm"
-            });
+    children: [
+      JsxRuntime.jsx(Components__Headline.Secondary.make, {
+        className: "JoinGameForm-title",
+        children: "Join Game..."
+      }),
+      JsxRuntime.jsx(Components__Input.make, {
+        label: "Your Name",
+        name: "name",
+        value: name,
+        onChange: (function (name) {
+          Curry._1(setName, (function (param) {
+            return name;
+          }));
+        })
+      }),
+      JsxRuntime.jsx(Components__Switch.make, {
+        checked: typ === "Spectator",
+        onChange: (function (param) {
+          if (param) {
+            return Curry._1(setTyp, (function (param) {
+              return "Spectator";
+            }));
+          } else {
+            return Curry._1(setTyp, (function (param) {
+              return "Player";
+            }));
+          }
+        }),
+        description: "You will not be able to play cards.",
+        label: "Join as Spectator",
+        name: "spectator"
+      }),
+      JsxRuntime.jsx(Components__Button.make, {
+        className: "JoinGameForm-button",
+        action: {
+          NAME: "Fn",
+          VAL: joinGame
+        },
+        children: "Join Game"
+      })
+    ],
+    className: "JoinGameForm"
+  });
 }
 
 const make = JoinGameForm;
 
 export {
-  css ,
-  make ,
+  css,
+  make,
 }
 /* css Not a pure module */

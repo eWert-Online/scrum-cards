@@ -11,12 +11,12 @@ function Layout$Header(Props) {
   let children = Props.children;
   const className = classNameOpt !== undefined ? classNameOpt : "";
   return JsxRuntime.jsx("header", {
-              children: children,
-              className: Css.merge([
-                    "Layout-header",
-                    className
-                  ])
-            });
+    children: children,
+    className: Css.merge([
+      "Layout-header",
+      className
+    ])
+  });
 }
 
 const Header = {
@@ -28,12 +28,12 @@ function Layout$Content(Props) {
   let children = Props.children;
   const className = classNameOpt !== undefined ? classNameOpt : "";
   return JsxRuntime.jsx("main", {
-              children: children,
-              className: Css.merge([
-                    "Layout-content",
-                    className
-                  ])
-            });
+    children: children,
+    className: Css.merge([
+      "Layout-content",
+      className
+    ])
+  });
 }
 
 const Content = {
@@ -45,20 +45,20 @@ function Layout(Props) {
   let children = Props.children;
   const className = classNameOpt !== undefined ? classNameOpt : "";
   return JsxRuntime.jsx("div", {
-              children: children,
-              className: Css.merge([
-                    "Layout",
-                    className
-                  ])
-            });
+    children: children,
+    className: Css.merge([
+      "Layout",
+      className
+    ])
+  });
 }
 
 const make = Layout;
 
 export {
-  css ,
-  Header ,
-  Content ,
-  make ,
+  css,
+  Header,
+  Content,
+  make,
 }
 /* css Not a pure module */

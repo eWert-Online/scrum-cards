@@ -4,6 +4,6 @@
 const Components__Button__ = {};
 
 export {
-  Components__Button__ ,
+  Components__Button__,
 }
 /* No side effect */

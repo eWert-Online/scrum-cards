@@ -3,14 +3,14 @@
 import * as React from "react";
 
 const context = React.createContext(function (prim) {
-      
-    });
+  
+});
 
 const Confirm = {
   context: context
 };
 
 export {
-  Confirm ,
+  Confirm,
 }
 /* context Not a pure module */

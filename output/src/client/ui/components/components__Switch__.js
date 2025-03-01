@@ -4,6 +4,6 @@
 const Components__Switch__ = {};
 
 export {
-  Components__Switch__ ,
+  Components__Switch__,
 }
 /* No side effect */

@@ -24,71 +24,71 @@ function GameBoard(Props) {
   let game = Props.game;
   let me = Props.me;
   const gameDeck = React.useMemo((function () {
-          return Stdlib__Array.of_list(game.game_deck);
-        }), [game.game_deck]);
-  const func = Curry._3(Hooks__Hooks_Confirm.useConfirm(undefined), "Not everyone voted", "There are some players that did not pick a card yet. Do you really want to reveal all cards?", "Warning");
+    return Stdlib__Array.of_list(game.game_deck);
+  }), [game.game_deck]);
   const arg = [
     "Keep hidden",
     (function (prim) {
-        
-      })
+      
+    })
   ];
+  const func = Curry._3(Hooks__Hooks_Confirm.useConfirm(undefined), "Not everyone voted", "There are some players that did not pick a card yet. Do you really want to reveal all cards?", "Warning");
   const match = React.useState(function () {
-        
-      });
+    
+  });
   const setMyCard = match[1];
   const myCard = match[0];
   const match$1 = React.useState(function () {
-        return {
-                is_revealed: false,
-                players: /* [] */0
-              };
-      });
+    return {
+      is_revealed: false,
+      players: /* [] */ 0
+    };
+  });
   const setGameState = match$1[1];
   const gameState = match$1[0];
   const ws = React.useRef(undefined);
   const send_request = function (request) {
     const conn = ws.current;
     if (conn === undefined) {
-      return ;
+      return;
     }
     const data = JSON.stringify(Curry._1(Shared_api_client.Api.write_ws_request, request));
     Caml_option.valFromOption(conn).send(data);
   };
   React.useEffect((function () {
-          const wsConnection = new WebSocket(Curry._1(Shared_api_universal__Routes__Routes_Builder.sprintf(Shared_api_universal__Routes.Api.websocket(undefined)), gameId));
-          ws.current = Caml_option.some(wsConnection);
-          wsConnection.addEventListener("message", (function (param) {
-                  const s = Curry._1(Shared_api_client.Api.read_ws_response, JSON.parse(param.data));
-                  if (typeof s === "number") {
-                    const data = JSON.stringify(Curry._1(Shared_api_client.Api.write_ws_request, /* ResetMe */3));
-                    wsConnection.send(data);
-                    return ;
-                  }
-                  if (s.TAG === /* YourCard */0) {
-                    const s$1 = s._0;
-                    return Curry._1(setMyCard, (function (param) {
-                                  return s$1;
-                                }));
-                  }
-                  const s$2 = s._0;
-                  Curry._1(setGameState, (function (param) {
-                          return s$2;
-                        }));
-                }));
-          return (function (param) {
-                    wsConnection.close();
-                  });
-        }), [
-        gameId,
-        setGameState,
-        setMyCard
-      ]);
+    const wsConnection = new WebSocket(Curry._1(Shared_api_universal__Routes__Routes_Builder.sprintf(Shared_api_universal__Routes.Api.websocket(undefined)), gameId));
+    ws.current = Caml_option.some(wsConnection);
+    wsConnection.addEventListener("message", (function (param) {
+      const s = Curry._1(Shared_api_client.Api.read_ws_response, JSON.parse(param.data));
+      if (/* tag */ typeof s === "number" || typeof s === "string") {
+        const data = JSON.stringify(Curry._1(Shared_api_client.Api.write_ws_request, /* ResetMe */ 3));
+        wsConnection.send(data);
+        return;
+      }
+      if (s.TAG === /* YourCard */ 0) {
+        const s$1 = s._0;
+        return Curry._1(setMyCard, (function (param) {
+          return s$1;
+        }));
+      }
+      const s$2 = s._0;
+      Curry._1(setGameState, (function (param) {
+        return s$2;
+      }));
+    }));
+    return (function (param) {
+      wsConnection.close();
+    });
+  }), [
+    gameId,
+    setGameState,
+    setMyCard
+  ]);
   const match$2 = game.game_reveal;
   const match$3 = me.who_am_i_typ;
   const match$4 = Stdlib__List.exists((function (player) {
-          return player.typ === "Spectator";
-        }), gameState.players);
+    return player.typ === "Spectator";
+  }), gameState.players);
   let tmp;
   let exit = 0;
   if (match$2 === "Everyone" || match$3 === "Spectator" || !match$4) {
@@ -98,135 +98,138 @@ function GameBoard(Props) {
   }
   if (exit === 1) {
     tmp = gameState.is_revealed ? JsxRuntime.jsx(Components__Button.make, {
-            variant: "Cta",
-            danger: true,
-            action: {
-              NAME: "Fn",
-              VAL: (function (param) {
-                  send_request(/* InitReset */2);
+        variant: "Cta",
+        danger: true,
+        action: {
+          NAME: "Fn",
+          VAL: (function (param) {
+            send_request(/* InitReset */ 2);
+          })
+        },
+        children: "Reset"
+      }) : JsxRuntime.jsx(Components__Button.make, {
+        variant: "Cta",
+        action: {
+          NAME: "Fn",
+          VAL: (function (param) {
+            const hasUnplayedCard = Stdlib__List.exists((function (player) {
+              const match = player.typ;
+              const match$1 = player.played_card;
+              if (match === "Spectator") {
+                return false;
+              } else {
+                return match$1 === undefined;
+              }
+            }), gameState.players);
+            if (hasUnplayedCard) {
+              return Curry._3(func, [
+                "Reveal all cards",
+                (function (param) {
+                  return Promise.resolve(send_request(/* RevealCards */ 1));
                 })
-            },
-            children: "Reset"
-          }) : JsxRuntime.jsx(Components__Button.make, {
-            variant: "Cta",
-            action: {
-              NAME: "Fn",
-              VAL: (function (param) {
-                  const hasUnplayedCard = Stdlib__List.exists((function (player) {
-                          const match = player.typ;
-                          const match$1 = player.played_card;
-                          if (match === "Spectator") {
-                            return false;
-                          } else {
-                            return match$1 === undefined;
-                          }
-                        }), gameState.players);
-                  if (hasUnplayedCard) {
-                    return Curry._3(func, [
-                                "Reveal all cards",
-                                (function (param) {
-                                    return Promise.resolve(send_request(/* RevealCards */1));
-                                  })
-                              ], arg, undefined);
-                  } else {
-                    return send_request(/* RevealCards */1);
-                  }
-                })
-            },
-            children: "Reveal Cards"
-          });
+              ], arg, undefined);
+            } else {
+              return send_request(/* RevealCards */ 1);
+            }
+          })
+        },
+        children: "Reveal Cards"
+      });
   }
   const match$5 = me.who_am_i_typ;
   return JsxRuntime.jsxs("section", {
-              children: [
-                JsxRuntime.jsxs("div", {
-                      children: [
-                        gameState.is_revealed ? JsxRuntime.jsx(Components__BarChart.make, {
-                                title: "Results",
-                                entries: Array.from(Stdlib__List.fold_left((function (acc, key) {
-                                            const value = acc.get(key);
-                                            if (value !== undefined) {
-                                              return acc.set(key, value + 1 | 0);
-                                            } else {
-                                              return acc.set(key, 1);
-                                            }
-                                          }), new Map(), Stdlib__List.sort((function (a, b) {
-                                                return gameDeck.indexOf(a, undefined) - gameDeck.indexOf(b, undefined) | 0;
-                                              }), Stdlib__List.filter_map((function (player) {
-                                                    const match = player.played_card;
-                                                    if (match !== undefined && match) {
-                                                      return match._0;
-                                                    }
-                                                    
-                                                  }), gameState.players))))
-                              }) : null,
-                        tmp
-                      ],
-                      className: "GameBoard-result"
-                    }),
-                JsxRuntime.jsxs("div", {
-                      children: [
-                        Stdlib__Array.of_list(Stdlib__List.filter_map((function (player) {
-                                    const match = player.typ;
-                                    if (match === "Spectator") {
-                                      return ;
-                                    }
-                                    const Key = player.id;
-                                    const match$1 = player.played_card;
-                                    return Caml_option.some(JsxRuntime.jsx(Components__BoardCard.make, {
-                                                    label: player.name,
-                                                    reveal: gameState.is_revealed,
-                                                    value: match$1 !== undefined ? (
-                                                        match$1 && gameState.is_revealed ? match$1._0 : ""
-                                                      ) : undefined
-                                                  }, Key));
-                                  }), gameState.players)),
-                        Stdlib__Array.of_list(Stdlib__List.filter_map((function (player) {
-                                    const match = player.typ;
-                                    if (match !== "Spectator") {
-                                      return ;
-                                    }
-                                    const Key = player.id;
-                                    return Caml_option.some(JsxRuntime.jsx(Components__Spectator.make, {
-                                                    label: player.name
-                                                  }, Key));
-                                  }), gameState.players))
-                      ],
-                      className: "GameBoard-players"
-                    }),
-                JsxRuntime.jsx("ul", {
-                      children: match$5 === "Spectator" ? null : Stdlib__Array.of_list(game.game_deck).map(function (card) {
-                              const isSelected = myCard === card;
-                              return JsxRuntime.jsx("li", {
-                                          children: JsxRuntime.jsx(Components__HandCard.make, {
-                                                label: card,
-                                                isSelected: isSelected,
-                                                onClick: (function (param) {
-                                                    if (!gameState.is_revealed) {
-                                                      if (isSelected) {
-                                                        return send_request(/* RevokeCard */0);
-                                                      } else {
-                                                        return send_request(/* PlayCard */{
-                                                                    _0: card
-                                                                  });
-                                                      }
-                                                    }
-                                                    
-                                                  })
-                                              })
-                                        }, card);
-                            }),
-                      className: "GameBoard-hand"
-                    })
-              ],
-              className: "GameBoard"
-            });
+    children: [
+      JsxRuntime.jsxs("div", {
+        children: [
+          gameState.is_revealed ? JsxRuntime.jsx(Components__BarChart.make, {
+              title: "Results",
+              entries: Array.from(Stdlib__List.fold_left((function (acc, key) {
+                const value = acc.get(key);
+                if (value !== undefined) {
+                  return acc.set(key, value + 1 | 0);
+                } else {
+                  return acc.set(key, 1);
+                }
+              }), new Map(), Stdlib__List.sort((function (a, b) {
+                return gameDeck.indexOf(a, undefined) - gameDeck.indexOf(b, undefined) | 0;
+              }), Stdlib__List.filter_map((function (player) {
+                const match = player.played_card;
+                if (match !== undefined && !/* tag */ (typeof match === "number" || typeof match === "string")) {
+                  return match._0;
+                }
+                
+              }), gameState.players))))
+            }) : null,
+          tmp
+        ],
+        className: "GameBoard-result"
+      }),
+      JsxRuntime.jsxs("div", {
+        children: [
+          Stdlib__Array.of_list(Stdlib__List.filter_map((function (player) {
+            const match = player.typ;
+            if (match === "Spectator") {
+              return;
+            }
+            const Key = player.id;
+            const match$1 = player.played_card;
+            let tmp;
+            tmp = match$1 !== undefined ? (
+                /* tag */ typeof match$1 === "number" || typeof match$1 === "string" || !gameState.is_revealed ? "" : match$1._0
+              ) : undefined;
+            return Caml_option.some(JsxRuntime.jsx(Components__BoardCard.make, {
+              label: player.name,
+              reveal: gameState.is_revealed,
+              value: tmp
+            }, Key));
+          }), gameState.players)),
+          Stdlib__Array.of_list(Stdlib__List.filter_map((function (player) {
+            const match = player.typ;
+            if (match !== "Spectator") {
+              return;
+            }
+            const Key = player.id;
+            return Caml_option.some(JsxRuntime.jsx(Components__Spectator.make, {
+              label: player.name
+            }, Key));
+          }), gameState.players))
+        ],
+        className: "GameBoard-players"
+      }),
+      JsxRuntime.jsx("ul", {
+        children: match$5 === "Spectator" ? null : Stdlib__Array.of_list(game.game_deck).map(function (card) {
+            const isSelected = myCard === card;
+            return JsxRuntime.jsx("li", {
+              children: JsxRuntime.jsx(Components__HandCard.make, {
+                label: card,
+                isSelected: isSelected,
+                onClick: (function (param) {
+                  if (!gameState.is_revealed) {
+                    if (isSelected) {
+                      return send_request(/* RevokeCard */ 0);
+                    } else {
+                      return send_request({
+                        TAG: /* PlayCard */ 0,
+                        _0: card
+                      });
+                    }
+                  }
+                  
+                })
+              })
+            }, card);
+          }),
+        className: "GameBoard-hand"
+      })
+    ],
+    className: "GameBoard"
+  });
 }
 
 const make = GameBoard;
 
 export {
-  css ,
-  make ,
+  css,
+  make,
 }
 /* css Not a pure module */

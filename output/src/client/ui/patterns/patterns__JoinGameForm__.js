@@ -4,6 +4,6 @@
 const Patterns__JoinGameForm__ = {};
 
 export {
-  Patterns__JoinGameForm__ ,
+  Patterns__JoinGameForm__,
 }
 /* No side effect */

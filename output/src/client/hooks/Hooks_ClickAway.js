@@ -6,31 +6,31 @@ import * as React from "react";
 
 function useClickAway(elementRefs, callback) {
   React.useEffect((function () {
-          const handleClick = function (evt) {
-            const clickedInside = Stdlib__List.exists((function (elementRef) {
-                    const node = elementRef.current;
-                    if (node == null) {
-                      return false;
-                    }
-                    const targetElement = evt.target;
-                    return node.contains(targetElement);
-                  }), elementRefs);
-            if (!clickedInside) {
-              return Curry._1(callback, evt);
-            }
-            
-          };
-          document.addEventListener("mouseup", handleClick);
-          return (function (param) {
-                    document.removeEventListener("mouseup", handleClick);
-                  });
-        }), [
-        callback,
-        elementRefs
-      ]);
+    const handleClick = function (evt) {
+      const clickedInside = Stdlib__List.exists((function (elementRef) {
+        const node = elementRef.current;
+        if (node == null) {
+          return false;
+        }
+        const targetElement = evt.target;
+        return node.contains(targetElement);
+      }), elementRefs);
+      if (!clickedInside) {
+        return Curry._1(callback, evt);
+      }
+      
+    };
+    document.addEventListener("mouseup", handleClick);
+    return (function (param) {
+      document.removeEventListener("mouseup", handleClick);
+    });
+  }), [
+    callback,
+    elementRefs
+  ]);
 }
 
 export {
-  useClickAway ,
+  useClickAway,
 }
 /* react Not a pure module */

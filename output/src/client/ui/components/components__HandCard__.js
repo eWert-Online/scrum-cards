@@ -4,6 +4,6 @@
 const Components__HandCard__ = {};
 
 export {
-  Components__HandCard__ ,
+  Components__HandCard__,
 }
 /* No side effect */

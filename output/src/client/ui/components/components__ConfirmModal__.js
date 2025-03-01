@@ -4,6 +4,6 @@
 const Components__ConfirmModal__ = {};
 
 export {
-  Components__ConfirmModal__ ,
+  Components__ConfirmModal__,
 }
 /* No side effect */

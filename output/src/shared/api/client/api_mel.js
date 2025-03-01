@@ -4,12 +4,12 @@ import * as Atdgen_codec_decode from "melange-atdgen-codec-runtime/atdgen_codec_
 import * as Atdgen_codec_encode from "melange-atdgen-codec-runtime/atdgen_codec_encode.js";
 
 const write_typ = Atdgen_codec_encode.make(function (x) {
-      if (x === "Spectator") {
-        return Atdgen_codec_encode.constr0("Spectator");
-      } else {
-        return Atdgen_codec_encode.constr0("Player");
-      }
-    });
+  if (x === "Spectator") {
+    return Atdgen_codec_encode.constr0("Spectator");
+  } else {
+    return Atdgen_codec_encode.constr0("Player");
+  }
+});
 
 const partial_arg = {
   hd: [
@@ -27,7 +27,7 @@ const partial_arg = {
         VAL: "Spectator"
       }
     ],
-    tl: /* [] */0
+    tl: /* [] */ 0
   }
 };
 
@@ -36,18 +36,18 @@ function read_typ(param) {
 }
 
 const write_card = Atdgen_codec_encode.make(function (x) {
-      if (x) {
-        return Atdgen_codec_encode.constr1("Revealed", Atdgen_codec_encode.string, x._0);
-      } else {
-        return Atdgen_codec_encode.constr0("Hidden");
-      }
-    });
+  if (/* tag */ typeof x === "number" || typeof x === "string") {
+    return Atdgen_codec_encode.constr0("Hidden");
+  } else {
+    return Atdgen_codec_encode.constr1("Revealed", Atdgen_codec_encode.string, x._0);
+  }
+});
 
 const partial_arg_0 = [
   "Hidden",
   {
     NAME: "Single",
-    VAL: /* Hidden */0
+    VAL: /* Hidden */ 0
   }
 ];
 
@@ -57,15 +57,16 @@ const partial_arg_1 = {
     {
       NAME: "Decode",
       VAL: (function (param) {
-          return Atdgen_codec_decode.map((function (x) {
-                        return /* Revealed */{
-                                _0: x
-                              };
-                      }), Atdgen_codec_decode.string, param);
-        })
+        return Atdgen_codec_decode.map((function (x) {
+          return {
+            TAG: /* Revealed */ 0,
+            _0: x
+          };
+        }), Atdgen_codec_decode.string, param);
+      })
     }
   ],
-  tl: /* [] */0
+  tl: /* [] */ 0
 };
 
 const partial_arg$1 = {
@@ -84,37 +85,37 @@ function write__card_option(param) {
 const read__card_option = Atdgen_codec_decode.option_as_constr(read_card);
 
 const write_player = Atdgen_codec_encode.make(function (t) {
-      return Atdgen_codec_encode.obj({
-                  hd: Atdgen_codec_encode.field(undefined, Atdgen_codec_encode.string, "id", t.id),
-                  tl: {
-                    hd: Atdgen_codec_encode.field(undefined, write_typ, "typ", t.typ),
-                    tl: {
-                      hd: Atdgen_codec_encode.field(undefined, Atdgen_codec_encode.string, "name", t.name),
-                      tl: {
-                        hd: Atdgen_codec_encode.field(undefined, write__card_option, "played_card", t.played_card),
-                        tl: /* [] */0
-                      }
-                    }
-                  }
-                });
-    });
+  return Atdgen_codec_encode.obj({
+    hd: Atdgen_codec_encode.field(undefined, Atdgen_codec_encode.string, "id", t.id),
+    tl: {
+      hd: Atdgen_codec_encode.field(undefined, write_typ, "typ", t.typ),
+      tl: {
+        hd: Atdgen_codec_encode.field(undefined, Atdgen_codec_encode.string, "name", t.name),
+        tl: {
+          hd: Atdgen_codec_encode.field(undefined, write__card_option, "played_card", t.played_card),
+          tl: /* [] */ 0
+        }
+      }
+    }
+  });
+});
 
 const read_player = Atdgen_codec_decode.make(function (json) {
-      return {
-              id: Atdgen_codec_decode.decode((function (param) {
-                      return Atdgen_codec_decode.field("id", Atdgen_codec_decode.string, param);
-                    }), json),
-              typ: Atdgen_codec_decode.decode((function (param) {
-                      return Atdgen_codec_decode.field("typ", read_typ, param);
-                    }), json),
-              name: Atdgen_codec_decode.decode((function (param) {
-                      return Atdgen_codec_decode.field("name", Atdgen_codec_decode.string, param);
-                    }), json),
-              played_card: Atdgen_codec_decode.decode((function (param) {
-                      return Atdgen_codec_decode.field("played_card", read__card_option, param);
-                    }), json)
-            };
-    });
+  return {
+    id: Atdgen_codec_decode.decode((function (param) {
+      return Atdgen_codec_decode.field("id", Atdgen_codec_decode.string, param);
+    }), json),
+    typ: Atdgen_codec_decode.decode((function (param) {
+      return Atdgen_codec_decode.field("typ", read_typ, param);
+    }), json),
+    name: Atdgen_codec_decode.decode((function (param) {
+      return Atdgen_codec_decode.field("name", Atdgen_codec_decode.string, param);
+    }), json),
+    played_card: Atdgen_codec_decode.decode((function (param) {
+      return Atdgen_codec_decode.field("played_card", read__card_option, param);
+    }), json)
+  };
+});
 
 function write__player_list(param) {
   return Atdgen_codec_encode.list(write_player, param);
@@ -125,25 +126,25 @@ function read__player_list(param) {
 }
 
 const write_game_state = Atdgen_codec_encode.make(function (t) {
-      return Atdgen_codec_encode.obj({
-                  hd: Atdgen_codec_encode.field(undefined, Atdgen_codec_encode.bool, "is_revealed", t.is_revealed),
-                  tl: {
-                    hd: Atdgen_codec_encode.field(undefined, write__player_list, "players", t.players),
-                    tl: /* [] */0
-                  }
-                });
-    });
+  return Atdgen_codec_encode.obj({
+    hd: Atdgen_codec_encode.field(undefined, Atdgen_codec_encode.bool, "is_revealed", t.is_revealed),
+    tl: {
+      hd: Atdgen_codec_encode.field(undefined, write__player_list, "players", t.players),
+      tl: /* [] */ 0
+    }
+  });
+});
 
 const read_game_state = Atdgen_codec_decode.make(function (json) {
-      return {
-              is_revealed: Atdgen_codec_decode.decode((function (param) {
-                      return Atdgen_codec_decode.field("is_revealed", Atdgen_codec_decode.bool, param);
-                    }), json),
-              players: Atdgen_codec_decode.decode((function (param) {
-                      return Atdgen_codec_decode.field("players", read__player_list, param);
-                    }), json)
-            };
-    });
+  return {
+    is_revealed: Atdgen_codec_decode.decode((function (param) {
+      return Atdgen_codec_decode.field("is_revealed", Atdgen_codec_decode.bool, param);
+    }), json),
+    players: Atdgen_codec_decode.decode((function (param) {
+      return Atdgen_codec_decode.field("players", read__player_list, param);
+    }), json)
+  };
+});
 
 function write__card_value_option(param) {
   return Atdgen_codec_encode.option_as_constr(Atdgen_codec_encode.string, param);
@@ -152,27 +153,27 @@ function write__card_value_option(param) {
 const read__card_value_option = Atdgen_codec_decode.option_as_constr(Atdgen_codec_decode.string);
 
 const write_ws_response = Atdgen_codec_encode.make(function (x) {
-      if (typeof x === "number") {
-        return Atdgen_codec_encode.constr0("Reset");
-      } else if (x.TAG === /* YourCard */0) {
-        return Atdgen_codec_encode.constr1("YourCard", write__card_value_option, x._0);
-      } else {
-        return Atdgen_codec_encode.constr1("UpdateGameState", write_game_state, x._0);
-      }
-    });
+  if (/* tag */ typeof x === "number" || typeof x === "string") {
+    return Atdgen_codec_encode.constr0("Reset");
+  } else if (x.TAG === /* YourCard */ 0) {
+    return Atdgen_codec_encode.constr1("YourCard", write__card_value_option, x._0);
+  } else {
+    return Atdgen_codec_encode.constr1("UpdateGameState", write_game_state, x._0);
+  }
+});
 
 const partial_arg_0$1 = [
   "YourCard",
   {
     NAME: "Decode",
     VAL: (function (param) {
-        return Atdgen_codec_decode.map((function (x) {
-                      return {
-                              TAG: /* YourCard */0,
-                              _0: x
-                            };
-                    }), read__card_value_option, param);
-      })
+      return Atdgen_codec_decode.map((function (x) {
+        return {
+          TAG: /* YourCard */ 0,
+          _0: x
+        };
+      }), read__card_value_option, param);
+    })
   }
 ];
 
@@ -182,13 +183,13 @@ const partial_arg_1$1 = {
     {
       NAME: "Decode",
       VAL: (function (param) {
-          return Atdgen_codec_decode.map((function (x) {
-                        return {
-                                TAG: /* UpdateGameState */1,
-                                _0: x
-                              };
-                      }), read_game_state, param);
-        })
+        return Atdgen_codec_decode.map((function (x) {
+          return {
+            TAG: /* UpdateGameState */ 1,
+            _0: x
+          };
+        }), read_game_state, param);
+      })
     }
   ],
   tl: {
@@ -196,10 +197,10 @@ const partial_arg_1$1 = {
       "Reset",
       {
         NAME: "Single",
-        VAL: /* Reset */0
+        VAL: /* Reset */ 0
       }
     ],
-    tl: /* [] */0
+    tl: /* [] */ 0
   }
 };
 
@@ -213,33 +214,33 @@ function read_ws_response(param) {
 }
 
 const write_ws_request = Atdgen_codec_encode.make(function (x) {
-      if (typeof x !== "number") {
-        return Atdgen_codec_encode.constr1("PlayCard", Atdgen_codec_encode.string, x._0);
-      }
-      switch (x) {
-        case /* RevokeCard */0 :
-            return Atdgen_codec_encode.constr0("RevokeCard");
-        case /* RevealCards */1 :
-            return Atdgen_codec_encode.constr0("RevealCards");
-        case /* InitReset */2 :
-            return Atdgen_codec_encode.constr0("InitReset");
-        case /* ResetMe */3 :
-            return Atdgen_codec_encode.constr0("ResetMe");
-        
-      }
-    });
+  if (!/* tag */ (typeof x === "number" || typeof x === "string")) {
+    return Atdgen_codec_encode.constr1("PlayCard", Atdgen_codec_encode.string, x._0);
+  }
+  switch (x) {
+    case /* RevokeCard */ 0 :
+      return Atdgen_codec_encode.constr0("RevokeCard");
+    case /* RevealCards */ 1 :
+      return Atdgen_codec_encode.constr0("RevealCards");
+    case /* InitReset */ 2 :
+      return Atdgen_codec_encode.constr0("InitReset");
+    case /* ResetMe */ 3 :
+      return Atdgen_codec_encode.constr0("ResetMe");
+  }
+});
 
 const partial_arg_0$2 = [
   "PlayCard",
   {
     NAME: "Decode",
     VAL: (function (param) {
-        return Atdgen_codec_decode.map((function (x) {
-                      return /* PlayCard */{
-                              _0: x
-                            };
-                    }), Atdgen_codec_decode.string, param);
-      })
+      return Atdgen_codec_decode.map((function (x) {
+        return {
+          TAG: /* PlayCard */ 0,
+          _0: x
+        };
+      }), Atdgen_codec_decode.string, param);
+    })
   }
 ];
 
@@ -248,7 +249,7 @@ const partial_arg_1$2 = {
     "RevokeCard",
     {
       NAME: "Single",
-      VAL: /* RevokeCard */0
+      VAL: /* RevokeCard */ 0
     }
   ],
   tl: {
@@ -256,7 +257,7 @@ const partial_arg_1$2 = {
       "RevealCards",
       {
         NAME: "Single",
-        VAL: /* RevealCards */1
+        VAL: /* RevealCards */ 1
       }
     ],
     tl: {
@@ -264,7 +265,7 @@ const partial_arg_1$2 = {
         "InitReset",
         {
           NAME: "Single",
-          VAL: /* InitReset */2
+          VAL: /* InitReset */ 2
         }
       ],
       tl: {
@@ -272,10 +273,10 @@ const partial_arg_1$2 = {
           "ResetMe",
           {
             NAME: "Single",
-            VAL: /* ResetMe */3
+            VAL: /* ResetMe */ 3
           }
         ],
-        tl: /* [] */0
+        tl: /* [] */ 0
       }
     }
   }
@@ -291,39 +292,39 @@ function read_ws_request(param) {
 }
 
 const write_who_am_i_response = Atdgen_codec_encode.make(function (t) {
-      return Atdgen_codec_encode.obj({
-                  hd: Atdgen_codec_encode.field(undefined, Atdgen_codec_encode.string, "id", t.who_am_i_id),
-                  tl: {
-                    hd: Atdgen_codec_encode.field(undefined, write_typ, "typ", t.who_am_i_typ),
-                    tl: {
-                      hd: Atdgen_codec_encode.field(undefined, Atdgen_codec_encode.string, "name", t.who_am_i_name),
-                      tl: /* [] */0
-                    }
-                  }
-                });
-    });
+  return Atdgen_codec_encode.obj({
+    hd: Atdgen_codec_encode.field(undefined, Atdgen_codec_encode.string, "id", t.who_am_i_id),
+    tl: {
+      hd: Atdgen_codec_encode.field(undefined, write_typ, "typ", t.who_am_i_typ),
+      tl: {
+        hd: Atdgen_codec_encode.field(undefined, Atdgen_codec_encode.string, "name", t.who_am_i_name),
+        tl: /* [] */ 0
+      }
+    }
+  });
+});
 
 const read_who_am_i_response = Atdgen_codec_decode.make(function (json) {
-      return {
-              who_am_i_id: Atdgen_codec_decode.decode((function (param) {
-                      return Atdgen_codec_decode.field("id", Atdgen_codec_decode.string, param);
-                    }), json),
-              who_am_i_typ: Atdgen_codec_decode.decode((function (param) {
-                      return Atdgen_codec_decode.field("typ", read_typ, param);
-                    }), json),
-              who_am_i_name: Atdgen_codec_decode.decode((function (param) {
-                      return Atdgen_codec_decode.field("name", Atdgen_codec_decode.string, param);
-                    }), json)
-            };
-    });
+  return {
+    who_am_i_id: Atdgen_codec_decode.decode((function (param) {
+      return Atdgen_codec_decode.field("id", Atdgen_codec_decode.string, param);
+    }), json),
+    who_am_i_typ: Atdgen_codec_decode.decode((function (param) {
+      return Atdgen_codec_decode.field("typ", read_typ, param);
+    }), json),
+    who_am_i_name: Atdgen_codec_decode.decode((function (param) {
+      return Atdgen_codec_decode.field("name", Atdgen_codec_decode.string, param);
+    }), json)
+  };
+});
 
 const write_reveal = Atdgen_codec_encode.make(function (x) {
-      if (x === "Everyone") {
-        return Atdgen_codec_encode.constr0("Everyone");
-      } else {
-        return Atdgen_codec_encode.constr0("SpectatorsOnly");
-      }
-    });
+  if (x === "Everyone") {
+    return Atdgen_codec_encode.constr0("Everyone");
+  } else {
+    return Atdgen_codec_encode.constr0("SpectatorsOnly");
+  }
+});
 
 const partial_arg$4 = {
   hd: [
@@ -341,7 +342,7 @@ const partial_arg$4 = {
         VAL: "SpectatorsOnly"
       }
     ],
-    tl: /* [] */0
+    tl: /* [] */ 0
   }
 };
 
@@ -358,68 +359,68 @@ function read__string_list(param) {
 }
 
 const write_load_game_response = Atdgen_codec_encode.make(function (t) {
-      return Atdgen_codec_encode.obj({
-                  hd: Atdgen_codec_encode.field(undefined, Atdgen_codec_encode.string, "id", t.game_id),
-                  tl: {
-                    hd: Atdgen_codec_encode.field(undefined, Atdgen_codec_encode.string, "name", t.game_name),
-                    tl: {
-                      hd: Atdgen_codec_encode.field(undefined, write__string_list, "deck", t.game_deck),
-                      tl: {
-                        hd: Atdgen_codec_encode.field(undefined, write_reveal, "reveal", t.game_reveal),
-                        tl: /* [] */0
-                      }
-                    }
-                  }
-                });
-    });
+  return Atdgen_codec_encode.obj({
+    hd: Atdgen_codec_encode.field(undefined, Atdgen_codec_encode.string, "id", t.game_id),
+    tl: {
+      hd: Atdgen_codec_encode.field(undefined, Atdgen_codec_encode.string, "name", t.game_name),
+      tl: {
+        hd: Atdgen_codec_encode.field(undefined, write__string_list, "deck", t.game_deck),
+        tl: {
+          hd: Atdgen_codec_encode.field(undefined, write_reveal, "reveal", t.game_reveal),
+          tl: /* [] */ 0
+        }
+      }
+    }
+  });
+});
 
 const read_load_game_response = Atdgen_codec_decode.make(function (json) {
-      return {
-              game_id: Atdgen_codec_decode.decode((function (param) {
-                      return Atdgen_codec_decode.field("id", Atdgen_codec_decode.string, param);
-                    }), json),
-              game_name: Atdgen_codec_decode.decode((function (param) {
-                      return Atdgen_codec_decode.field("name", Atdgen_codec_decode.string, param);
-                    }), json),
-              game_deck: Atdgen_codec_decode.decode((function (param) {
-                      return Atdgen_codec_decode.field("deck", read__string_list, param);
-                    }), json),
-              game_reveal: Atdgen_codec_decode.decode((function (param) {
-                      return Atdgen_codec_decode.field("reveal", read_reveal, param);
-                    }), json)
-            };
-    });
+  return {
+    game_id: Atdgen_codec_decode.decode((function (param) {
+      return Atdgen_codec_decode.field("id", Atdgen_codec_decode.string, param);
+    }), json),
+    game_name: Atdgen_codec_decode.decode((function (param) {
+      return Atdgen_codec_decode.field("name", Atdgen_codec_decode.string, param);
+    }), json),
+    game_deck: Atdgen_codec_decode.decode((function (param) {
+      return Atdgen_codec_decode.field("deck", read__string_list, param);
+    }), json),
+    game_reveal: Atdgen_codec_decode.decode((function (param) {
+      return Atdgen_codec_decode.field("reveal", read_reveal, param);
+    }), json)
+  };
+});
 
 const write_join_game_request = Atdgen_codec_encode.make(function (t) {
-      return Atdgen_codec_encode.obj({
-                  hd: Atdgen_codec_encode.field(undefined, write_typ, "typ", t.join_game_typ),
-                  tl: {
-                    hd: Atdgen_codec_encode.field(undefined, Atdgen_codec_encode.string, "name", t.join_game_name),
-                    tl: /* [] */0
-                  }
-                });
-    });
+  return Atdgen_codec_encode.obj({
+    hd: Atdgen_codec_encode.field(undefined, write_typ, "typ", t.join_game_typ),
+    tl: {
+      hd: Atdgen_codec_encode.field(undefined, Atdgen_codec_encode.string, "name", t.join_game_name),
+      tl: /* [] */ 0
+    }
+  });
+});
 
 const read_join_game_request = Atdgen_codec_decode.make(function (json) {
-      return {
-              join_game_typ: Atdgen_codec_decode.decode((function (param) {
-                      return Atdgen_codec_decode.field("typ", read_typ, param);
-                    }), json),
-              join_game_name: Atdgen_codec_decode.decode((function (param) {
-                      return Atdgen_codec_decode.field("name", Atdgen_codec_decode.string, param);
-                    }), json)
-            };
-    });
+  return {
+    join_game_typ: Atdgen_codec_decode.decode((function (param) {
+      return Atdgen_codec_decode.field("typ", read_typ, param);
+    }), json),
+    join_game_name: Atdgen_codec_decode.decode((function (param) {
+      return Atdgen_codec_decode.field("name", Atdgen_codec_decode.string, param);
+    }), json)
+  };
+});
 
 const write_deck = Atdgen_codec_encode.make(function (x) {
-      if (x === "Fibonacci") {
-        return Atdgen_codec_encode.constr0("Fibonacci");
-      } else if (x === "Tshirt") {
-        return Atdgen_codec_encode.constr0("Tshirt");
-      } else {
-        return Atdgen_codec_encode.constr0("FiveFingers");
-      }
-    });
+  if (x === "Fibonacci") {
+    return Atdgen_codec_encode.constr0("Fibonacci");
+  } else if (x === "Tshirt") {
+    return Atdgen_codec_encode.constr0("Tshirt");
+  } else {
+    return Atdgen_codec_encode.constr0("FiveFingers");
+  }
+});
 
 const partial_arg$5 = {
   hd: [
@@ -445,7 +446,7 @@ const partial_arg$5 = {
           VAL: "FiveFingers"
         }
       ],
-      tl: /* [] */0
+      tl: /* [] */ 0
     }
   }
 };
@@ -455,46 +456,46 @@ function read_deck(param) {
 }
 
 const write_create_game_response = Atdgen_codec_encode.make(function (t) {
-      return Atdgen_codec_encode.obj({
-                  hd: Atdgen_codec_encode.field(undefined, Atdgen_codec_encode.string, "id", t.created_game_id),
-                  tl: /* [] */0
-                });
-    });
+  return Atdgen_codec_encode.obj({
+    hd: Atdgen_codec_encode.field(undefined, Atdgen_codec_encode.string, "id", t.created_game_id),
+    tl: /* [] */ 0
+  });
+});
 
 const read_create_game_response = Atdgen_codec_decode.make(function (json) {
-      return {
-              created_game_id: Atdgen_codec_decode.decode((function (param) {
-                      return Atdgen_codec_decode.field("id", Atdgen_codec_decode.string, param);
-                    }), json)
-            };
-    });
+  return {
+    created_game_id: Atdgen_codec_decode.decode((function (param) {
+      return Atdgen_codec_decode.field("id", Atdgen_codec_decode.string, param);
+    }), json)
+  };
+});
 
 const write_create_game_request = Atdgen_codec_encode.make(function (t) {
-      return Atdgen_codec_encode.obj({
-                  hd: Atdgen_codec_encode.field(undefined, Atdgen_codec_encode.string, "name", t.create_game_name),
-                  tl: {
-                    hd: Atdgen_codec_encode.field(undefined, write_deck, "deck", t.create_game_deck),
-                    tl: {
-                      hd: Atdgen_codec_encode.field(undefined, write_reveal, "reveal", t.create_game_reveal),
-                      tl: /* [] */0
-                    }
-                  }
-                });
-    });
+  return Atdgen_codec_encode.obj({
+    hd: Atdgen_codec_encode.field(undefined, Atdgen_codec_encode.string, "name", t.create_game_name),
+    tl: {
+      hd: Atdgen_codec_encode.field(undefined, write_deck, "deck", t.create_game_deck),
+      tl: {
+        hd: Atdgen_codec_encode.field(undefined, write_reveal, "reveal", t.create_game_reveal),
+        tl: /* [] */ 0
+      }
+    }
+  });
+});
 
 const read_create_game_request = Atdgen_codec_decode.make(function (json) {
-      return {
-              create_game_name: Atdgen_codec_decode.decode((function (param) {
-                      return Atdgen_codec_decode.field("name", Atdgen_codec_decode.string, param);
-                    }), json),
-              create_game_deck: Atdgen_codec_decode.decode((function (param) {
-                      return Atdgen_codec_decode.field("deck", read_deck, param);
-                    }), json),
-              create_game_reveal: Atdgen_codec_decode.decode((function (param) {
-                      return Atdgen_codec_decode.field("reveal", read_reveal, param);
-                    }), json)
-            };
-    });
+  return {
+    create_game_name: Atdgen_codec_decode.decode((function (param) {
+      return Atdgen_codec_decode.field("name", Atdgen_codec_decode.string, param);
+    }), json),
+    create_game_deck: Atdgen_codec_decode.decode((function (param) {
+      return Atdgen_codec_decode.field("deck", read_deck, param);
+    }), json),
+    create_game_reveal: Atdgen_codec_decode.decode((function (param) {
+      return Atdgen_codec_decode.field("reveal", read_reveal, param);
+    }), json)
+  };
+});
 
 const read_player_id = Atdgen_codec_decode.string;
 
@@ -505,35 +506,35 @@ const read_card_value = Atdgen_codec_decode.string;
 const write_card_value = Atdgen_codec_encode.string;
 
 export {
-  read_typ ,
-  write_typ ,
-  read_player_id ,
-  write_player_id ,
-  read_card_value ,
-  write_card_value ,
-  read_card ,
-  write_card ,
-  read_player ,
-  write_player ,
-  read_game_state ,
-  write_game_state ,
-  read_ws_response ,
-  write_ws_response ,
-  read_ws_request ,
-  write_ws_request ,
-  read_who_am_i_response ,
-  write_who_am_i_response ,
-  read_reveal ,
-  write_reveal ,
-  read_load_game_response ,
-  write_load_game_response ,
-  read_join_game_request ,
-  write_join_game_request ,
-  read_deck ,
-  write_deck ,
-  read_create_game_response ,
-  write_create_game_response ,
-  read_create_game_request ,
-  write_create_game_request ,
+  read_typ,
+  write_typ,
+  read_player_id,
+  write_player_id,
+  read_card_value,
+  write_card_value,
+  read_card,
+  write_card,
+  read_player,
+  write_player,
+  read_game_state,
+  write_game_state,
+  read_ws_response,
+  write_ws_response,
+  read_ws_request,
+  write_ws_request,
+  read_who_am_i_response,
+  write_who_am_i_response,
+  read_reveal,
+  write_reveal,
+  read_load_game_response,
+  write_load_game_response,
+  read_join_game_request,
+  write_join_game_request,
+  read_deck,
+  write_deck,
+  read_create_game_response,
+  write_create_game_response,
+  read_create_game_request,
+  write_create_game_request,
 }
 /* write_typ Not a pure module */

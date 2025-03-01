@@ -4,6 +4,6 @@
 const Patterns__GameBoard__ = {};
 
 export {
-  Patterns__GameBoard__ ,
+  Patterns__GameBoard__,
 }
 /* No side effect */

@@ -6,35 +6,32 @@ const coffee = "☕️";
 function make(param) {
   if (param === "Fibonacci") {
     return {
-            hd: "0",
+      hd: "0",
+      tl: {
+        hd: "1",
+        tl: {
+          hd: "2",
+          tl: {
+            hd: "3",
             tl: {
-              hd: "1",
+              hd: "5",
               tl: {
-                hd: "2",
+                hd: "8",
                 tl: {
-                  hd: "3",
+                  hd: "13",
                   tl: {
-                    hd: "5",
+                    hd: "21",
                     tl: {
-                      hd: "8",
+                      hd: "34",
                       tl: {
-                        hd: "13",
+                        hd: "55",
                         tl: {
-                          hd: "21",
+                          hd: "89",
                           tl: {
-                            hd: "34",
+                            hd: "?",
                             tl: {
-                              hd: "55",
-                              tl: {
-                                hd: "89",
-                                tl: {
-                                  hd: "?",
-                                  tl: {
-                                    hd: coffee,
-                                    tl: /* [] */0
-                                  }
-                                }
-                              }
+                              hd: coffee,
+                              tl: /* [] */ 0
                             }
                           }
                         }
@@ -44,58 +41,61 @@ function make(param) {
                 }
               }
             }
-          };
+          }
+        }
+      }
+    };
   } else if (param === "Tshirt") {
     return {
-            hd: "XS",
+      hd: "XS",
+      tl: {
+        hd: "S",
+        tl: {
+          hd: "M",
+          tl: {
+            hd: "L",
             tl: {
-              hd: "S",
+              hd: "XL",
               tl: {
-                hd: "M",
+                hd: "?",
                 tl: {
-                  hd: "L",
-                  tl: {
-                    hd: "XL",
-                    tl: {
-                      hd: "?",
-                      tl: {
-                        hd: coffee,
-                        tl: /* [] */0
-                      }
-                    }
-                  }
+                  hd: coffee,
+                  tl: /* [] */ 0
                 }
               }
             }
-          };
+          }
+        }
+      }
+    };
   } else {
     return {
-            hd: "0",
+      hd: "0",
+      tl: {
+        hd: "1",
+        tl: {
+          hd: "2",
+          tl: {
+            hd: "3",
             tl: {
-              hd: "1",
+              hd: "5",
               tl: {
-                hd: "2",
+                hd: "?",
                 tl: {
-                  hd: "3",
-                  tl: {
-                    hd: "5",
-                    tl: {
-                      hd: "?",
-                      tl: {
-                        hd: coffee,
-                        tl: /* [] */0
-                      }
-                    }
-                  }
+                  hd: coffee,
+                  tl: /* [] */ 0
                 }
               }
             }
-          };
+          }
+        }
+      }
+    };
   }
 }
 
 export {
-  coffee ,
-  make ,
+  coffee,
+  make,
 }
 /* No side effect */

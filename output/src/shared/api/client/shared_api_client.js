@@ -5,6 +5,6 @@ import * as Shared_api_client__Api_mel from "./api_mel.js";
 const Api = Shared_api_client__Api_mel;
 
 export {
-  Api ,
+  Api,
 }
 /* Shared_api_client__Api_mel Not a pure module */

@@ -11,7 +11,7 @@ function merge_list(classes) {
 }
 
 export {
-  merge ,
-  merge_list ,
+  merge,
+  merge_list,
 }
 /* No side effect */

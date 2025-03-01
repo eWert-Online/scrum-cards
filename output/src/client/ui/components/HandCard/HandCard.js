@@ -18,10 +18,10 @@ function HandCard(Props) {
   let tmp = {
     children: label,
     className: Css.merge([
-          "HandCard",
-          selectedClass,
-          className
-        ])
+      "HandCard",
+      selectedClass,
+      className
+    ])
   };
   if (onClick !== undefined) {
     tmp.onClick = Caml_option.valFromOption(onClick);
@@ -32,7 +32,7 @@ function HandCard(Props) {
 const make = HandCard;
 
 export {
-  css ,
-  make ,
+  css,
+  make,
 }
 /* css Not a pure module */

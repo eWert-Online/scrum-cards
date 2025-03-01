@@ -4,6 +4,6 @@
 const Components__Select__ = {};
 
 export {
-  Components__Select__ ,
+  Components__Select__,
 }
 /* No side effect */

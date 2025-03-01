@@ -10,23 +10,23 @@ function Logo(Props) {
   let classNameOpt = Props.className;
   const className = classNameOpt !== undefined ? classNameOpt : "";
   return JsxRuntime.jsx("div", {
-              children: JsxRuntime.jsx("img", {
-                    className: "Logo-image",
-                    height: "28",
-                    src: "/public/images/logo.svg",
-                    width: "28"
-                  }),
-              className: Css.merge([
-                    "Logo",
-                    className
-                  ])
-            });
+    children: JsxRuntime.jsx("img", {
+      className: "Logo-image",
+      height: "28",
+      src: "/public/images/logo.svg",
+      width: "28"
+    }),
+    className: Css.merge([
+      "Logo",
+      className
+    ])
+  });
 }
 
 const make = Logo;
 
 export {
-  css ,
-  make ,
+  css,
+  make,
 }
 /* css Not a pure module */

@@ -12,24 +12,24 @@ function App(Props) {
   const url = Router.useUrl(undefined);
   const gameId = url.route;
   let tmp;
-  tmp = typeof gameId === "number" ? (
-      gameId === /* Home */0 ? JsxRuntime.jsx(Screens__CreateGame.make, {}) : JsxRuntime.jsx(Screens__NotFound.make, {})
+  tmp = /* tag */ typeof gameId === "number" || typeof gameId === "string" ? (
+      gameId === /* Home */ 0 ? JsxRuntime.jsx(Screens__CreateGame.make, {}) : JsxRuntime.jsx(Screens__NotFound.make, {})
     ) : (
-      gameId.TAG === /* JoinGame */0 ? JsxRuntime.jsx(Screens__JoinGame.make, {
-              gameId: gameId._0
-            }) : JsxRuntime.jsx(Screens__Play.make, {
-              gameId: gameId._0
-            })
+      gameId.TAG === /* JoinGame */ 0 ? JsxRuntime.jsx(Screens__JoinGame.make, {
+          gameId: gameId._0
+        }) : JsxRuntime.jsx(Screens__Play.make, {
+          gameId: gameId._0
+        })
     );
   return JsxRuntime.jsx(React.Suspense, {
-              children: tmp,
-              fallback: null
-            });
+    children: tmp,
+    fallback: null
+  });
 }
 
 const make = App;
 
 export {
-  make ,
+  make,
 }
 /* Router Not a pure module */

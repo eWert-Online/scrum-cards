@@ -12,8 +12,8 @@ const root = document.querySelector("#app");
 
 if (!(root == null)) {
   Client.createRoot(root).render(JsxRuntime.jsx(Context__ConfirmContext.Provider.make, {
-            children: JsxRuntime.jsx(Client__App.make, {})
-          }));
+    children: JsxRuntime.jsx(Client__App.make, {})
+  }));
 }
 
 function setTheme(darkTheme) {
@@ -27,8 +27,8 @@ const theme = localStorage.getItem("theme");
 if (theme !== null) {
   if (theme === "auto") {
     color_theme.addEventListener("change", (function (theme) {
-            setTheme(theme.matches);
-          }));
+      setTheme(theme.matches);
+    }));
     setTheme(color_theme.matches);
   } else {
     setTheme(theme === "dark");
@@ -39,6 +39,6 @@ if (theme !== null) {
 }
 
 export {
-  css ,
+  css,
 }
 /* css Not a pure module */

@@ -24,26 +24,26 @@ function InputLabel(Props) {
         )
     );
   return JsxRuntime.jsxs("label", {
-              children: [
-                JsxRuntime.jsx("span", {
-                      children: text,
-                      className: "InputLabel-text"
-                    }),
-                children
-              ],
-              className: Css.merge([
-                    "InputLabel",
-                    pos,
-                    className
-                  ]),
-              htmlFor: htmlFor
-            });
+    children: [
+      JsxRuntime.jsx("span", {
+        children: text,
+        className: "InputLabel-text"
+      }),
+      children
+    ],
+    className: Css.merge([
+      "InputLabel",
+      pos,
+      className
+    ]),
+    htmlFor: htmlFor
+  });
 }
 
 const make = InputLabel;
 
 export {
-  css ,
-  make ,
+  css,
+  make,
 }
 /* css Not a pure module */

@@ -18,10 +18,10 @@ const css = SelectCss;
 function make(disabledOpt, value, text, param) {
   const disabled = disabledOpt !== undefined ? disabledOpt : false;
   return {
-          value: value,
-          text: text,
-          disabled: disabled
-        };
+    value: value,
+    text: text,
+    disabled: disabled
+  };
 }
 
 const SelectOption = {
@@ -32,24 +32,24 @@ function scrollElementIntoView(listbox, el) {
   const listbox$1 = listbox.current;
   const el$1 = el.current;
   if (listbox$1 == null) {
-    return ;
+    return;
   }
   if (el$1 == null) {
-    return ;
+    return;
   }
   if (listbox$1.scrollHeight <= listbox$1.clientHeight) {
-    return ;
+    return;
   }
   const scrollBottom = listbox$1.clientHeight + listbox$1.scrollTop | 0;
   const elementBottom = el$1.offsetTop + el$1.offsetHeight | 0;
   if (elementBottom > scrollBottom) {
     listbox$1.scrollTop = elementBottom - listbox$1.clientHeight | 0;
-    return ;
+    return;
   } else if (el$1.offsetTop < listbox$1.scrollTop) {
     listbox$1.scrollTop = el$1.offsetTop;
-    return ;
+    return;
   } else {
-    return ;
+    return;
   }
 }
 
@@ -71,76 +71,76 @@ function Select$Single(Props) {
   const listboxRef = React.createRef();
   const focusedEl = React.createRef();
   const match = React.useState(function () {
-        return "";
-      });
+    return "";
+  });
   const setKeysSoFar = match[1];
   const keysSoFar = match[0];
   const match$1 = React.useState(function () {
-        
-      });
+    
+  });
   const setFocusedOption = match$1[1];
   const focusedOption = match$1[0];
   const match$2 = React.useState(function () {
-        
-      });
+    
+  });
   const setIsOpen = match$2[1];
   const isOpen = match$2[0];
   Hooks__Hooks_ClickAway.useClickAway({
-        hd: listboxRef,
-        tl: {
-          hd: buttonRef,
-          tl: /* [] */0
+    hd: listboxRef,
+    tl: {
+      hd: buttonRef,
+      tl: /* [] */ 0
+    }
+  }, (function (_e) {
+    Curry._1(setIsOpen, (function (param) {
+      
+    }));
+  }));
+  React.useEffect((function () {
+    scrollElementIntoView(listboxRef, focusedEl);
+  }), [
+    listboxRef,
+    focusedEl
+  ]);
+  React.useEffect((function () {
+    if (isOpen !== undefined) {
+      if (isOpen) {
+        const listbox = listboxRef.current;
+        if (!(listbox == null)) {
+          listbox.focus();
         }
-      }, (function (_e) {
-          Curry._1(setIsOpen, (function (param) {
-                  
-                }));
-        }));
+        
+      } else {
+        Stdlib__Option.map((function (button) {
+          button.focus();
+        }), Caml_option.nullable_to_opt(buttonRef.current));
+      }
+    }
+    
+  }), [
+    isOpen,
+    buttonRef,
+    listboxRef
+  ]);
   React.useEffect((function () {
-          scrollElementIntoView(listboxRef, focusedEl);
-        }), [
-        listboxRef,
-        focusedEl
-      ]);
-  React.useEffect((function () {
-          if (isOpen !== undefined) {
-            if (isOpen) {
-              const listbox = listboxRef.current;
-              if (!(listbox == null)) {
-                listbox.focus();
-              }
-              
-            } else {
-              Stdlib__Option.map((function (button) {
-                      button.focus();
-                    }), Caml_option.nullable_to_opt(buttonRef.current));
-            }
-          }
-          
-        }), [
-        isOpen,
-        buttonRef,
-        listboxRef
-      ]);
-  React.useEffect((function () {
-          const timeoutId = setTimeout((function (param) {
-                  Curry._1(setKeysSoFar, (function (param) {
-                          return "";
-                        }));
-                }), 500);
-          return (function (param) {
-                    clearTimeout(timeoutId);
-                  });
-        }), [
-        keysSoFar,
-        setKeysSoFar
-      ]);
+    const timeoutId = setTimeout((function (param) {
+      Curry._1(setKeysSoFar, (function (param) {
+        return "";
+      }));
+    }), 500);
+    return (function (param) {
+      clearTimeout(timeoutId);
+    });
+  }), [
+    keysSoFar,
+    setKeysSoFar
+  ]);
   const handleChange = function (option) {
     if (!disabled && !option.disabled) {
       Curry._1(onChange, option.value);
       return Curry._1(setIsOpen, (function (param) {
-                    return false;
-                  }));
+        return false;
+      }));
     }
     
   };
@@ -149,27 +149,27 @@ function Select$Single(Props) {
       contents: 0
     };
     const foundOption = options.find(function (option, index) {
-          if (index >= startIndex && index < endIndex) {
-            foundIndex.contents = index;
-            return option.text.toUpperCase().indexOf(keysSoFar.toUpperCase(), undefined) === 0;
-          } else {
-            return false;
-          }
-        });
+      if (index >= startIndex && index < endIndex) {
+        foundIndex.contents = index;
+        return option.text.toUpperCase().indexOf(keysSoFar.toUpperCase(), undefined) === 0;
+      } else {
+        return false;
+      }
+    });
     return [
-            foundIndex.contents,
-            foundOption === undefined ? undefined : Caml_option.some(foundOption)
-          ];
+      foundIndex.contents,
+      foundOption === undefined ? undefined : Caml_option.some(foundOption)
+    ];
   };
   const focusFirstItem = function (param) {
     const option = Belt__Belt_Array.get(options, 0);
     if (option !== undefined) {
       return Curry._1(setFocusedOption, (function (param) {
-                    return [
-                            0,
-                            option
-                          ];
-                  }));
+        return [
+          0,
+          option
+        ];
+      }));
     }
     
   };
@@ -178,15 +178,15 @@ function Select$Single(Props) {
     if (keysSoFar === "" && focusedOption !== undefined) {
       const focusedOption$1 = focusedOption[1];
       const index = options.findIndex(function (option) {
-            return option.text === focusedOption$1.text;
-          });
+        return option.text === focusedOption$1.text;
+      });
       searchIndex = index === -1 ? 0 : index;
     } else {
       searchIndex = 0;
     }
     Curry._1(setKeysSoFar, (function (currentKeys) {
-            return currentKeys + key;
-          }));
+      return currentKeys + key;
+    }));
     const nextMatch = findMatchInRange(searchIndex + 1 | 0, options.length);
     if (nextMatch[1] !== undefined) {
       return nextMatch;
@@ -197,97 +197,96 @@ function Select$Single(Props) {
   const handleListKeyDown = function (e) {
     const key = e.key;
     if (focusedOption === undefined) {
-      return ;
+      return;
     }
     const index = focusedOption[0];
     let exit = 0;
     switch (key) {
       case "ArrowDown" :
       case "Down" :
-          exit = 4;
-          break;
+        exit = 4;
+        break;
       case "End" :
-          e.preventDefault();
-          const len = options.length;
-          const option = Belt__Belt_Array.get(options, len - 1 | 0);
-          if (option !== undefined) {
-            return Curry._1(setFocusedOption, (function (param) {
-                          return [
-                                  len - 1 | 0,
-                                  option
-                                ];
-                        }));
-          } else {
-            return ;
-          }
+        e.preventDefault();
+        const len = options.length;
+        const option = Belt__Belt_Array.get(options, len - 1 | 0);
+        if (option !== undefined) {
+          return Curry._1(setFocusedOption, (function (param) {
+            return [
+              len - 1 | 0,
+              option
+            ];
+          }));
+        } else {
+          return;
+        }
       case " " :
       case "Enter" :
-          exit = 2;
-          break;
+        exit = 2;
+        break;
       case "Esc" :
       case "Escape" :
-          exit = 1;
-          break;
+        exit = 1;
+        break;
       case "Home" :
-          e.preventDefault();
-          return focusFirstItem(undefined);
+        e.preventDefault();
+        return focusFirstItem(undefined);
       case "ArrowUp" :
       case "Up" :
-          exit = 3;
-          break;
+        exit = 3;
+        break;
       default:
         const itemToFocus = findItemToFocus(key);
         const item = itemToFocus[1];
         if (item === undefined) {
-          return ;
+          return;
         }
         const index$1 = itemToFocus[0];
         return Curry._1(setFocusedOption, (function (param) {
-                      return [
-                              index$1,
-                              item
-                            ];
-                    }));
+          return [
+            index$1,
+            item
+          ];
+        }));
     }
     switch (exit) {
       case 1 :
-          e.preventDefault();
-          return Curry._1(setIsOpen, (function (param) {
-                        return false;
-                      }));
+        e.preventDefault();
+        return Curry._1(setIsOpen, (function (param) {
+          return false;
+        }));
       case 2 :
-          e.preventDefault();
-          Curry._1(setIsOpen, (function (param) {
-                  return false;
-                }));
-          return handleChange(focusedOption[1]);
+        e.preventDefault();
+        Curry._1(setIsOpen, (function (param) {
+          return false;
+        }));
+        return handleChange(focusedOption[1]);
       case 3 :
-          e.preventDefault();
-          const prevItem = Belt__Belt_Array.get(options, index - 1 | 0);
-          if (prevItem !== undefined) {
-            return Curry._1(setFocusedOption, (function (param) {
-                          return [
-                                  index - 1 | 0,
-                                  prevItem
-                                ];
-                        }));
-          } else {
-            return ;
-          }
+        e.preventDefault();
+        const prevItem = Belt__Belt_Array.get(options, index - 1 | 0);
+        if (prevItem !== undefined) {
+          return Curry._1(setFocusedOption, (function (param) {
+            return [
+              index - 1 | 0,
+              prevItem
+            ];
+          }));
+        } else {
+          return;
+        }
       case 4 :
-          e.preventDefault();
-          const nextItem = Belt__Belt_Array.get(options, index + 1 | 0);
-          if (nextItem !== undefined) {
-            return Curry._1(setFocusedOption, (function (param) {
-                          return [
-                                  index + 1 | 0,
-                                  nextItem
-                                ];
-                        }));
-          } else {
-            return ;
-          }
-      
+        e.preventDefault();
+        const nextItem = Belt__Belt_Array.get(options, index + 1 | 0);
+        if (nextItem !== undefined) {
+          return Curry._1(setFocusedOption, (function (param) {
+            return [
+              index + 1 | 0,
+              nextItem
+            ];
+          }));
+        } else {
+          return;
+        }
     }
   };
   const handleButtonKeyUp = function (e) {
@@ -297,19 +296,19 @@ function Select$Single(Props) {
       case "ArrowUp" :
       case "Down" :
       case "Up" :
-          break;
+        break;
       default:
-        return ;
+        return;
     }
     e.preventDefault();
     Curry._1(setIsOpen, (function (param) {
-            return true;
-          }));
+      return true;
+    }));
     handleListKeyDown(e);
   };
   const handleListFocus = function (_e) {
     if (focusedOption !== undefined) {
-      return ;
+      return;
     } else {
       return focusFirstItem(undefined);
     }
@@ -318,118 +317,118 @@ function Select$Single(Props) {
   if (value !== undefined) {
     const value$1 = Caml_option.valFromOption(value);
     tmp = Stdlib__Option.value(Stdlib__Option.map((function (opt) {
-                return opt.text;
-              }), Caml_option.undefined_to_opt(options.find(function (opt) {
-                      return Caml_obj.caml_equal(opt.value, value$1);
-                    }))), "Nothing selected...");
+      return opt.text;
+    }), Caml_option.undefined_to_opt(options.find(function (opt) {
+      return Caml_obj.caml_equal(opt.value, value$1);
+    }))), "Nothing selected...");
   } else {
     tmp = "Nothing selected...";
   }
   return JsxRuntime.jsxs("div", {
+    children: [
+      label !== undefined ? JsxRuntime.jsx(Components__InputLabel.make, {
+          className: "Select-label",
+          text: label,
+          htmlFor: name
+        }) : null,
+      JsxRuntime.jsxs("div", {
+        children: [
+          JsxRuntime.jsx("button", {
+            ref: buttonRef,
+            children: tmp,
+            "aria-expanded": Stdlib__Option.value(isOpen, false) ? true : false,
+            "aria-labelledby": "Select-label Select-toggle",
+            className: "Select-toggle",
+            id: "Select-toggle",
+            disabled: disabled,
+            type: "button",
+            onKeyUp: handleButtonKeyUp,
+            onClick: (function (_e) {
+              Curry._1(setIsOpen, (function (isOpen) {
+                if (isOpen !== undefined) {
+                  return !isOpen;
+                } else {
+                  return true;
+                }
+              }));
+            })
+          }),
+          JsxRuntime.jsx(Images__Icons.ChevronDown.make, {
+            className: "Select-arrow"
+          })
+        ],
+        className: "Select-inputWrapper"
+      }),
+      JsxRuntime.jsx("div", {
+        children: JsxRuntime.jsx("ul", {
+          ref: listboxRef,
+          children: options.map(function (option, index) {
+            const id = name + ("-" + option.text);
+            const isFocused = Stdlib__Option.value(Stdlib__Option.map((function (param) {
+              return param[1].text === option.text;
+            }), focusedOption), false);
+            const isSelected = value !== undefined ? Caml_obj.caml_equal(Caml_option.valFromOption(value), option.value) : false;
+            const isDisabled = option.disabled;
+            const Key = option.text;
+            return JsxRuntime.jsxs("li", {
+              ref: (function (el) {
+                if (isFocused) {
+                  focusedEl.current = el;
+                  return;
+                }
+                
+              }),
               children: [
-                label !== undefined ? JsxRuntime.jsx(Components__InputLabel.make, {
-                        className: "Select-label",
-                        text: label,
-                        htmlFor: name
-                      }) : null,
-                JsxRuntime.jsxs("div", {
-                      children: [
-                        JsxRuntime.jsx("button", {
-                              ref: buttonRef,
-                              children: tmp,
-                              "aria-expanded": Stdlib__Option.value(isOpen, false) ? true : false,
-                              "aria-labelledby": "Select-label Select-toggle",
-                              className: "Select-toggle",
-                              id: "Select-toggle",
-                              disabled: disabled,
-                              type: "button",
-                              onKeyUp: handleButtonKeyUp,
-                              onClick: (function (_e) {
-                                  Curry._1(setIsOpen, (function (isOpen) {
-                                          if (isOpen !== undefined) {
-                                            return !isOpen;
-                                          } else {
-                                            return true;
-                                          }
-                                        }));
-                                })
-                            }),
-                        JsxRuntime.jsx(Images__Icons.ChevronDown.make, {
-                              className: "Select-arrow"
-                            })
-                      ],
-                      className: "Select-inputWrapper"
-                    }),
-                JsxRuntime.jsx("div", {
-                      children: JsxRuntime.jsx("ul", {
-                            ref: listboxRef,
-                            children: options.map(function (option, index) {
-                                  const id = name + ("-" + option.text);
-                                  const isFocused = Stdlib__Option.value(Stdlib__Option.map((function (param) {
-                                              return param[1].text === option.text;
-                                            }), focusedOption), false);
-                                  const isSelected = value !== undefined ? Caml_obj.caml_equal(Caml_option.valFromOption(value), option.value) : false;
-                                  const isDisabled = option.disabled;
-                                  const Key = option.text;
-                                  return JsxRuntime.jsxs("li", {
-                                              ref: (function (el) {
-                                                  if (isFocused) {
-                                                    focusedEl.current = el;
-                                                    return ;
-                                                  }
-                                                  
-                                                }),
-                                              children: [
-                                                option.text,
-                                                isSelected ? JsxRuntime.jsx(Images__Icons.Checkmark.make, {
-                                                        className: "Select-optionIcon"
-                                                      }) : null
-                                              ],
-                                              "aria-selected": isSelected ? true : false,
-                                              className: Css.merge([
-                                                    "Select-option",
-                                                    isFocused ? "is-focused" : "",
-                                                    isSelected ? "is-selected" : "",
-                                                    isDisabled ? "is-disabled" : ""
-                                                  ]),
-                                              id: id,
-                                              role: "option",
-                                              onClick: (function (param) {
-                                                  handleChange(option);
-                                                }),
-                                              onMouseOver: (function (param) {
-                                                  Curry._1(setFocusedOption, (function (param) {
-                                                          return [
-                                                                  index,
-                                                                  option
-                                                                ];
-                                                        }));
-                                                })
-                                            }, Key);
-                                }),
-                            "aria-activedescendant": Stdlib__Option.value(Stdlib__Option.map((function (param) {
-                                        return name + ("-" + param[1].text);
-                                      }), focusedOption), ""),
-                            "aria-labelledby": "Select-label",
-                            className: Css.merge([
-                                  "Select-optionList",
-                                  Stdlib__Option.value(isOpen, false) ? "" : "is-hidden"
-                                ]),
-                            role: "listbox",
-                            tabIndex: -1,
-                            onKeyDown: handleListKeyDown,
-                            onFocus: handleListFocus
-                          }),
-                      className: "Select-optionListWrapper"
-                    })
+                option.text,
+                isSelected ? JsxRuntime.jsx(Images__Icons.Checkmark.make, {
+                    className: "Select-optionIcon"
+                  }) : null
               ],
+              "aria-selected": isSelected ? true : false,
               className: Css.merge([
-                    "Select",
-                    disabled ? "is-disabled" : "",
-                    Stdlib__Option.value(isOpen, false) ? "is-open" : "",
-                    className
-                  ])
-            });
+                "Select-option",
+                isFocused ? "is-focused" : "",
+                isSelected ? "is-selected" : "",
+                isDisabled ? "is-disabled" : ""
+              ]),
+              id: id,
+              role: "option",
+              onClick: (function (param) {
+                handleChange(option);
+              }),
+              onMouseOver: (function (param) {
+                Curry._1(setFocusedOption, (function (param) {
+                  return [
+                    index,
+                    option
+                  ];
+                }));
+              })
+            }, Key);
+          }),
+          "aria-activedescendant": Stdlib__Option.value(Stdlib__Option.map((function (param) {
+            return name + ("-" + param[1].text);
+          }), focusedOption), ""),
+          "aria-labelledby": "Select-label",
+          className: Css.merge([
+            "Select-optionList",
+            Stdlib__Option.value(isOpen, false) ? "" : "is-hidden"
+          ]),
+          role: "listbox",
+          tabIndex: -1,
+          onKeyDown: handleListKeyDown,
+          onFocus: handleListFocus
+        }),
+        className: "Select-optionListWrapper"
+      })
+    ],
+    className: Css.merge([
+      "Select",
+      disabled ? "is-disabled" : "",
+      Stdlib__Option.value(isOpen, false) ? "is-open" : "",
+      className
+    ])
+  });
 }
 
 const Single = {
@@ -450,88 +449,88 @@ function Select$Multi(Props) {
   const className = classNameOpt !== undefined ? classNameOpt : "";
   const disabled = disabledOpt !== undefined ? disabledOpt : false;
   const selectedText = selectedTextOpt !== undefined ? selectedTextOpt : (function (param) {
-        return "selected item(s)";
-      });
+      return "selected item(s)";
+    });
   const buttonRef = React.createRef();
   const listboxRef = React.createRef();
   const focusedEl = React.createRef();
   const match = React.useState(function () {
-        return "";
-      });
+    return "";
+  });
   const setKeysSoFar = match[1];
   const keysSoFar = match[0];
   const match$1 = React.useState(function () {
-        
-      });
+    
+  });
   const setFocusedOption = match$1[1];
   const focusedOption = match$1[0];
   const match$2 = React.useState(function () {
-        
-      });
+    
+  });
   const setIsOpen = match$2[1];
   const isOpen = match$2[0];
   Hooks__Hooks_ClickAway.useClickAway({
-        hd: listboxRef,
-        tl: {
-          hd: buttonRef,
-          tl: /* [] */0
+    hd: listboxRef,
+    tl: {
+      hd: buttonRef,
+      tl: /* [] */ 0
+    }
+  }, (function (_e) {
+    Curry._1(setIsOpen, (function (param) {
+      
+    }));
+  }));
+  React.useEffect((function () {
+    scrollElementIntoView(listboxRef, focusedEl);
+  }), [
+    listboxRef,
+    focusedEl
+  ]);
+  React.useEffect((function () {
+    if (isOpen !== undefined) {
+      if (isOpen) {
+        const listbox = listboxRef.current;
+        if (!(listbox == null)) {
+          listbox.focus();
         }
-      }, (function (_e) {
-          Curry._1(setIsOpen, (function (param) {
-                  
-                }));
-        }));
+        
+      } else {
+        Stdlib__Option.iter((function (button) {
+          button.focus();
+        }), Caml_option.nullable_to_opt(buttonRef.current));
+      }
+    }
+    
+  }), [
+    isOpen,
+    buttonRef,
+    listboxRef
+  ]);
   React.useEffect((function () {
-          scrollElementIntoView(listboxRef, focusedEl);
-        }), [
-        listboxRef,
-        focusedEl
-      ]);
-  React.useEffect((function () {
-          if (isOpen !== undefined) {
-            if (isOpen) {
-              const listbox = listboxRef.current;
-              if (!(listbox == null)) {
-                listbox.focus();
-              }
-              
-            } else {
-              Stdlib__Option.iter((function (button) {
-                      button.focus();
-                    }), Caml_option.nullable_to_opt(buttonRef.current));
-            }
-          }
-          
-        }), [
-        isOpen,
-        buttonRef,
-        listboxRef
-      ]);
-  React.useEffect((function () {
-          const timeoutId = setTimeout((function (param) {
-                  Curry._1(setKeysSoFar, (function (param) {
-                          return "";
-                        }));
-                }), 500);
-          return (function (param) {
-                    clearTimeout(timeoutId);
-                  });
-        }), [
-        keysSoFar,
-        setKeysSoFar
-      ]);
+    const timeoutId = setTimeout((function (param) {
+      Curry._1(setKeysSoFar, (function (param) {
+        return "";
+      }));
+    }), 500);
+    return (function (param) {
+      clearTimeout(timeoutId);
+    });
+  }), [
+    keysSoFar,
+    setKeysSoFar
+  ]);
   const handleChange = function (option) {
     if (!(!disabled && !option.disabled)) {
-      return ;
+      return;
     }
     if (value.includes(option.value)) {
       const minValuesReached = minItems !== undefined ? value.length <= minItems : false;
       if (!minValuesReached) {
         return Curry._1(onChange, value.filter(function (value) {
-                        return Caml_obj.caml_notequal(value, option.value);
-                      }));
+          return Caml_obj.caml_notequal(value, option.value);
+        }));
       } else {
-        return ;
+        return;
       }
     }
     const maxValuesReached = maxItems !== undefined ? value.length >= maxItems : false;
@@ -545,27 +544,27 @@ function Select$Multi(Props) {
       contents: 0
     };
     const foundOption = options.find(function (option, index) {
-          if (index >= startIndex && index < endIndex) {
-            foundIndex.contents = index;
-            return option.text.toUpperCase().startsWith(keysSoFar.toUpperCase(), undefined);
-          } else {
-            return false;
-          }
-        });
+      if (index >= startIndex && index < endIndex) {
+        foundIndex.contents = index;
+        return option.text.toUpperCase().startsWith(keysSoFar.toUpperCase(), undefined);
+      } else {
+        return false;
+      }
+    });
     return [
-            foundIndex.contents,
-            foundOption === undefined ? undefined : Caml_option.some(foundOption)
-          ];
+      foundIndex.contents,
+      foundOption === undefined ? undefined : Caml_option.some(foundOption)
+    ];
   };
   const focusFirstItem = function (param) {
     const option = Belt__Belt_Array.get(options, 0);
     if (option !== undefined) {
       return Curry._1(setFocusedOption, (function (param) {
-                    return [
-                            0,
-                            option
-                          ];
-                  }));
+        return [
+          0,
+          option
+        ];
+      }));
     }
     
   };
@@ -574,15 +573,15 @@ function Select$Multi(Props) {
     if (keysSoFar === "" && focusedOption !== undefined) {
       const focusedOption$1 = focusedOption[1];
       const index = options.findIndex(function (option) {
-            return option.text === focusedOption$1.text;
-          });
+        return option.text === focusedOption$1.text;
+      });
       searchIndex = index === -1 ? 0 : index;
     } else {
       searchIndex = 0;
     }
     Curry._1(setKeysSoFar, (function (currentKeys) {
-            return currentKeys + key;
-          }));
+      return currentKeys + key;
+    }));
     const nextMatch = findMatchInRange(searchIndex + 1 | 0, options.length);
     if (nextMatch[1] !== undefined) {
       return nextMatch;
@@ -593,7 +592,7 @@ function Select$Multi(Props) {
   const handleListKeyDown = function (e) {
     const key = e.key;
     if (focusedOption === undefined) {
-      return ;
+      return;
     }
     const focusedOption$1 = focusedOption[1];
     const index = focusedOption[0];
@@ -601,84 +600,83 @@ function Select$Multi(Props) {
     switch (key) {
       case "ArrowDown" :
       case "Down" :
-          exit = 3;
-          break;
+        exit = 3;
+        break;
       case "End" :
-          e.preventDefault();
-          const len = options.length;
-          const option = Belt__Belt_Array.get(options, len - 1 | 0);
-          if (option !== undefined) {
-            return Curry._1(setFocusedOption, (function (param) {
-                          return [
-                                  len - 1 | 0,
-                                  option
-                                ];
-                        }));
-          } else {
-            return ;
-          }
+        e.preventDefault();
+        const len = options.length;
+        const option = Belt__Belt_Array.get(options, len - 1 | 0);
+        if (option !== undefined) {
+          return Curry._1(setFocusedOption, (function (param) {
+            return [
+              len - 1 | 0,
+              option
+            ];
+          }));
+        } else {
+          return;
+        }
       case " " :
       case "Enter" :
-          e.preventDefault();
-          return handleChange(focusedOption$1);
+        e.preventDefault();
+        return handleChange(focusedOption$1);
       case "Esc" :
       case "Escape" :
-          exit = 1;
-          break;
+        exit = 1;
+        break;
       case "Home" :
-          e.preventDefault();
-          return focusFirstItem(undefined);
+        e.preventDefault();
+        return focusFirstItem(undefined);
       case "ArrowUp" :
       case "Up" :
-          exit = 2;
-          break;
+        exit = 2;
+        break;
       default:
         const itemToFocus = findItemToFocus(key);
         const item = itemToFocus[1];
         if (item === undefined) {
-          return ;
+          return;
         }
         const index$1 = itemToFocus[0];
         return Curry._1(setFocusedOption, (function (param) {
-                      return [
-                              index$1,
-                              item
-                            ];
-                    }));
+          return [
+            index$1,
+            item
+          ];
+        }));
     }
     switch (exit) {
       case 1 :
-          e.preventDefault();
-          return Curry._1(setIsOpen, (function (param) {
-                        return false;
-                      }));
+        e.preventDefault();
+        return Curry._1(setIsOpen, (function (param) {
+          return false;
+        }));
       case 2 :
-          e.preventDefault();
-          const prevItem = Belt__Belt_Array.get(options, index - 1 | 0);
-          if (prevItem !== undefined) {
-            return Curry._1(setFocusedOption, (function (param) {
-                          return [
-                                  index - 1 | 0,
-                                  prevItem
-                                ];
-                        }));
-          } else {
-            return ;
-          }
+        e.preventDefault();
+        const prevItem = Belt__Belt_Array.get(options, index - 1 | 0);
+        if (prevItem !== undefined) {
+          return Curry._1(setFocusedOption, (function (param) {
+            return [
+              index - 1 | 0,
+              prevItem
+            ];
+          }));
+        } else {
+          return;
+        }
       case 3 :
-          e.preventDefault();
-          const nextItem = Belt__Belt_Array.get(options, index + 1 | 0);
-          if (nextItem !== undefined) {
-            return Curry._1(setFocusedOption, (function (param) {
-                          return [
-                                  index + 1 | 0,
-                                  nextItem
-                                ];
-                        }));
-          } else {
-            return ;
-          }
-      
+        e.preventDefault();
+        const nextItem = Belt__Belt_Array.get(options, index + 1 | 0);
+        if (nextItem !== undefined) {
+          return Curry._1(setFocusedOption, (function (param) {
+            return [
+              index + 1 | 0,
+              nextItem
+            ];
+          }));
+        } else {
+          return;
+        }
     }
   };
   const handleButtonKeyUp = function (e) {
@@ -688,128 +686,128 @@ function Select$Multi(Props) {
       case "ArrowUp" :
       case "Down" :
       case "Up" :
-          break;
+        break;
       default:
-        return ;
+        return;
     }
     e.preventDefault();
     Curry._1(setIsOpen, (function (param) {
-            return true;
-          }));
+      return true;
+    }));
     handleListKeyDown(e);
   };
   const handleListFocus = function (_e) {
     if (focusedOption !== undefined) {
-      return ;
+      return;
     } else {
       return focusFirstItem(undefined);
     }
   };
   return JsxRuntime.jsxs("div", {
+    children: [
+      label !== undefined ? JsxRuntime.jsx(Components__InputLabel.make, {
+          className: "Select-label",
+          text: label,
+          htmlFor: name
+        }) : null,
+      JsxRuntime.jsxs("div", {
+        children: [
+          JsxRuntime.jsx("button", {
+            ref: buttonRef,
+            children: Curry._1(selectedText, value),
+            "aria-expanded": Stdlib__Option.value(isOpen, false) ? true : false,
+            "aria-labelledby": "Select-label Select-toggle",
+            className: "Select-toggle",
+            id: "Select-toggle",
+            disabled: disabled,
+            type: "button",
+            onKeyUp: handleButtonKeyUp,
+            onClick: (function (_e) {
+              Curry._1(setIsOpen, (function (isOpen) {
+                if (isOpen !== undefined) {
+                  return !isOpen;
+                } else {
+                  return true;
+                }
+              }));
+            })
+          }),
+          JsxRuntime.jsx(Images__Icons.ChevronDown.make, {
+            className: "Select-arrow"
+          })
+        ],
+        className: "Select-inputWrapper"
+      }),
+      JsxRuntime.jsx("div", {
+        children: JsxRuntime.jsx("ul", {
+          ref: listboxRef,
+          children: options.map(function (option, index) {
+            const id = name + ("-" + option.text);
+            const isFocused = Stdlib__Option.value(Stdlib__Option.map((function (param) {
+              return param[1].text === option.text;
+            }), focusedOption), false);
+            const isSelected = value.includes(option.value);
+            const isDisabled = option.disabled;
+            const Key = option.text;
+            return JsxRuntime.jsxs("li", {
+              ref: (function (el) {
+                if (isFocused) {
+                  focusedEl.current = el;
+                  return;
+                }
+                
+              }),
               children: [
-                label !== undefined ? JsxRuntime.jsx(Components__InputLabel.make, {
-                        className: "Select-label",
-                        text: label,
-                        htmlFor: name
-                      }) : null,
-                JsxRuntime.jsxs("div", {
-                      children: [
-                        JsxRuntime.jsx("button", {
-                              ref: buttonRef,
-                              children: Curry._1(selectedText, value),
-                              "aria-expanded": Stdlib__Option.value(isOpen, false) ? true : false,
-                              "aria-labelledby": "Select-label Select-toggle",
-                              className: "Select-toggle",
-                              id: "Select-toggle",
-                              disabled: disabled,
-                              type: "button",
-                              onKeyUp: handleButtonKeyUp,
-                              onClick: (function (_e) {
-                                  Curry._1(setIsOpen, (function (isOpen) {
-                                          if (isOpen !== undefined) {
-                                            return !isOpen;
-                                          } else {
-                                            return true;
-                                          }
-                                        }));
-                                })
-                            }),
-                        JsxRuntime.jsx(Images__Icons.ChevronDown.make, {
-                              className: "Select-arrow"
-                            })
-                      ],
-                      className: "Select-inputWrapper"
-                    }),
-                JsxRuntime.jsx("div", {
-                      children: JsxRuntime.jsx("ul", {
-                            ref: listboxRef,
-                            children: options.map(function (option, index) {
-                                  const id = name + ("-" + option.text);
-                                  const isFocused = Stdlib__Option.value(Stdlib__Option.map((function (param) {
-                                              return param[1].text === option.text;
-                                            }), focusedOption), false);
-                                  const isSelected = value.includes(option.value);
-                                  const isDisabled = option.disabled;
-                                  const Key = option.text;
-                                  return JsxRuntime.jsxs("li", {
-                                              ref: (function (el) {
-                                                  if (isFocused) {
-                                                    focusedEl.current = el;
-                                                    return ;
-                                                  }
-                                                  
-                                                }),
-                                              children: [
-                                                option.text,
-                                                isSelected ? JsxRuntime.jsx(Images__Icons.Checkmark.make, {
-                                                        className: "Select-optionIcon"
-                                                      }) : null
-                                              ],
-                                              "aria-selected": isSelected ? true : false,
-                                              className: Css.merge([
-                                                    "Select-option",
-                                                    isFocused ? "is-focused" : "",
-                                                    isSelected ? "is-selected" : "",
-                                                    isDisabled ? "is-disabled" : ""
-                                                  ]),
-                                              id: id,
-                                              role: "option",
-                                              onClick: (function (param) {
-                                                  handleChange(option);
-                                                }),
-                                              onMouseOver: (function (param) {
-                                                  Curry._1(setFocusedOption, (function (param) {
-                                                          return [
-                                                                  index,
-                                                                  option
-                                                                ];
-                                                        }));
-                                                })
-                                            }, Key);
-                                }),
-                            "aria-activedescendant": Stdlib__Option.value(Stdlib__Option.map((function (param) {
-                                        return name + ("-" + param[1].text);
-                                      }), focusedOption), ""),
-                            "aria-labelledby": "Select-label",
-                            className: Css.merge([
-                                  "Select-optionList",
-                                  Stdlib__Option.value(isOpen, false) ? "" : "is-hidden"
-                                ]),
-                            role: "listbox",
-                            tabIndex: -1,
-                            onKeyDown: handleListKeyDown,
-                            onFocus: handleListFocus
-                          }),
-                      className: "Select-optionListWrapper"
-                    })
+                option.text,
+                isSelected ? JsxRuntime.jsx(Images__Icons.Checkmark.make, {
+                    className: "Select-optionIcon"
+                  }) : null
               ],
+              "aria-selected": isSelected ? true : false,
               className: Css.merge([
-                    "Select",
-                    disabled ? "is-disabled" : "",
-                    Stdlib__Option.value(isOpen, false) ? "is-open" : "",
-                    className
-                  ])
-            });
+                "Select-option",
+                isFocused ? "is-focused" : "",
+                isSelected ? "is-selected" : "",
+                isDisabled ? "is-disabled" : ""
+              ]),
+              id: id,
+              role: "option",
+              onClick: (function (param) {
+                handleChange(option);
+              }),
+              onMouseOver: (function (param) {
+                Curry._1(setFocusedOption, (function (param) {
+                  return [
+                    index,
+                    option
+                  ];
+                }));
+              })
+            }, Key);
+          }),
+          "aria-activedescendant": Stdlib__Option.value(Stdlib__Option.map((function (param) {
+            return name + ("-" + param[1].text);
+          }), focusedOption), ""),
+          "aria-labelledby": "Select-label",
+          className: Css.merge([
+            "Select-optionList",
+            Stdlib__Option.value(isOpen, false) ? "" : "is-hidden"
+          ]),
+          role: "listbox",
+          tabIndex: -1,
+          onKeyDown: handleListKeyDown,
+          onFocus: handleListFocus
+        }),
+        className: "Select-optionListWrapper"
+      })
+    ],
+    className: Css.merge([
+      "Select",
+      disabled ? "is-disabled" : "",
+      Stdlib__Option.value(isOpen, false) ? "is-open" : "",
+      className
+    ])
+  });
 }
 
 const Multi = {
@@ -817,10 +815,10 @@ const Multi = {
 };
 
 export {
-  css ,
-  SelectOption ,
-  Helpers ,
-  Single ,
-  Multi ,
+  css,
+  SelectOption,
+  Helpers,
+  Single,
+  Multi,
 }
 /* css Not a pure module */

@@ -12,29 +12,29 @@ function Spectator(Props) {
   let classNameOpt = Props.className;
   const className = classNameOpt !== undefined ? classNameOpt : "";
   return JsxRuntime.jsxs("div", {
-              children: [
-                JsxRuntime.jsx("div", {
-                      children: JsxRuntime.jsx(Images__Icons.Eye.make, {
-                            className: "Spectator-icon"
-                          }),
-                      className: "Spectator-card"
-                    }),
-                JsxRuntime.jsx("p", {
-                      children: label,
-                      className: "Spectator-label"
-                    })
-              ],
-              className: Css.merge([
-                    "Spectator",
-                    className
-                  ])
-            });
+    children: [
+      JsxRuntime.jsx("div", {
+        children: JsxRuntime.jsx(Images__Icons.Eye.make, {
+          className: "Spectator-icon"
+        }),
+        className: "Spectator-card"
+      }),
+      JsxRuntime.jsx("p", {
+        children: label,
+        className: "Spectator-label"
+      })
+    ],
+    className: Css.merge([
+      "Spectator",
+      className
+    ])
+  });
 }
 
 const make = Spectator;
 
 export {
-  css ,
-  make ,
+  css,
+  make,
 }
 /* css Not a pure module */

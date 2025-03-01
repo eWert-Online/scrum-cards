@@ -6,22 +6,22 @@ import * as JsxRuntime from "react/jsx-runtime";
 
 function NotFound(Props) {
   return JsxRuntime.jsx(Components__ConfirmModal.make, {
-              title: "Page not found",
-              text: "The URL you entered does not lead to anything we know.",
-              variant: "Info",
-              isOpen: true,
-              onConfirm: [
-                "Create new game",
-                (function (param) {
-                    Router.replace(/* Home */0);
-                  })
-              ]
-            });
+    title: "Page not found",
+    text: "The URL you entered does not lead to anything we know.",
+    variant: "Info",
+    isOpen: true,
+    onConfirm: [
+      "Create new game",
+      (function (param) {
+        Router.replace(/* Home */ 0);
+      })
+    ]
+  });
 }
 
 const make = NotFound;
 
 export {
-  make ,
+  make,
 }
 /* Components__ConfirmModal Not a pure module */

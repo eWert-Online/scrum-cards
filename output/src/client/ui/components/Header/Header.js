@@ -11,21 +11,21 @@ function Header(Props) {
   let children = Props.children;
   const className = classNameOpt !== undefined ? classNameOpt : "";
   return JsxRuntime.jsx("header", {
-              children: children,
-              className: Css.merge_list({
-                    hd: "Header",
-                    tl: {
-                      hd: className,
-                      tl: /* [] */0
-                    }
-                  })
-            });
+    children: children,
+    className: Css.merge_list({
+      hd: "Header",
+      tl: {
+        hd: className,
+        tl: /* [] */ 0
+      }
+    })
+  });
 }
 
 const make = Header;
 
 export {
-  css ,
-  make ,
+  css,
+  make,
 }
 /* css Not a pure module */

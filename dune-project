@@ -37,7 +37,7 @@
   ppx_irmin
   lwt
   (melange
-   (= 4.0.0-414))
+   (= 5.0.1-53))
   melange-atdgen-codec-runtime
   melange-fetch
   melange-json

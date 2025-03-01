@@ -4,6 +4,6 @@
 const Components__Header__ = {};
 
 export {
-  Components__Header__ ,
+  Components__Header__,
 }
 /* No side effect */

@@ -4,6 +4,6 @@
 const Components__BoardCard__ = {};
 
 export {
-  Components__BoardCard__ ,
+  Components__BoardCard__,
 }
 /* No side effect */

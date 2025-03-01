@@ -9,28 +9,28 @@ const css = HeadlineCss;
 function render(tag, children) {
   if (tag === "h2") {
     return JsxRuntime.jsx("h2", {
-                children: children
-              });
+      children: children
+    });
   } else if (tag === "h3") {
     return JsxRuntime.jsx("h3", {
-                children: children
-              });
+      children: children
+    });
   } else if (tag === "h4") {
     return JsxRuntime.jsx("h4", {
-                children: children
-              });
+      children: children
+    });
   } else if (tag === "h5") {
     return JsxRuntime.jsx("h5", {
-                children: children
-              });
+      children: children
+    });
   } else if (tag === "h6") {
     return JsxRuntime.jsx("h6", {
-                children: children
-              });
+      children: children
+    });
   } else {
     return JsxRuntime.jsx("h1", {
-                children: children
-              });
+      children: children
+    });
   }
 }
 
@@ -45,13 +45,13 @@ function Headline$Primary(Props) {
   const className = classNameOpt !== undefined ? classNameOpt : "";
   const tag = tagOpt !== undefined ? tagOpt : "h2";
   return JsxRuntime.jsx("div", {
-              children: render(tag, children),
-              className: Css.merge([
-                    "Headline",
-                    "Headline--primary",
-                    className
-                  ])
-            });
+    children: render(tag, children),
+    className: Css.merge([
+      "Headline",
+      "Headline--primary",
+      className
+    ])
+  });
 }
 
 const Primary = {
@@ -65,13 +65,13 @@ function Headline$Secondary(Props) {
   const className = classNameOpt !== undefined ? classNameOpt : "";
   const tag = tagOpt !== undefined ? tagOpt : "h2";
   return JsxRuntime.jsx("div", {
-              children: render(tag, children),
-              className: Css.merge([
-                    "Headline",
-                    "Headline--secondary",
-                    className
-                  ])
-            });
+    children: render(tag, children),
+    className: Css.merge([
+      "Headline",
+      "Headline--secondary",
+      className
+    ])
+  });
 }
 
 const Secondary = {
@@ -85,13 +85,13 @@ function Headline$Subheadline(Props) {
   const className = classNameOpt !== undefined ? classNameOpt : "";
   const tag = tagOpt !== undefined ? tagOpt : "h2";
   return JsxRuntime.jsx("div", {
-              children: render(tag, children),
-              className: Css.merge([
-                    "Headline",
-                    "Headline--subheadline",
-                    className
-                  ])
-            });
+    children: render(tag, children),
+    className: Css.merge([
+      "Headline",
+      "Headline--subheadline",
+      className
+    ])
+  });
 }
 
 const Subheadline = {
@@ -99,10 +99,10 @@ const Subheadline = {
 };
 
 export {
-  css ,
-  Tag ,
-  Primary ,
-  Secondary ,
-  Subheadline ,
+  css,
+  Tag,
+  Primary,
+  Secondary,
+  Subheadline,
 }
 /* css Not a pure module */

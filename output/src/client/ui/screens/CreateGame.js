@@ -19,37 +19,37 @@ function CreateGame(Props) {
       ) : "Fibonacci";
     const create_game_reveal = canEveryoneReveal ? "Everyone" : "SpectatorsOnly";
     const data = JSON.stringify(Curry._1(Shared_api_client.Api.write_create_game_request, {
-              create_game_name: name,
-              create_game_deck: create_game_deck,
-              create_game_reveal: create_game_reveal
-            }));
-    fetch(Shared_api_universal__Routes__Routes_Builder.sprintf(Shared_api_universal__Routes.Api.create_game(undefined)), Curry._2(Fetch.RequestInit.make(/* Post */2, undefined, Caml_option.some(data), undefined, undefined, undefined)(undefined, undefined, undefined, undefined, undefined), undefined, undefined)).then(function (prim) {
-              return prim.json();
-            }).then(function (data) {
-            return Promise.resolve(Curry._1(Shared_api_client.Api.read_create_game_response, data));
-          }).then(function (data) {
-          return Promise.resolve(Router.push({
-                          TAG: /* Play */1,
-                          _0: data.created_game_id
-                        }));
-        });
+      create_game_name: name,
+      create_game_deck: create_game_deck,
+      create_game_reveal: create_game_reveal
+    }));
+    fetch(Shared_api_universal__Routes__Routes_Builder.sprintf(Shared_api_universal__Routes.Api.create_game(undefined)), Fetch.RequestInit.make(/* Post */ 2, undefined, Caml_option.some(data), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)(undefined)).then(function (prim) {
+      return prim.json();
+    }).then(function (data) {
+      return Promise.resolve(Curry._1(Shared_api_client.Api.read_create_game_response, data));
+    }).then(function (data) {
+      return Promise.resolve(Router.push({
+        TAG: /* Play */ 1,
+        _0: data.created_game_id
+      }));
+    });
   };
   return JsxRuntime.jsx(Components__Layout.make, {
-              children: JsxRuntime.jsx(Components__Layout.Content.make, {
-                    children: JsxRuntime.jsx(Components__Modal.make, {
-                          isOpen: true,
-                          onClose: undefined,
-                          children: JsxRuntime.jsx(Patterns__CreateGameForm.make, {
-                                onSubmit: createGame
-                              })
-                        })
-                  })
-            });
+    children: JsxRuntime.jsx(Components__Layout.Content.make, {
+      children: JsxRuntime.jsx(Components__Modal.make, {
+        isOpen: true,
+        onClose: undefined,
+        children: JsxRuntime.jsx(Patterns__CreateGameForm.make, {
+          onSubmit: createGame
+        })
+      })
+    })
+  });
 }
 
 const make = CreateGame;
 
 export {
-  make ,
+  make,
 }
 /* Components__Layout Not a pure module */

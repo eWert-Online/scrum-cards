@@ -4,6 +4,6 @@
 const Components__Modal__ = {};
 
 export {
-  Components__Modal__ ,
+  Components__Modal__,
 }
 /* No side effect */
