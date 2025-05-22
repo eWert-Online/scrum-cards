@@ -69,10 +69,12 @@ type ws_request = [
   | RevealCards
   | InitReset
   | ResetMe
+  | Pong
 ] <ocaml repr="classic">
 
 type ws_response = [
   | YourCard of card_value option
   | UpdateGameState of game_state
   | Reset
+  | Ping
 ] <ocaml repr="classic">

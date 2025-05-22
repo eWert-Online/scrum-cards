@@ -154,7 +154,11 @@ const read__card_value_option = Atdgen_codec_decode.option_as_constr(Atdgen_code
 
 const write_ws_response = Atdgen_codec_encode.make(function (x) {
   if (/* tag */ typeof x === "number" || typeof x === "string") {
-    return Atdgen_codec_encode.constr0("Reset");
+    if (x === /* Reset */ 0) {
+      return Atdgen_codec_encode.constr0("Reset");
+    } else {
+      return Atdgen_codec_encode.constr0("Ping");
+    }
   } else if (x.TAG === /* YourCard */ 0) {
     return Atdgen_codec_encode.constr1("YourCard", write__card_value_option, x._0);
   } else {
@@ -200,7 +204,16 @@ const partial_arg_1$1 = {
         VAL: /* Reset */ 0
       }
     ],
-    tl: /* [] */ 0
+    tl: {
+      hd: [
+        "Ping",
+        {
+          NAME: "Single",
+          VAL: /* Ping */ 1
+        }
+      ],
+      tl: /* [] */ 0
+    }
   }
 };
 
@@ -226,6 +239,8 @@ const write_ws_request = Atdgen_codec_encode.make(function (x) {
       return Atdgen_codec_encode.constr0("InitReset");
     case /* ResetMe */ 3 :
       return Atdgen_codec_encode.constr0("ResetMe");
+    case /* Pong */ 4 :
+      return Atdgen_codec_encode.constr0("Pong");
   }
 });
 
@@ -276,7 +291,16 @@ const partial_arg_1$2 = {
             VAL: /* ResetMe */ 3
           }
         ],
-        tl: /* [] */ 0
+        tl: {
+          hd: [
+            "Pong",
+            {
+              NAME: "Single",
+              VAL: /* Pong */ 4
+            }
+          ],
+          tl: /* [] */ 0
+        }
       }
     }
   }

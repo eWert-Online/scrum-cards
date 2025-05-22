@@ -12,6 +12,7 @@ module Game = struct
     ; typ : Api.typ
     ; name : string
     ; selected_value : Api.card_value option
+    ; pinged : Time_float.t option
     }
 
   let storage : (string, t) Hashtbl.t = Hashtbl.create (module String)
@@ -38,6 +39,12 @@ module Game = struct
     Hashtbl.change storage game_id ~f:(function
       | None -> None
       | Some game -> Some { game with players = List.map game.players ~f })
+  ;;
+
+  let update_or_remove_players game_id f =
+    Hashtbl.change storage game_id ~f:(function
+      | None -> None
+      | Some game -> Some { game with players = List.filter_map game.players ~f })
   ;;
 
   let update_players_and_return game_id f =
@@ -161,10 +168,28 @@ let handle_message ~client_id request game_id message =
     let%bind.Lwt () = Player_session.set_played_card request None in
     let%bind.Lwt () = send_current_card ~client_id request game_id in
     send_current_game_state ~client_id ~only_me:true request game_id
+  | Api.Pong ->
+    Lwt.return
+    @@ Game.update_players game_id (function
+      | data when String.equal data.id client_id -> { data with pinged = None }
+      | p -> p)
 ;;
 
 let handle_client ~session request game_id socket message_stream =
   let client_id = session.Player_session.Session.key in
+
+  let current_time = Time_float.now () in
+  let ping_message = Api.string_of_ws_response Api.Ping in
+  Game.update_or_remove_players game_id (fun player ->
+    match player.pinged with
+    | None ->
+      player.socket (Some (Websocket.Frame.create ~content:ping_message ()));
+      Some { player with pinged = Some current_time }
+    | Some time ->
+      if Time_float.Span.(Time_float.abs_diff current_time time > of_int_sec 10)
+      then None
+      else Some player);
+
   let%bind.Lwt name = Player_session.get_name request in
   let%bind.Lwt spectator = Player_session.get_spectator request in
   let%bind.Lwt selected_value = Player_session.get_played_card request in
@@ -183,6 +208,7 @@ let handle_client ~session request game_id socket message_stream =
       ; socket
       ; name = Option.value name ~default:"Unnamed Player"
       ; selected_value
+      ; pinged = None
       };
   let%bind.Lwt () = send_current_game_state ~client_id request game_id in
   let%bind.Lwt () = send_current_card ~client_id request game_id in

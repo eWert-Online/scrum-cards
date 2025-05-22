@@ -96,6 +96,9 @@ let make =
               Bindings.Websocket.sendString(wsConnection, data);
             | Api.UpdateGameState(s) => setGameState(_ => s)
             | Api.YourCard(s) => setMyCard(_ => s)
+            | Api.Ping =>
+              let data = Js.Json.stringify @@ Api.write_ws_request(Api.Pong);
+              Bindings.Websocket.sendString(wsConnection, data);
             }
           },
         ),

@@ -61,20 +61,26 @@ function GameBoard(Props) {
     wsConnection.addEventListener("message", (function (param) {
       const s = Curry._1(Shared_api_client.Api.read_ws_response, JSON.parse(param.data));
       if (/* tag */ typeof s === "number" || typeof s === "string") {
-        const data = JSON.stringify(Curry._1(Shared_api_client.Api.write_ws_request, /* ResetMe */ 3));
-        wsConnection.send(data);
+        if (s === /* Reset */ 0) {
+          const data = JSON.stringify(Curry._1(Shared_api_client.Api.write_ws_request, /* ResetMe */ 3));
+          wsConnection.send(data);
+          return;
+        }
+        const data$1 = JSON.stringify(Curry._1(Shared_api_client.Api.write_ws_request, /* Pong */ 4));
+        wsConnection.send(data$1);
         return;
-      }
-      if (s.TAG === /* YourCard */ 0) {
-        const s$1 = s._0;
-        return Curry._1(setMyCard, (function (param) {
-          return s$1;
+      } else {
+        if (s.TAG === /* YourCard */ 0) {
+          const s$1 = s._0;
+          return Curry._1(setMyCard, (function (param) {
+            return s$1;
+          }));
+        }
+        const s$2 = s._0;
+        return Curry._1(setGameState, (function (param) {
+          return s$2;
         }));
       }
-      const s$2 = s._0;
-      Curry._1(setGameState, (function (param) {
-        return s$2;
-      }));
     }));
     return (function (param) {
       wsConnection.close();
