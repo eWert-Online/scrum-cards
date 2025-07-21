@@ -1,0 +1,60 @@
+name: build unikraft
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ewert-online/scrum-cards
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org/
+
+      - name: Use OCaml 5.3.x
+        uses: ocaml/setup-ocaml@v3
+        with:
+          ocaml-compiler: 5.3.x
+
+      - name: Install dependencies
+        run: |
+          npm install
+          opam install . --yes --deps-only && eval $(opam env)
+
+      - name: Build
+        run: make release
+
+      - name: Move binary
+        run: |
+          mv _build/default/src/bin/main.exe scrum-cards
+          rm -rf _build
+
+      - name: Install Kraft
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y ca-certificates curl gnupg lsb-release
+          sudo mkdir -p /etc/apt/keyrings
+          curl -fsSL https://deb.pkg.kraftkit.sh/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/unikraft.gpg
+          echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/unikraft.gpg] https://deb.pkg.kraftkit.sh /" | sudo tee /etc/apt/sources.list.d/unikraft.list > /dev/null
+          sudo apt-get update -y
+          sudo apt-get install kraftkit -y
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Unikraft
+        run: |
+          docker run -d --name buildkitd --privileged moby/buildkit:latest
+          export KRAFTKIT_BUILDKIT_HOST=docker-container://buildkitd
+          kraft build
+          kraft pkg --name scrum-cards
+          kraft cloud --metro fra0 deploy -p 443:80

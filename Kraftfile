@@ -1,0 +1,12 @@
+spec: v0.6
+name: scrum-cards
+unikraft:
+  version: stable
+
+rootfs: ./Dockerfile
+
+targets: [
+	{ plat: qemu, arch: x86_64 }
+]
+
+cmd: ["/scrum-cards", "serve", "--port=80"]
