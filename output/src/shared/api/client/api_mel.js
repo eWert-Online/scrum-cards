@@ -2,6 +2,7 @@
 
 import * as Atdgen_codec_decode from "melange-atdgen-codec-runtime/atdgen_codec_decode.js";
 import * as Atdgen_codec_encode from "melange-atdgen-codec-runtime/atdgen_codec_encode.js";
+import * as Curry from "melange.js/curry.js";
 
 const write_typ = Atdgen_codec_encode.make(function (x) {
   if (x === "Spectator") {
@@ -56,14 +57,12 @@ const partial_arg_1 = {
     "Revealed",
     {
       NAME: "Decode",
-      VAL: (function (param) {
-        return Atdgen_codec_decode.map((function (x) {
-          return {
-            TAG: /* Revealed */ 0,
-            _0: x
-          };
-        }), Atdgen_codec_decode.string, param);
-      })
+      VAL: Curry._2(Atdgen_codec_decode.map, (function (x) {
+        return {
+          TAG: /* Revealed */ 0,
+          _0: x
+        };
+      }), Atdgen_codec_decode.string)
     }
   ],
   tl: /* [] */ 0
@@ -170,14 +169,12 @@ const partial_arg_0$1 = [
   "YourCard",
   {
     NAME: "Decode",
-    VAL: (function (param) {
-      return Atdgen_codec_decode.map((function (x) {
-        return {
-          TAG: /* YourCard */ 0,
-          _0: x
-        };
-      }), read__card_value_option, param);
-    })
+    VAL: Curry._2(Atdgen_codec_decode.map, (function (x) {
+      return {
+        TAG: /* YourCard */ 0,
+        _0: x
+      };
+    }), read__card_value_option)
   }
 ];
 
@@ -186,14 +183,12 @@ const partial_arg_1$1 = {
     "UpdateGameState",
     {
       NAME: "Decode",
-      VAL: (function (param) {
-        return Atdgen_codec_decode.map((function (x) {
-          return {
-            TAG: /* UpdateGameState */ 1,
-            _0: x
-          };
-        }), read_game_state, param);
-      })
+      VAL: Curry._2(Atdgen_codec_decode.map, (function (x) {
+        return {
+          TAG: /* UpdateGameState */ 1,
+          _0: x
+        };
+      }), read_game_state)
     }
   ],
   tl: {
@@ -248,14 +243,12 @@ const partial_arg_0$2 = [
   "PlayCard",
   {
     NAME: "Decode",
-    VAL: (function (param) {
-      return Atdgen_codec_decode.map((function (x) {
-        return {
-          TAG: /* PlayCard */ 0,
-          _0: x
-        };
-      }), Atdgen_codec_decode.string, param);
-    })
+    VAL: Curry._2(Atdgen_codec_decode.map, (function (x) {
+      return {
+        TAG: /* PlayCard */ 0,
+        _0: x
+      };
+    }), Atdgen_codec_decode.string)
   }
 ];
 

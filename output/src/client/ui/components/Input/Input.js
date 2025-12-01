@@ -11,6 +11,7 @@ const css = InputCss;
 function Input(Props) {
   let classNameOpt = Props.className;
   let typOpt = Props.typ;
+  let requiredOpt = Props.required;
   let placeholderOpt = Props.placeholder;
   let autoCompleteOpt = Props.autoComplete;
   let rowsOpt = Props.rows;
@@ -21,6 +22,7 @@ function Input(Props) {
   let onChange = Props.onChange;
   const className = classNameOpt !== undefined ? classNameOpt : "";
   const typ = typOpt !== undefined ? typOpt : "Text";
+  const required = requiredOpt !== undefined ? requiredOpt : false;
   const placeholder = placeholderOpt !== undefined ? placeholderOpt : "";
   const autoComplete = autoCompleteOpt !== undefined ? autoCompleteOpt : "";
   const rows = rowsOpt !== undefined ? rowsOpt : 2;
@@ -46,6 +48,7 @@ function Input(Props) {
               autoComplete: autoComplete,
               placeholder: placeholder,
               readOnly: onChange === undefined,
+              required: required,
               rows: rows,
               value: value,
               onChange: handleChange
@@ -56,6 +59,7 @@ function Input(Props) {
                   autoComplete: autoComplete,
                   placeholder: placeholder,
                   readOnly: onChange === undefined,
+                  required: required,
                   type: "text",
                   value: value,
                   onChange: handleChange
@@ -65,6 +69,7 @@ function Input(Props) {
                   autoComplete: autoComplete,
                   placeholder: placeholder,
                   readOnly: onChange === undefined,
+                  required: required,
                   type: "password",
                   value: value,
                   onChange: handleChange

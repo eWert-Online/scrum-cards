@@ -75,5 +75,18 @@ let make =
       }>
       contents
     </button>
+  | `Submit =>
+    <button
+      className=classes
+      type_="submit"
+      disabled
+      ref={
+        switch (buttonRef) {
+        | None => ReactDOM.Ref.domRef(fallbackRef)
+        | Some(r) => r
+        }
+      }>
+      contents
+    </button>
   };
 };

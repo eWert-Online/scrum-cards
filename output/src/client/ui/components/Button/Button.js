@@ -72,7 +72,15 @@ function Button(Props) {
         icon$1("Button-icon--right")
       ]
     });
-  if (action.NAME === "Href") {
+  if (typeof action === "string") {
+    return JsxRuntime.jsx("button", {
+      ref: buttonRef !== undefined ? Caml_option.valFromOption(buttonRef) : fallbackRef,
+      children: contents,
+      className: classes,
+      disabled: disabled,
+      type: "submit"
+    });
+  } else if (action.NAME === "Href") {
     return JsxRuntime.jsx("a", {
       ref: buttonRef !== undefined ? Caml_option.valFromOption(buttonRef) : fallbackRef,
       children: contents,

@@ -6,11 +6,11 @@ let make = (~onSubmit) => {
   let (name, setName) = React.useState(() => "");
 
   let joinGame = evt => {
-    React.Event.Mouse.preventDefault(evt);
+    React.Event.Form.preventDefault(evt);
     onSubmit(~typ, ~name);
   };
 
-  <div className="JoinGameForm">
+  <form className="JoinGameForm" onSubmit=joinGame>
     <Components.Headline.Secondary className="JoinGameForm-title">
       {React.string("Join Game...")}
     </Components.Headline.Secondary>
@@ -18,6 +18,7 @@ let make = (~onSubmit) => {
       label="Your Name"
       name="name"
       value=name
+      required=true
       onChange={name => setName(_ => name)}
     />
     <Components.Switch
@@ -31,8 +32,8 @@ let make = (~onSubmit) => {
         | true => setTyp(_ => `Spectator)
       }
     />
-    <Components.Button className="JoinGameForm-button" action={`Fn(joinGame)}>
+    <Components.Button className="JoinGameForm-button" action=`Submit>
       "Join Game"
     </Components.Button>
-  </div>;
+  </form>;
 };

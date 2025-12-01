@@ -11,6 +11,7 @@ let make =
     (
       ~className="",
       ~typ=`Text,
+      ~required=false,
       ~placeholder="",
       ~autoComplete="",
       ~rows=2,
@@ -46,6 +47,7 @@ let make =
              placeholder
              value
              autoComplete
+             required
              readOnly={
                switch (onChange) {
                | Some(_) => false
@@ -62,6 +64,7 @@ let make =
              placeholder
              value
              autoComplete
+             required
              readOnly={
                switch (onChange) {
                | Some(_) => false
@@ -77,6 +80,7 @@ let make =
              placeholder
              value
              autoComplete
+             required
              rows
              readOnly={
                switch (onChange) {

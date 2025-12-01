@@ -35,13 +35,14 @@ function CreateGameForm(Props) {
     evt.preventDefault();
     Curry._3(onSubmit, name, deck, canEveryoneReveal);
   };
-  return JsxRuntime.jsxs("div", {
+  return JsxRuntime.jsxs("form", {
     children: [
       JsxRuntime.jsx(Components__Headline.Secondary.make, {
         className: "CreateGameForm-title",
         children: "Create a new Game"
       }),
       JsxRuntime.jsx(Components__Input.make, {
+        required: true,
         label: "Game name",
         name: "name",
         value: name,
@@ -123,14 +124,12 @@ function CreateGameForm(Props) {
       }),
       JsxRuntime.jsx(Components__Button.make, {
         className: "CreateGameForm-button",
-        action: {
-          NAME: "Fn",
-          VAL: createGame
-        },
+        action: "Submit",
         children: "Create new Game"
       })
     ],
-    className: "CreateGameForm"
+    className: "CreateGameForm",
+    onSubmit: createGame
   });
 }
 

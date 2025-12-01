@@ -27,13 +27,14 @@ function JoinGameForm(Props) {
     evt.preventDefault();
     Curry._2(onSubmit, typ, name);
   };
-  return JsxRuntime.jsxs("div", {
+  return JsxRuntime.jsxs("form", {
     children: [
       JsxRuntime.jsx(Components__Headline.Secondary.make, {
         className: "JoinGameForm-title",
         children: "Join Game..."
       }),
       JsxRuntime.jsx(Components__Input.make, {
+        required: true,
         label: "Your Name",
         name: "name",
         value: name,
@@ -62,14 +63,12 @@ function JoinGameForm(Props) {
       }),
       JsxRuntime.jsx(Components__Button.make, {
         className: "JoinGameForm-button",
-        action: {
-          NAME: "Fn",
-          VAL: joinGame
-        },
+        action: "Submit",
         children: "Join Game"
       })
     ],
-    className: "JoinGameForm"
+    className: "JoinGameForm",
+    onSubmit: joinGame
   });
 }
 

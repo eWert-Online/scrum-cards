@@ -7,17 +7,18 @@ let make = (~onSubmit) => {
   let (canEveryoneReveal, setCanEveryoneReveal) = React.useState(() => true);
 
   let createGame = evt => {
-    React.Event.Mouse.preventDefault(evt);
+    React.Event.Form.preventDefault(evt);
     onSubmit(~name, ~deck, ~canEveryoneReveal);
   };
 
-  <div className="CreateGameForm">
+  <form className="CreateGameForm" onSubmit=createGame>
     <Components.Headline.Secondary className="CreateGameForm-title">
       {React.string("Create a new Game")}
     </Components.Headline.Secondary>
     <Components.Input
       label="Game name"
       name="name"
+      required=true
       value=name
       onChange=setName
     />
@@ -72,9 +73,8 @@ let make = (~onSubmit) => {
       checked={!canEveryoneReveal}
       onChange={value => setCanEveryoneReveal(_ => !value)}
     />
-    <Components.Button
-      className="CreateGameForm-button" action={`Fn(createGame)}>
+    <Components.Button className="CreateGameForm-button" action=`Submit>
       "Create new Game"
     </Components.Button>
-  </div>;
+  </form>;
 };
